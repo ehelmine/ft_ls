@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:04:42 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/06 20:41:25 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/10 11:47:46 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,14 @@ typedef	struct s_all
 		char *path;
 		char **path_arr;
 		int p;
+		char *tmp;
 }				t_all;
 
 int		ft_exit_call(int i);
 
 int		check_regular_file(const char *str);
 
-int		check_directory(const char *str, t_all *all);
+int		check_directory(char *str, t_all *all, char *path);
 
 int		open_and_write_directory(t_all *all, char *directory, char *path);
 

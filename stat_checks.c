@@ -6,18 +6,21 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:27:41 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/06 20:15:55 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/10 11:47:37 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-int	check_directory(const char *str, t_all *all)
+int	check_directory(char *str, t_all *all, char *path)
 {
 	struct stat buf;
 	char *tmp;
-
-	tmp = ft_strjoin(all->path, str);
+	
+	if (path != NULL)
+		tmp = ft_strjoin(path, str);
+	if (path == NULL)
+		tmp = str;
 	stat(tmp, &buf);
 //	ft_printf("string %s and %i return val\n", tmp, S_ISDIR(buf.st_mode));
 	return (S_ISDIR(buf.st_mode));

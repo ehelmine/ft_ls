@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:11:24 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/06 20:42:05 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/08 19:04:04 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void	print_output(t_all *all)
 {
 	print_and_free_array(all->not_exist, all->num_no, 1, all);
 	print_and_free_array(all->files, all->num_file, 0, all);
+	all->tmp = (char*)malloc(sizeof(char) * 1000);
 	print_and_free_array(all->directories, all->num_dir, 2, all);
 }
 

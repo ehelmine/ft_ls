@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:37:22 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/06 20:42:39 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/10 11:58:52 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,23 @@ int		open_and_write_directory(t_all *all, char *directory, char *path)
 	int o;
 	int in;
 	int intti;
+	int check;
 	char *tmp;
-	
+
 	i = 0;
 	y = 0;
 	ii = 0;
 	o = 0;
+	if (path == NULL)
+		dir = opendir(directory);
 	if (path != NULL)
 	{
-		all->path = ft_strcat(all->path, path);
-		all->path = ft_strcat(all->path, "/");
+		if (path[ft_strlen(path) - 1] != '/')
+			path = ft_strcat(path, "/");
+		tmp = ft_strjoin(path, directory);
+		dir = opendir(tmp);
 	}
-	all->path = ft_strcat(all->path, directory);
-//	all->path = ft_strcat(all->path, "/");
-	dir = opendir(all->path);
+//	ft_printf("path %s dir %s tmp %s\n\n", path, directory, tmp);
 	if (dir == NULL)
 		return (1);
 	if (all->big_r_flag)
@@ -58,14 +61,18 @@ int		open_and_write_directory(t_all *all, char *directory, char *path)
 	list[ii][0] = '\0';
 	sort_asc(list, ii);
 	x = 0;
-	ft_putstr(all->path);
-	all->path = ft_strcat(all->path, "/");
+	check = 0;
+	if (path == NULL)
+		ft_putstr(directory);
+	if (path != NULL)
+		ft_putstr(tmp);
 	write(1, ":\n", 3);
+//	ft_printf("directory %s tmp %s path %s\n", directory, tmp, path);
 	while (x < ii)
 	{
 		if (all->big_r_flag)
 		{
-			if (check_directory(list[x], all) != 0)
+			if (check_directory(list[x], all, path) != 0)
 				other_dirrs[0][o++] = x;
 		}
 // TASSA KOHTI MENE HAKEMAAN LISATIETOJA KIRJOITETTAVAKSI ENNEN
@@ -78,17 +85,20 @@ int		open_and_write_directory(t_all *all, char *directory, char *path)
 	in = 0;
 	if (all->big_r_flag)
 	{
-		while (in < o)
+		ft_putstr("\n");
+		while (in <= o)
 		{
-			ft_printf("in the loop in %i and o %o\n", in, o);
-			ft_putstr("\n");
 			intti = other_dirrs[0][in];
-			open_and_write_directory(all, list[intti], path);
-			ft_printf("back from openwrite\n");
-			// MIETI MITEN SAAT PATHIN TALTEEN!!! TAMA EI SAATANA TOIMI
+//			ft_printf("in the loop in %i and o %o and tmp %s\n", in, o, tmp);
+			if (path == NULL)
+				open_and_write_directory(all, list[intti], directory);
+			if (path != NULL)
+				open_and_write_directory(all, list[intti], tmp);
+//			ft_printf("back from openwrite\n");
+
 			in++;
 		}
 	}
-	ft_printf("i %i and o %i\n", i, o);
+//	ft_printf("i %i and o %i\n", i, o);
 	return (1);
 }
