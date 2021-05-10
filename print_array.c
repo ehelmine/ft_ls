@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 14:29:45 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/06 20:41:32 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/10 17:39:38 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,29 @@ void	loop_directories(t_all *all)
 void	print_and_free_array(char **arr, int i, int no, t_all *all)
 {
 	int x;
-	
+	char *tmp;
+	int check;
+
+	tmp = NULL;
 	x = 0;
-	if (i > 1)
+	if (i > 1 && !all->t_flag)
 		sort_asc_arr(arr, i);
+	if (i == 0 && no == 2)
+	{
+		tmp = (char*)malloc(sizeof(char) * 1000);
+		tmp[0] = '.';
+		check = 1;
+		i++;
+	}
 	while (x < i)
 	{
 		if (no == 2)
-			open_and_write_directory(all, arr[x], NULL);
+		{
+			if (check == 1)
+				open_and_write_directory(all, tmp, NULL);
+			else
+				open_and_write_directory(all, arr[x], NULL);
+		}
 		else if (no == 1)
 			ft_printf("ls: %s: No such file or directory\n", arr[x]);
 		else if (no == 0)
@@ -98,8 +113,9 @@ void	print_and_free_array(char **arr, int i, int no, t_all *all)
 			if (x + 1 == i)
 				write(1, "\n", 2);
 		}
-		free(arr[x++]);
+		x++;
 	}
-	free(arr);
+	if (check == 1)
+		free(tmp);
 	return ;
 }
