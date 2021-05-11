@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 17:53:31 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/10 18:35:49 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/11 12:58:35 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	sort_mod_time(char list[100][100], int ii, char *path, t_all *all)
 
 	all->i = 0;
 //	ft_printf("here amount of lines ii %i path %s\n", ii, path);
-	if (path != NULL && path[0] != '.')
+	if (path != NULL && path[ft_strlen(path) - 1] != '/')
 		path = ft_strcat(path, "/");
 	tmp = (char*)malloc(sizeof(char) * 1000);
 	while (all->i < ii - 1)
@@ -42,7 +42,7 @@ void	sort_mod_time(char list[100][100], int ii, char *path, t_all *all)
 		cur_dir1 = list[all->i];
 		cur_dir2 = list[all->i + 1];
 //		ft_printf("path[0] %c\n", path[0]);
-		if (path != NULL && path[0] != '.')
+		if (path != NULL)
 		{
 			cur_dir1 = ft_strjoin(path, list[all->i]);
 			cur_dir2 = ft_strjoin(path, list[all->i + 1]);

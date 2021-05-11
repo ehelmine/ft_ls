@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/22 16:49:30 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 16:48:49 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/11 14:41:12 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_strnew(size_t size)
 {
 	char	*newstr;
 
-	newstr = (char *)malloc(sizeof(*newstr) * (size + 1));
+	newstr = (char *)malloc(sizeof(newstr) * (size + 1));
 	if (newstr == NULL)
 		return (NULL);
 	else

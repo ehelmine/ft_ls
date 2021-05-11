@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:11:24 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/10 18:35:12 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/11 15:55:43 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ int	check_flags(t_all *all, int argc)
 			else if (all->input_arr[i][ii] == 't')
 				all->t_flag = 1;
 			else
-				ft_exit_call(1);
+				ft_exit_call(1, all->input_arr[i][ii]);
 			ii++;
 		}
 		i++;
@@ -158,6 +158,7 @@ void	set_values_to_zero(t_all *all)
 	all->num_no = 0;
 	all->num_dir = 0;
 	all->p = 0;
+	all->links_len = 0;
 }
 
 int	main(int argc, char **argv)

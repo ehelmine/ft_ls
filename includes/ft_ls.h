@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:04:42 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/10 18:31:26 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/11 16:09:40 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 # include "../libft/includes/libft.h"
 # include "../ft_printf/includes/ft_printf.h"
 #include <sys/stat.h>
+#include <sys/types.h>
+#include <pwd.h>
+#include <grp.h>
+#include <stdio.h>
 #include <dirent.h>
 #include <time.h>
 #define MAX_LINES 10000
@@ -46,9 +50,10 @@ typedef	struct s_all
 		int p;
 		char *tmp;
 		int i;
+		int links_len;
 }				t_all;
 
-int		ft_exit_call(int i);
+int		ft_exit_call(int i, char c);
 
 int		check_regular_file(const char *str);
 
