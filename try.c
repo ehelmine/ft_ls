@@ -6,11 +6,39 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:37:22 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/11 16:43:57 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/12 16:33:50 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
+
+void	check_number_of_links(char *file, t_all *all, char *path)
+{
+	int links;
+	int len;
+	struct stat buf;
+	char		*tmp;
+	int i;
+	
+	tmp = NULL;
+	if (path != NULL)
+	{
+		if (path[ft_strlen(path) - 1] != '/')
+			path = ft_strcat(path, "/");
+		tmp = ft_strjoin(path, file);
+	}
+	if (path == NULL)
+		tmp = file;
+	i = stat(tmp, &buf);
+	if (path != NULL)
+		free(tmp);
+	if (i < 0 && !S_IFDIR)
+		return ;
+	links = buf.st_nlink;
+	len = ft_check_int_len(links);
+	if (len > all->links_len)
+		all->links_len = len;
+}
 
 void	write_long_output3(struct stat buf, t_all *all, char *output)
 {
@@ -21,17 +49,26 @@ void	write_long_output3(struct stat buf, t_all *all, char *output)
 	struct group *grp;
 	time_t mod_time;
 	char *tmp;
+	int real_len;
+	char *empty;
 
 	links = buf.st_nlink;
 	len = ft_check_int_len(links);
-	if (len > all->links_len)
-		all->links_len = len;
+//	ft_putnbr(all->links_len);
+	real_len = all->links_len - len;
+	empty = (char *)malloc(sizeof(char) * real_len + 1);
+	i = 0;
+	while (i < real_len)
+		empty[i++] = ' ';
+	empty[real_len] = '\0';
 	output[10] = '\0';
 	pwd = getpwuid(buf.st_uid);
 	grp = getgrgid(buf.st_gid);
 	mod_time = buf.st_mtime;
-	ft_putstr(ctime(&mod_time));
-	ft_printf("%s  %3i  %s %s  %7i ", output, links, pwd->pw_name, grp->gr_name, buf.st_size);
+//	ft_putstr(ctime(&mod_time));
+	ft_printf("%s  %s%i %s  %s  %7i ", output, empty, links, pwd->pw_name, grp->gr_name, buf.st_size);
+	free(empty);
+	free(output);
 }
 
 void	set_permission_to_output(struct stat buf, char *output)
@@ -91,8 +128,11 @@ void	write_long_output(char *file, t_all *all, char *path)
 	if (path == NULL)
 		tmp = file;
 	i = stat(tmp, &buf);
-	if (path != NULL)
+	if (path != NULL && tmp != NULL)
+	{
 		free(tmp);
+		tmp = NULL;
+	}
 	if (i < 0 && !S_IFDIR)
 		return ;
 //	ft_printf("\ncheck tmp %s\n", tmp);
@@ -130,6 +170,7 @@ int		open_and_write_directory(t_all *all, char *directory, char *path)
 		else if (path[ft_strlen(path) - 1] != '/')
 			path = ft_strcat(path, "/");
 		tmp = ft_strjoin(path, directory);
+		all->tmp = tmp;
 		dir = opendir(tmp);
 	}
 //	ft_printf("begin path %s dir %s tmp %s\n\n", path, directory, tmp);
@@ -150,11 +191,16 @@ int		open_and_write_directory(t_all *all, char *directory, char *path)
 	}
 	while (((dp = readdir(dir)) != NULL))
 	{
-		if (dp->d_name[0] != '.' || (dp->d_name[0] == '.' && all->a_flag))
+		if (!all->a_flag)
+		{
+			if (dp->d_name[0] != '.')
+				ft_strcpy(list[ii++], dp->d_name);
+		}
+		else
 			ft_strcpy(list[ii++], dp->d_name);
 	}
 	list[ii][0] = '\0';
-	if (ii != 0)
+	if (ii > 1)
 	{
 		if (all->t_flag)
 		{
@@ -173,17 +219,30 @@ int		open_and_write_directory(t_all *all, char *directory, char *path)
 		ft_putstr(tmp);
 		write(1, ":\n", 3);
 	}
+	all->links_len = 0;
+	while (x < ii && all->l_flag)
+		check_number_of_links(list[x++], all, tmp);
+	x = 0;
 //	ft_printf("directory %s tmp %s path %s\n", directory, tmp, path);
 	while (x < ii)
 	{
 		if (all->big_r_flag)
 		{
-			if (check_directory(list[x], all, tmp) != 0)
-				other_dirrs[0][o++] = x;
+			if (path == NULL)
+			{
+				if (check_directory(list[x], all, directory) != 0)
+					other_dirrs[0][o++] = x;
+			}
+			else
+			{
+				if (check_directory(list[x], all, tmp) != 0)
+					other_dirrs[0][o++] = x;
+			}
 		}
 		if (all->l_flag)
+		{
 			write_long_output(list[x], all, tmp);
-			
+		}
 // TASSA KOHTI MENE HAKEMAAN LISATIETOJA KIRJOITETTAVAKSI ENNEN
 // SEURAAVAN RIVIN TOTEUTTAMISTA, JOS PIKKU_L ON OLEMASSA! 
 // eli if (all->l == 1)
@@ -201,9 +260,13 @@ int		open_and_write_directory(t_all *all, char *directory, char *path)
 			intti = other_dirrs[0][in];
 //			ft_printf("in the loop in %i and o %o and tmp %s\n", in, o, tmp);
 			if (path == NULL)
+			{
 				open_and_write_directory(all, list[intti], directory);
+			}
 			if (path != NULL)
+			{
 				open_and_write_directory(all, list[intti], tmp);
+			}
 //			ft_printf("back from openwrite\n");
 			in++;
 		}
@@ -212,10 +275,12 @@ int		open_and_write_directory(t_all *all, char *directory, char *path)
 //	ft_printf("i %i and o %i\n", i, o);
 	if (all->big_r_flag)
 	{
-		while (x < 1)
-			free(other_dirrs[x++]);
+		free(other_dirrs[x]);
 		free(other_dirrs);
 	}
+	closedir(dir);
+//	if (path != NULL)
+//		free(tmp);
 // TAALLA PITAA JOTENKI VAPAUTTAA TMP ILMAN ET KAIKKI MENEE VITUIKSI
 	return (1);
 }

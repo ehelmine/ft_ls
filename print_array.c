@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 14:29:45 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/10 17:39:38 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/12 16:05:59 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,52 +33,6 @@ void	sort_asc_arr(char **list, int ii)
 	}
 }
 
-void	loop_directories(t_all *all)
-{
-	char			list[100][100];
-	DIR				*dir;
-	struct dirent	*dp;
-	int i;
-	int x;
-	int ii;
-	int y;
-	
-	i = 0;
-	y = 0;
-	while (i < all->num_dir)
-	{
-		ii = 0;
-		dir = opendir(all->directories[i]);
-		if (dir == NULL)
-		{
-			ft_putstr("can't open");
-			exit (1);
-		}
-		while (((dp = readdir(dir)) != NULL))
-		{
-			if (dp->d_name[0] != '.')
-				ft_strcpy(list[ii++], dp->d_name);
-		}
-		list[ii][0] = '\0';
-		sort_asc(list, ii);
-		x = 0;
-		ft_putstr(all->directories[i]);
-		free(all->directories[i]);
-		ft_putstr(":\n");
-		while (x < ii)
-		{
-//			if (check_directory(list[x]))
-//				int_arr[0][y++] = x;
-			ft_printf("%s\n", list[x++]);
-		}
-		if (i + 1 != all->num_dir)
-			ft_putstr("\n");
-		if (all->big_r_flag && y > 0)
-			ft_putstr("there is more directories\n");
-		i++;
-	}
-}
-
 void	print_and_free_array(char **arr, int i, int no, t_all *all)
 {
 	int x;
@@ -86,6 +40,7 @@ void	print_and_free_array(char **arr, int i, int no, t_all *all)
 	int check;
 
 	tmp = NULL;
+	check = 0;
 	x = 0;
 	if (i > 1 && !all->t_flag)
 		sort_asc_arr(arr, i);
@@ -103,9 +58,11 @@ void	print_and_free_array(char **arr, int i, int no, t_all *all)
 			if (check == 1)
 				open_and_write_directory(all, tmp, NULL);
 			else
+			{
 				open_and_write_directory(all, arr[x], NULL);
+			}
 		}
-		else if (no == 1)
+		if (no == 1)
 			ft_printf("ls: %s: No such file or directory\n", arr[x]);
 		else if (no == 0)
 		{

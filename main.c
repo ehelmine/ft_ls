@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:11:24 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/11 15:55:43 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/12 16:17:20 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,12 @@ void	print_output(t_all *all)
 {
 	int	y;
 
-	print_and_free_array(all->not_exist, all->num_no, 1, all);
-	print_and_free_array(all->files, all->num_file, 0, all);
-	print_and_free_array(all->directories, all->num_dir, 2, all);
+	if (all->num_no > 0)
+		print_and_free_array(all->not_exist, all->num_no, 1, all);
+	if (all->num_file > 0)
+		print_and_free_array(all->files, all->num_file, 0, all);
+	if (all->num_dir > 0)
+		print_and_free_array(all->directories, all->num_dir, 2, all);
 	y = 0;
 	while (y < all->num_no)
 		free(all->not_exist[y++]);
@@ -91,7 +94,9 @@ int	check_other_input(t_all *all, int i, int argc)
 				all->files[all->num_file++] = ft_strdup(all->input_arr[i]);
 		}
 		else
+		{
 			all->directories[all->num_dir++] = ft_strdup(all->input_arr[i]);
+		}
 		i++;
 	}
 	return (1);
@@ -159,6 +164,7 @@ void	set_values_to_zero(t_all *all)
 	all->num_dir = 0;
 	all->p = 0;
 	all->links_len = 0;
+	all->tmp = NULL;
 }
 
 int	main(int argc, char **argv)
