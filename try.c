@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:37:22 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/12 16:33:50 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/12 16:45:19 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,7 +241,10 @@ int		open_and_write_directory(t_all *all, char *directory, char *path)
 		}
 		if (all->l_flag)
 		{
-			write_long_output(list[x], all, tmp);
+			if (path == NULL)
+				write_long_output(list[x], all, directory);
+			else
+				write_long_output(list[x], all, tmp);
 		}
 // TASSA KOHTI MENE HAKEMAAN LISATIETOJA KIRJOITETTAVAKSI ENNEN
 // SEURAAVAN RIVIN TOTEUTTAMISTA, JOS PIKKU_L ON OLEMASSA! 
