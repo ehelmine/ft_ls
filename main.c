@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:11:24 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/12 16:46:39 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/14 21:08:59 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	write_only_ls(t_all *all)
 {
 	DIR				*dir;
 	int				i;
-	char			list[100][100];
+	char			list[500][500];
 	struct dirent	*dp;
 
 	dir = opendir(".");
@@ -36,6 +36,7 @@ void	write_only_ls(t_all *all)
 	all->x = 0;
 	while (all->x < i)
 		ft_printf("%s\n", list[all->x++]);
+	closedir(dir);
 }
 
 void	print_output(t_all *all)
@@ -144,6 +145,13 @@ int	check_flags(t_all *all, int argc)
 	}
 	if (i < argc)
 		return (check_other_input(all, i, argc));
+	else
+	{
+		all->directories = (char **)malloc(sizeof(char *) * (1 + 1));
+		if (all->directories == NULL)
+			return (-1);
+		all->directories[all->num_dir++] = ft_strdup(".");
+	}
 	return (1);
 }
 
@@ -164,8 +172,18 @@ void	set_values_to_zero(t_all *all)
 	all->num_dir = 0;
 	all->p = 0;
 	all->links_len = 0;
+	all->size_len = 0;
 	all->tmp = NULL;
+	all->blocks = 0;
 }
+
+/*
+**	First lets set some values to zero.
+** If number of argument is one (so only ft_ls), then we call function
+** that outputs the current directory content.
+** If argument count is more, then we copy the arguments to input_arr
+** and 
+*/
 
 int	main(int argc, char **argv)
 {
@@ -187,7 +205,7 @@ int	main(int argc, char **argv)
 			ft_strcpy(all.input_arr[i++], argv[ii++]);
 		all.input_arr[i][0] = '\0';
 		if (check_flags(&all, argc) == -1)
-			return (-1);
+			return (1);
 		print_output(&all);
 	}
 //	system ("leaks ft_ls");

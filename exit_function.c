@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 14:15:24 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/11 14:43:43 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/14 15:54:17 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,5 @@ int		ft_exit_call(int i, char c)
 	}
 	else if (i == 2)
 		write(1, "malloc fail\n", 13);
-	exit (0);
+	exit (1);
 }

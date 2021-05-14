@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:04:42 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/11 16:09:40 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/14 20:25:46 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 
 typedef	struct s_all
 {
-		char input_arr[MAX_LINES][__DARWIN_MAXNAMLEN];
+		char input_arr[MAX_LINES][500];
 		char **not_exist;
 		char **files;
 		char **directories;
@@ -51,6 +51,10 @@ typedef	struct s_all
 		char *tmp;
 		int i;
 		int links_len;
+		int size_len;
+		char *empty;
+		char *empty2;
+		int blocks;
 }				t_all;
 
 int		ft_exit_call(int i, char c);
@@ -63,9 +67,9 @@ void	set_values_to_zero(t_all *all);
 
 int		open_and_write_directory(t_all *all, char *directory, char *path);
 
-void	sort_asc(char list[100][100], int ii);
+void	sort_asc(char list[500][500], int ii);
 
-void	sort_mod_time(char list[100][100], int ii, char *path, t_all *all);
+void	sort_mod_time(char list[500][500], int ii, char *path, t_all *all);
 
 void	sort_asc_arr(char **list, int ii);
 

@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 14:29:45 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/12 16:05:59 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/14 19:07:09 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	sort_asc_arr(char **list, int ii)
 {
-	char temp[__DARWIN_MAXNAMLEN];
+	char temp[500];
 	int i;
 	int x;
 
@@ -38,15 +38,21 @@ void	print_and_free_array(char **arr, int i, int no, t_all *all)
 	int x;
 	char *tmp;
 	int check;
+	char *path;
 
 	tmp = NULL;
 	check = 0;
 	x = 0;
+	path = NULL;
+	path = (char *)malloc(sizeof(char) * 1000);
+	if (path == NULL)
+		exit(1);
+	path = NULL;
 	if (i > 1 && !all->t_flag)
 		sort_asc_arr(arr, i);
 	if (i == 0 && no == 2)
 	{
-		tmp = (char*)malloc(sizeof(char) * 1000);
+		tmp = (char *)malloc(sizeof(char) * 1000);
 		tmp[0] = '.';
 		check = 1;
 		i++;
@@ -56,11 +62,9 @@ void	print_and_free_array(char **arr, int i, int no, t_all *all)
 		if (no == 2)
 		{
 			if (check == 1)
-				open_and_write_directory(all, tmp, NULL);
+				open_and_write_directory(all, tmp, path);
 			else
-			{
-				open_and_write_directory(all, arr[x], NULL);
-			}
+				open_and_write_directory(all, arr[x], path);
 		}
 		if (no == 1)
 			ft_printf("ls: %s: No such file or directory\n", arr[x]);
@@ -72,6 +76,7 @@ void	print_and_free_array(char **arr, int i, int no, t_all *all)
 		}
 		x++;
 	}
+	free(path);
 	if (check == 1)
 		free(tmp);
 	return ;

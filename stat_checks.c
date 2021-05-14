@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:27:41 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/12 16:35:59 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/14 19:31:30 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	check_directory(char *file, t_all *all, char *path)
 	if (path_slash != NULL)
 		free(path_slash);
 //	ft_printf("string %s \n", tmp);
-	if (i < 0 && !S_IFDIR)
+	if (i == -1 && !S_IFDIR)
 		return (0);
 	if (S_ISDIR(buf.st_mode))
 		return (1);

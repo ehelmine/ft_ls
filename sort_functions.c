@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 17:53:31 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/12 15:33:19 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/14 19:30:14 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 // NIIN JOS NE ON TASMALLEEN SAMAAN AIKAAN
 // NIIN SITTEN ASCENDING ORDER PITAA TEHDA NIILLE TIEDOSTOILLE.
 
-void	sort_mod_time(char list[100][100], int ii, char *path, t_all *all)
+void	sort_mod_time(char list[500][500], int ii, char *path, t_all *all)
 {
 	struct	stat first;
 	struct	stat second;
@@ -36,7 +36,9 @@ void	sort_mod_time(char list[100][100], int ii, char *path, t_all *all)
 //	ft_printf("here amount of lines ii %i path %s\n", ii, path);
 	if (path != NULL && path[ft_strlen(path) - 1] != '/')
 		path = ft_strcat(path, "/");
-	tmp = (char*)malloc(sizeof(char) * 1000);
+	tmp = (char *)malloc(sizeof(char) * 1000);
+	if (tmp == NULL)
+		exit (1);
 	while (all->i < ii - 1)
 	{
 		cur_dir1 = list[all->i];
@@ -45,11 +47,17 @@ void	sort_mod_time(char list[100][100], int ii, char *path, t_all *all)
 		if (path != NULL)
 		{
 			cur_dir1 = ft_strjoin(path, list[all->i]);
+			if (cur_dir1 == NULL)
+				exit (1);
 			cur_dir2 = ft_strjoin(path, list[all->i + 1]);
+			if (cur_dir2 == NULL)
+				exit (1);
 		}
 //		ft_printf("curdir1 %s curdir2 %s path %s\n", cur_dir1, cur_dir2, path);
-		stat(cur_dir1, &first);
-		stat(cur_dir2, &second);
+		if (stat(cur_dir1, &first) == -1)
+			exit (1);
+		if (stat(cur_dir2, &second) == -1)
+			exit (1);
 		if (path != NULL && path[0] != '.')
 		{
 			free(cur_dir1);
@@ -77,9 +85,9 @@ void	sort_mod_time(char list[100][100], int ii, char *path, t_all *all)
 ** and checks it is in order by the ascending order.
 */
 
-void	sort_asc(char list[100][100], int ii)
+void	sort_asc(char list[500][500], int ii)
 {
-	char	temp[100];
+	char	temp[500];
 	int		i;
 	int		x;
 
