@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:37:22 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/12 16:45:19 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/14 12:51:51 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	write_long_output3(struct stat buf, t_all *all, char *output)
 	grp = getgrgid(buf.st_gid);
 	mod_time = buf.st_mtime;
 //	ft_putstr(ctime(&mod_time));
-	ft_printf("%s  %s%i %s  %s  %7i ", output, empty, links, pwd->pw_name, grp->gr_name, buf.st_size);
+	ft_printf("%s  %s%i %s  %s  %6i\t", output, empty, links, pwd->pw_name, grp->gr_name, buf.st_size);
 	free(empty);
 	free(output);
 }
