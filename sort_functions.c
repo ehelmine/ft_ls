@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 17:53:31 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/14 19:30:14 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/17 13:14:52 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 // NIIN JOS NE ON TASMALLEEN SAMAAN AIKAAN
 // NIIN SITTEN ASCENDING ORDER PITAA TEHDA NIILLE TIEDOSTOILLE.
 
-void	sort_mod_time(char list[500][500], int ii, char *path, t_all *all)
+void	sort_mod_time(char list[800][600], int ii, char *path, t_all *all)
 {
 	struct	stat first;
 	struct	stat second;
@@ -85,9 +85,9 @@ void	sort_mod_time(char list[500][500], int ii, char *path, t_all *all)
 ** and checks it is in order by the ascending order.
 */
 
-void	sort_asc(char list[500][500], int ii)
+void	sort_asc(char list[800][600], int ii)
 {
-	char	temp[500];
+	char	temp[800];
 	int		i;
 	int		x;
 

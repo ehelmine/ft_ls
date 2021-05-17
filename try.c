@@ -6,24 +6,21 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:37:22 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/14 21:09:44 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/17 13:17:56 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-void	total_number_of_blocks(t_all *all, char *directory, char *tmp, char *path)
+void	total_number_of_blocks(t_all *all)
 {
-	int i;
-	
 	write(1, "total ", 7);
 	ft_putnbr(all->blocks);
 	write(1, "\n", 2);
 }
 
-void	check_number_of_links(char list[500][500], t_all *all, char *path, int ii)
+void	check_number_of_links(char list[800][600], t_all *all, char *path, int ii)
 {
-	int links;
 	int len;
 	struct stat buf;
 	char		*tmp;
@@ -77,7 +74,6 @@ void	write_long_output3(struct stat buf, t_all *all, char *output)
 	struct group *grp;
 	time_t mod_time;
 	time_t now;
-	char *tmp;
 	int real_len;
 	char *empty;
 	char *empty2;
@@ -202,7 +198,7 @@ void	write_long_output(char *file, t_all *all, char *path)
 
 int		open_and_write_directory(t_all *all, char *directory, char *path)
 {
-	char			list[500][500];
+	char			list[800][600];
 	DIR				*dir;
 	struct dirent	*dp;
 	int i;
@@ -231,7 +227,8 @@ int		open_and_write_directory(t_all *all, char *directory, char *path)
 		else if (path[ft_strlen(path) - 1] != '/')
 			path = ft_strcat(path, "/");
 		tmp = ft_strjoin(path, directory);
-		all->tmp = tmp;
+		if (tmp == NULL)
+			return (0);
 		dir = opendir(tmp);
 	}
 //	ft_printf("begin path %s dir %s tmp %s\n\n", path, directory, tmp);
@@ -271,6 +268,18 @@ int		open_and_write_directory(t_all *all, char *directory, char *path)
 			ft_strcpy(list[ii++], dp->d_name);
 	}
 	closedir(dir);
+	if (ii == 0)
+	{
+		if (path != NULL)
+		{
+			ft_putstr(tmp);
+			free(tmp);
+		}
+		else
+			ft_putstr(directory);
+		write(1, ":\n", 3);
+		return (0);
+	}
 	list[ii][0] = '\0';
 	if (ii > 1)
 	{
@@ -302,26 +311,26 @@ int		open_and_write_directory(t_all *all, char *directory, char *path)
 			check_number_of_links(list, all, directory, ii);
 	}
 	x = 0;
-//	ft_printf("directory %s tmp %s path %s\n", directory, tmp, path);
 	while (x < ii)
 	{
+//		ft_printf("x %i ii %i before loop\n", x, ii);
 		if (all->big_r_flag)
 		{
 			if (path == NULL)
 			{
-				if (check_directory(list[x], all, directory) != 0)
+				if (check_directory(list[x], directory) != 0)
 					other_dirrs[0][o++] = x;
 			}
 			else
 			{
-				if (check_directory(list[x], all, tmp) != 0)
+				if (check_directory(list[x], tmp) != 0)
 					other_dirrs[0][o++] = x;
 			}
 		}
 		if (all->l_flag)
 		{
 			if (x == 0)
-				total_number_of_blocks(all, directory, tmp, path);
+				total_number_of_blocks(all);
 			if (path == NULL)
 			{
 //				ft_printf("NULL dir %s tmp %s path %s   ", directory, tmp, path);
@@ -338,24 +347,37 @@ int		open_and_write_directory(t_all *all, char *directory, char *path)
 	in = 0;
 	if (all->big_r_flag)
 	{
+//		ft_printf("in %i o %i\n", in, o);
 		ft_putstr("\n");
 		while (in < o)
 		{
-//			ft_printf("directory %s tmp %s ", directory, tmp);
+//			ft_printf("in %i o %i\n", in, o);
+//			ft_printf("in %i other_dirrs[0][in] %i\n", in, other_dirrs[0][in]);
 			intti = other_dirrs[0][in];
+//			ft_printf("curdirectory %s tmp %s list_dir %s\n", directory, tmp, list[intti + 1]);
 			if (path == NULL)
+			{
+//				ft_printf("null h\n");
 				open_and_write_directory(all, list[intti], directory);
-			if (path != NULL)
+			}
+			else if (path != NULL)
+			{
+//				ft_printf("not null h\n");
 				open_and_write_directory(all, list[intti], tmp);
+			}
+//			ft_printf("back\n");
 			in++;
 		}
+//		ft_printf("here\n");
 	}
 	if (all->big_r_flag)
 	{
 		free(other_dirrs[0]);
 		free(other_dirrs);
 	}
-	free(tmp);
+	if (path != NULL)
+		free(tmp);
 // TAALLA PITAA JOTENKI VAPAUTTAA TMP ILMAN ET KAIKKI MENEE VITUIKSI
+//	ft_printf("hhh\n");
 	return (1);
 }

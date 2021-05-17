@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 14:29:45 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/14 19:07:09 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/17 12:48:22 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	print_and_free_array(char **arr, int i, int no, t_all *all)
 	check = 0;
 	x = 0;
 	path = NULL;
-	path = (char *)malloc(sizeof(char) * 1000);
+	path = (char *)malloc(sizeof(char) * 2000);
 	if (path == NULL)
 		exit(1);
 	path = NULL;
@@ -54,11 +54,13 @@ void	print_and_free_array(char **arr, int i, int no, t_all *all)
 	{
 		tmp = (char *)malloc(sizeof(char) * 1000);
 		tmp[0] = '.';
+		tmp[1] = '\0';
 		check = 1;
 		i++;
 	}
 	while (x < i)
 	{
+		ft_printf("x %i\n", x);
 		if (no == 2)
 		{
 			if (check == 1)

@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:11:24 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/14 21:08:59 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/17 13:15:16 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	write_only_ls(t_all *all)
 {
 	DIR				*dir;
 	int				i;
-	char			list[500][500];
+	char			list[800][600];
 	struct dirent	*dp;
 
 	dir = opendir(".");
