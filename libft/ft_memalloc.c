@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 12:17:00 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 16:55:13 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/18 14:51:38 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	*ft_memalloc(size_t size)
 {
 	void	*str;
 
-	str = (void *)malloc(sizeof(*str) * size);
+	str = (void *)malloc(sizeof(str) * size);
 	if (str != NULL)
 	{
 		ft_bzero(str, size);

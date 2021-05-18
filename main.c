@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:11:24 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/17 13:15:16 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/18 17:29:46 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	write_only_ls(t_all *all)
 {
 	DIR				*dir;
 	int				i;
-	char			list[800][600];
+	char			**list;
 	struct dirent	*dp;
 
 	dir = opendir(".");
@@ -26,17 +26,30 @@ void	write_only_ls(t_all *all)
 		exit (1);
 	}
 	i = 0;
+	list = (char **)malloc(sizeof(char) * 800);
+	if (list == NULL)
+		exit (1);
 	while (((dp = readdir(dir)) != NULL))
 	{
 		if (dp->d_name[0] != '.')
-			ft_strcpy(list[i++], dp->d_name);
+		{
+			list[i] = ft_strdup(dp->d_name);
+			if (list[i] == NULL)
+				exit (1);
+			i++;
+		}
 	}
-	list[i][0] = '\0';
+	closedir(dir);
+	list[i] = NULL;
 	sort_asc(list, i);
 	all->x = 0;
 	while (all->x < i)
-		ft_printf("%s\n", list[all->x++]);
-	closedir(dir);
+	{
+		ft_printf("%s\n", list[all->x]);
+		free(list[all->x++]);
+	}
+	if (list != NULL)
+		free(list);
 }
 
 void	print_output(t_all *all)
@@ -147,7 +160,7 @@ int	check_flags(t_all *all, int argc)
 		return (check_other_input(all, i, argc));
 	else
 	{
-		all->directories = (char **)malloc(sizeof(char *) * (1 + 1));
+		all->directories = (char **)malloc(sizeof(char *) * (1));
 		if (all->directories == NULL)
 			return (-1);
 		all->directories[all->num_dir++] = ft_strdup(".");

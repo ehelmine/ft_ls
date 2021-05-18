@@ -6,13 +6,13 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:27:41 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/17 12:37:02 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/18 17:29:17 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-int	check_directory(char *file, char *path)
+int	check_directory(char *file, const char *path)
 {
 	struct stat buf;
 	char *tmp;
@@ -44,8 +44,8 @@ int	check_directory(char *file, char *path)
 	}
 	else if (path == NULL)
 		tmp = file;
-	i = stat(tmp, &buf);
-	if (path != NULL)
+	i = lstat(tmp, &buf);
+	if (tmp != NULL)
 		free(tmp);
 	if (path_slash != NULL)
 		free(path_slash);

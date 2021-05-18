@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:04:42 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/17 13:12:40 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/18 18:01:28 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 #include <stdio.h>
 #include <dirent.h>
 #include <time.h>
+#include <errno.h>
 #define MAX_LINES 10000
 
 typedef	struct s_all
@@ -53,21 +54,22 @@ typedef	struct s_all
 		char *empty;
 		char *empty2;
 		int blocks;
+		int check;
 }				t_all;
 
 int		ft_exit_call(int i, char c);
 
 int		check_regular_file(const char *str);
 
-int		check_directory(char *str, char *path);
+int		check_directory(char *str, const char *path);
 
 void	set_values_to_zero(t_all *all);
 
-int		open_and_write_directory(t_all *all, char *directory, char *path);
+int		open_and_write_directory(t_all *all, const char *directory, const char *path);
 
-void	sort_asc(char list[1000][600], int ii);
+void	sort_asc(char **list, int ii);
 
-void	sort_mod_time(char list[1000][600], int ii, char *path, t_all *all);
+void	sort_mod_time(char **list, int ii, const char *path, t_all *all);
 
 void	sort_asc_arr(char **list, int ii);
 
