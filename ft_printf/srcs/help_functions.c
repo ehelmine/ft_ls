@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 17:05:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/03 13:52:45 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/19 14:31:28 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ int	get_arg_signed_int(t_val *all, va_list args)
 		all->num = va_arg(args, signed int);
 	if (all->num == 0)
 		all->zero_num = 1;
+	if (all->no_flags == 1)
+		return (write_no_flags(all));
 	if (check_num_type(all))
 		return (write_d_and_i(all));
 	return (1);
@@ -89,6 +91,8 @@ int	get_arg_s_and_p(t_val *all, va_list args, char x)
 	if (x == 's')
 	{
 		all->str = va_arg(args, char *);
+		if (all->no_flags == 1)
+			return (write_no_flags(all));
 		return (write_s(all));
 	}
 	else if (x == 'p')

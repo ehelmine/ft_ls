@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 17:53:31 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/18 15:19:35 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/19 18:59:05 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,15 @@ void	sort_mod_time(char **list, int ii, const char *path, t_all *all)
 		check = 1;
 	}
 	else
-		tmp2 = (char*)path;
-	tmp = (char *)malloc(sizeof(char) * 800);
+		tmp2 = (char *)path;
+	tmp = (char *)malloc(sizeof(char) * 1000);
 	if (tmp == NULL)
 		exit (1);
-	while (all->i < ii - 1)
+	while (all->i + 1 < ii)
 	{
-//		ft_printf("path[0] %c\n", path[0]);
 		if (path != NULL)
 		{
+//			ft_printf("list1 %s list+1 %s ii %i all->i %i\n", list[all->i], list[all->i + 1], ii, all->i);
 			cur_dir1 = ft_strjoin(tmp2, list[all->i]);
 			if (cur_dir1 == NULL)
 				exit (1);
@@ -59,22 +59,27 @@ void	sort_mod_time(char **list, int ii, const char *path, t_all *all)
 			if (cur_dir2 == NULL)
 				exit (1);
 		}
-		else
+		else if (path == NULL)
 		{
 			cur_dir1 = list[all->i];
 			cur_dir2 = list[all->i + 1];
 		}
-//		ft_printf("curdir1 %s curdir2 %s path %s\n", cur_dir1, cur_dir2, path);
-		if (stat(cur_dir1, &first) == -1)
+//		ft_printf("curdir1 %s curdir2 %s ii %i all->i %i\n", cur_dir1, cur_dir2, ii, all->i);
+		if (lstat(cur_dir1, &first) == -1)
+		{
+			ft_putstr("stat fail in modt\n");
 			exit (1);
-		if (stat(cur_dir2, &second) == -1)
+		}
+		if (lstat(cur_dir2, &second) == -1)
+		{
+			ft_putstr("stat fail in modt\n");
 			exit (1);
+		}
 		if (path != NULL)
 		{
 			free(cur_dir1);
 			free(cur_dir2);
 		}
-//		ft_printf("first %i second %i\n", first.st_mtime, second.st_mtime);
 		first_t = first.st_mtime;
 		second_t = second.st_mtime;
 		if (first_t < second_t)
@@ -83,6 +88,16 @@ void	sort_mod_time(char **list, int ii, const char *path, t_all *all)
 			ft_strcpy(list[all->i], list[all->i + 1]);
 			ft_strcpy(list[all->i + 1], tmp);
 			all->i = -1;
+		}
+		else if (first_t == second_t)
+		{
+			if (ft_strcmp(list[all->i], list[all->i + 1]) > 0)
+			{
+				ft_strcpy(tmp, list[all->i]);
+				ft_strcpy(list[all->i], list[all->i + 1]);
+				ft_strcpy(list[all->i + 1], tmp);
+				all->i = -1;	
+			}
 		}
 		all->i++;
 	}

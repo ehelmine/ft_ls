@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 15:21:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/03 14:40:34 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/19 14:27:33 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,11 @@ int	check_flags_float(t_val *all, char *flags, int i)
 
 int	check_flags_int(t_val *all, char *flags, int i, char c)
 {
+	if (flags[i + 1] == '\0')
+	{
+		all->no_flags = 1;
+		return (1);
+	}
 	while (flags[i] == '+' || flags[i] == '-'
 		|| flags[i] == ' ' || flags[i] == '#' || flags[i] == '0')
 	{

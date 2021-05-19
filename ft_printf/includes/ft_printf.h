@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 18:31:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/05 16:19:39 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/19 14:25:02 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_val
 	int				space_flag;
 	int				hash_flag;
 	int				zero_flag;
+	int				no_flags;
 	int				width;
 	int				minimum_width;
 	int				precision;
@@ -93,6 +94,8 @@ int					get_arg(t_val *all, va_list args, char c);
 int					real_width(int num_len, int input_width, int precision);
 
 char				*convert_num(t_val *all);
+
+int					write_no_flags(t_val *all);
 
 void				write_c(t_val *all);
 

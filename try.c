@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:37:22 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/18 18:02:04 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/19 19:25:57 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,17 +79,15 @@ void	check_number_of_links(char **list, t_all *all, const char *path, int ii)
 		free(tmp1);
 }
 
-void	print_link_name(t_all *all, char *path)
+void	print_link_name(char *path)
 {
 	char buf[80];
 	
 	readlink(path, buf, sizeof(buf));
 	ft_printf(" -> %s", buf);
-	if (all->check == 1)
-		free(path);
 }
 
-void	write_long_output3(struct stat buf, t_all *all, char *output, char *path)
+void	write_long_output3(struct stat buf, t_all *all, char *path)
 {
 	int links;
 	int len;
@@ -142,24 +140,29 @@ void	write_long_output3(struct stat buf, t_all *all, char *output, char *path)
 		str[16] = '\0';
 	}
 	if (grp == NULL && pwd != NULL)
-		ft_printf("%s  %s%i %s %llu %s %lli %s ", output, empty, links, pwd->pw_name, (unsigned long long)buf.st_gid, empty2, buf.st_size, str + 4);
+		ft_printf("  %s%i %s %llu %s %lli %s ", empty, links, pwd->pw_name, (unsigned long long)buf.st_gid, empty2, buf.st_size, str + 4);
 	else if (grp != NULL && pwd == NULL)
-		ft_printf("%s  %s%i %llu %s %s %lli %s ", output, empty, links, (unsigned long long)buf.st_uid, grp->gr_name, empty2, buf.st_size, str + 4);
+		ft_printf("  %s%i %llu %s %s %lli %s ", empty, links, (unsigned long long)buf.st_uid, grp->gr_name, empty2, buf.st_size, str + 4);
 	else if (grp == NULL && pwd == NULL)
-		ft_printf("%s  %s%i %llu %llu %s %lli %s ", output, empty, links, (unsigned long long)buf.st_uid, (unsigned long long)buf.st_gid, empty2, buf.st_size, str + 4);
+		ft_printf("  %s%i %llu %llu %s %lli %s ", empty, links, (unsigned long long)buf.st_uid, (unsigned long long)buf.st_gid, empty2, buf.st_size, str + 4);
 	else
-		ft_printf("%s  %s%i %s %s %s %lli %s ", output, empty, links, pwd->pw_name, grp->gr_name, empty2, buf.st_size, str + 4);
+		ft_printf("  %s%i %s %s %s %lli %s ", empty, links, pwd->pw_name, grp->gr_name, empty2, buf.st_size, str + 4);
 	if (S_ISLNK(buf.st_mode) != 0)
-		print_link_name(all, path);
+		print_link_name(path);
+	if (all->check == 1)
+		free(path);
 	free(empty);
-	free(output);
 	free(empty2);
 }
 
-void	set_permission_to_output(struct stat buf, char *output, int i)
+//		./ft_ls -lRa ../../  3.04s user 1.88s system 41% cpu 11.953 total
+//	printf change
+//		./ft_ls -lRa ../../  2.93s user 1.74s system 41% cpu 11.166 total
+// after i and d
+//		./ft_ls -lRa ../../  2.91s user 1.68s system 41% cpu 11.114 total
+
+void	set_permission_to_output(char output[11], struct stat buf)
 {
-	while (i < 10)
-		output[i++] = '-';
 	if (S_ISDIR(buf.st_mode) != 0)
 		output[0] = 'd';
 	else if (S_ISREG(buf.st_mode) != 0)
@@ -184,32 +187,39 @@ void	set_permission_to_output(struct stat buf, char *output, int i)
 		output[8] = 'w';
 	if (buf.st_mode & S_IXOTH)
 		output[9] = 'x';
-	output[10] = '\0';
 }
 
-void	write_long_output2(struct stat buf, t_all *all, char *path)
+void	write_long_output2(t_all *all, char *path)
 {
+	struct stat	buf;
 	int i;
-	char *output;
+	char output[11];
 
+	i = lstat(path, &buf);
+	if (i == -1 && S_ISDIR(buf.st_mode) == 0)
+		exit (1);
 	i = 0;
-	output = (char *)malloc(sizeof(char) * 15);
-	if (output == NULL)
-		ft_exit_call(2, '0');
-	set_permission_to_output(buf, output, i);
-	write_long_output3(buf, all, output, path);
+	while (i < 10)
+		output[i++] = '-';
+	output[10] = '\0';
+	set_permission_to_output(output, buf);
+	write(1, output, 11);
+	write_long_output3(buf, all, path);
+}
+
+void	set_long_output_vals(t_all *all)
+{
+	all->check = 0;
+	all->i = 0;
 }
 
 void	write_long_output(char *file, t_all *all, const char *path)
 {
-	struct stat	buf;
 	char		*tmp;
 	char		*tmp2;
-	int			i;
 
 	tmp = NULL;
 	tmp2 = NULL;
-	all->check = 0;
 	if (path != NULL)
 	{
 		if (path[ft_strlen(path) - 1] != '/')
@@ -226,15 +236,9 @@ void	write_long_output(char *file, t_all *all, const char *path)
 			exit (1);
 		all->check = 1;
 	}
-	if (path == NULL)
+	else if (path == NULL)
 		tmp = file;
-	i = lstat(tmp, &buf);
-	if (i == -1 && !S_IFDIR)
-	{
-		ft_putstr("stat fail\n");
-		exit (1);
-	}
-	write_long_output2(buf, all, tmp);
+	write_long_output2(all, tmp);
 }
 
 int		open_and_write_directory(t_all *all, const char *directory, const char *path)
@@ -260,6 +264,7 @@ int		open_and_write_directory(t_all *all, const char *directory, const char *pat
 	o = 0;
 	tmp = NULL;
 	list = NULL;
+	dir_tmp = NULL;
 //	ft_printf("dir very begin %s and path %s\n", directory, path);
 	if (path == NULL)
 		dir = opendir(directory);
@@ -283,11 +288,12 @@ int		open_and_write_directory(t_all *all, const char *directory, const char *pat
 		exit (1);
 	while ((dp = readdir(dir)))
 	{
-		if ((!all->a_flag && dp->d_name[0] != '.') || all->a_flag)
+		if ((!all->a_flag && dp->d_name[0] != '.') || (all->a_flag && dp->d_name[0] == '.'))
 		{
-			list[ii] = ft_strdup(dp->d_name);
+			list[ii] = ft_strnew(80);
 			if (list[ii] == NULL)
-				exit (1);
+				exit(1);
+			ft_strcpy(list[ii], dp->d_name);
 			ii++;
 		}
 	}
@@ -311,7 +317,7 @@ int		open_and_write_directory(t_all *all, const char *directory, const char *pat
 		other_dirrs = (int**)malloc(sizeof(int*) * 1);
 		if (other_dirrs == NULL)
 			exit (1);
-		other_dirrs[o] = (int*)malloc(sizeof(int) * 500);
+		other_dirrs[o] = (int*)malloc(sizeof(int) * 800);
 		if (other_dirrs[o] == NULL)
 			exit (1);
 	}
@@ -381,35 +387,43 @@ int		open_and_write_directory(t_all *all, const char *directory, const char *pat
 			tmp = ft_strjoin(directory, "/");
 		else
 			tmp = ft_strjoin(dir_tmp, "/");
-		while (in < o)
+	}
+	x = 0;
+	while (in < ii)
+	{
+		if (all->big_r_flag && other_dirrs[0][x] == in && x < o)
 		{
-			ft_putstr("\n");
-//			ft_printf("in %i o %i\n", in, o);
-//			ft_printf("in %i other_dirrs[0][in] %i\n", in, other_dirrs[0][in]);
-			intti = other_dirrs[0][in];
-//			ft_printf("curdirectory %s tmp %s list_dir %s\n", directory, tmp, list[intti + 1]);
+			intti = other_dirrs[0][x];
+			write(1, "\n", 2);
 			open_and_write_directory(all, list[intti], tmp);
-			in++;
+			x++;
 		}
-		free(tmp);
+		in++;
+	}
+	if (all->big_r_flag)
+	{
 		free(other_dirrs[0]);
 		free(other_dirrs);
-//		ft_printf("here\n");
+		free(tmp);
 	}
 	if (path != NULL)
 		free(dir_tmp);
 	x = 0;
-	if (path == NULL)
+	while (list[x] != NULL)
+		free(list[x++]);
+/*	if (list != NULL && x != 0)
 	{
-		while (x < ii)
-		{
-			free(list[x]);
-			x++;
-		}
 		free(list);
-	}
-//	if (list != NULL)
-// TAALLA PITAA JOTENKI VAPAUTTAA TMP ILMAN ET KAIKKI MENEE VITUIKSI
-//	ft_printf("hhh\n");
+		list = NULL;
+	}*/
 	return (1);
 }
+/*
+while (any_array[y] != NULL)
+	{
+		free(any_array[y]);
+		y++;
+	}
+	free(any_array);
+	any_array = NULL;
+	*/

@@ -6,7 +6,7 @@
 #    By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/19 13:31:46 by ehelmine          #+#    #+#              #
-#    Updated: 2021/05/05 16:18:41 by ehelmine         ###   ########.fr        #
+#    Updated: 2021/05/19 14:24:42 by ehelmine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRCS = srcs/handle_input.c srcs/check_flags_one.c srcs/check_flags_second.c \
 srcs/write_c_and_ints.c srcs/help_functions.c srcs/write_signed_ints.c \
 srcs/write_string.c srcs/write_p.c srcs/write_unsigned_ints.c \
 srcs/write_zero.c srcs/convert_int.c srcs/write_float_1.c \
-srcs/write_float_2.c srcs/write_float_3.c
+srcs/write_float_2.c srcs/write_float_3.c srcs/write_no_flags.c
 
 LIBFT_SRCS = $(addprefix ../libft/, ft_putchar.c ft_putstr.c ft_atoi.c \
 ft_strlen.c ft_strcmp.c ft_putnbr.c ft_strdup.c ft_strcpy.c ft_strncpy.c \
@@ -34,7 +34,7 @@ ft_islower.c ft_isupper.c ft_isspace.c ft_strndup.c get_next_line.c)
 OBJS = handle_input.o check_flags_one.o check_flags_second.o \
 write_c_and_ints.o help_functions.o write_signed_ints.o write_string.o \
 write_p.o write_unsigned_ints.o write_zero.o convert_int.o write_float_1.o \
-write_float_2.o write_float_3.o
+write_float_2.o write_float_3.o write_no_flags.o
 
 LIB = libft/
 

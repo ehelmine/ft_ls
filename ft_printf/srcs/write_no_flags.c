@@ -1,39 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strndup.c                                       :+:      :+:    :+:   */
+/*   write_no_flags.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/09 10:21:34 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/19 19:00:49 by ehelmine         ###   ########.fr       */
+/*   Created: 2021/05/19 14:22:07 by ehelmine          #+#    #+#             */
+/*   Updated: 2021/05/19 14:34:50 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <string.h>
-#include <stdlib.h>
+#include "../includes/ft_printf.h"
 
-char	*ft_strndup(const char *s1, size_t n)
+int		write_no_flags(t_val *all)
 {
-	size_t	len;
-	char	*dup;
-	size_t	i;
+	int i;
 
-	len = 0;
-	while (s1[len] != '\0')
-		len++;
-	if (n >= len)
-		n = len;
-	dup = (char *)malloc(sizeof(char) * (n + 1));
-	if (dup == NULL)
-		return (NULL);
 	i = 0;
-	while (i < n)
+	if (all->conv == 's')
 	{
-		dup[i] = s1[i];
-		i++;
+		while (all->str[i] != '\0')
+			i++;
+		write(1, all->str, i);
 	}
-	dup[i] = '\0';
-	return (dup);
+	else if (all->conv == 'i' || all->conv == 'd')
+		ft_putnbr(all->num);
+	return (1);
 }

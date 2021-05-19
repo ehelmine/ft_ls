@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:11:24 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/18 17:29:46 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/19 19:26:11 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ void	write_only_ls(t_all *all)
 
 	dir = opendir(".");
 	if (dir == NULL)
-	{
-		ft_putstr("can't open");
 		exit (1);
-	}
 	i = 0;
 	list = (char **)malloc(sizeof(char) * 800);
 	if (list == NULL)
@@ -58,18 +55,18 @@ void	print_output(t_all *all)
 
 	if (all->num_no > 0)
 		print_and_free_array(all->not_exist, all->num_no, 1, all);
-	if (all->num_file > 0)
-		print_and_free_array(all->files, all->num_file, 0, all);
-	if (all->num_dir > 0)
-		print_and_free_array(all->directories, all->num_dir, 2, all);
 	y = 0;
 	while (y < all->num_no)
 		free(all->not_exist[y++]);
 	free(all->not_exist);
+	if (all->num_file > 0)
+		print_and_free_array(all->files, all->num_file, 0, all);
 	y = 0;
 	while (y < all->num_file)
 		free(all->files[y++]);
 	free(all->files);
+	if (all->num_dir > 0)
+		print_and_free_array(all->directories, all->num_dir, 2, all);
 	y = 0;
 	while (y < all->num_dir)
 		free(all->directories[y++]);
