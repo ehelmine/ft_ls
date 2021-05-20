@@ -6,11 +6,11 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/17 16:11:12 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 17:00:54 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:16:06 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {

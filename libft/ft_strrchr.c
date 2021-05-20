@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 14:22:17 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 16:51:24 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:17:52 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 */
 
 #include <string.h>
-#include "libft.h"
+#include "includes/libft.h"
 
 char	*ft_strrchr(const char *s, int c)
 {

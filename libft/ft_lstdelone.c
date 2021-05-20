@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 11:53:16 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 16:03:47 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:15:33 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 ** Libc functions free(3)
 */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 void	ft_lstdelone(t_list **alst, void (*del)(void *, size_t))
 {

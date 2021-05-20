@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 13:17:33 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/18 14:30:01 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:17:52 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 ** Return value The “fresh” string result of the concatenation of the 2 strings.
 */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

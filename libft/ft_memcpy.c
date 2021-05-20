@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/17 12:20:09 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 16:28:06 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:16:10 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 **   The memcpy() function returns the original value of dst.
 */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {

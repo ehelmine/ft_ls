@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/17 11:50:28 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 16:28:26 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:16:38 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 **  The memset() function returns its first argument.
 */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 void	*ft_memset(void *b, int c, size_t len)
 {

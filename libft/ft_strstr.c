@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 13:44:34 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 16:55:27 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:17:52 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 **   character of the first occurrence of needle is returned.
 */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 char	*ft_strstr(const char *haystack, const char *needle)
 {

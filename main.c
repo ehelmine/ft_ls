@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:11:24 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/19 19:26:11 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 15:22:52 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,7 +221,3 @@ int	main(int argc, char **argv)
 //	system ("leaks ft_ls");
 	return (0);
 }
-
-
-// MIKSI ME VALILLA SEGFAULTATAAN KUN ANTAA
-// ft_ls -Rla libft MUTTEI AINA???

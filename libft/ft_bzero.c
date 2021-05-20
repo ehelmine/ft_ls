@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 11:05:35 by ehelmine          #+#    #+#             */
-/*   Updated: 2020/06/30 17:11:47 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:17:52 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** zero, bzero() does nothing.
 */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {

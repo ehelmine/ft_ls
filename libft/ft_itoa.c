@@ -6,11 +6,11 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 23:11:35 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 16:48:06 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:15:08 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 char	*ft_itoa(long n)
 {

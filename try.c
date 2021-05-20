@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:37:22 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/19 19:25:57 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 17:53:17 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,6 +265,9 @@ int		open_and_write_directory(t_all *all, const char *directory, const char *pat
 	tmp = NULL;
 	list = NULL;
 	dir_tmp = NULL;
+	other_dirrs = NULL;
+	dir = NULL;
+	dp = NULL;
 //	ft_printf("dir very begin %s and path %s\n", directory, path);
 	if (path == NULL)
 		dir = opendir(directory);
@@ -280,7 +283,10 @@ int		open_and_write_directory(t_all *all, const char *directory, const char *pat
 	{
 		ft_printf("%s\nls: %s: %s\n", dir_tmp, directory, strerror(errno));
 		if (path != NULL)
+		{
 			free(dir_tmp);
+			dir_tmp = NULL;
+		}
 		return (0);
 	}
 	list = (char **)malloc(sizeof(char *) * 3000);
@@ -288,13 +294,22 @@ int		open_and_write_directory(t_all *all, const char *directory, const char *pat
 		exit (1);
 	while ((dp = readdir(dir)))
 	{
-		if ((!all->a_flag && dp->d_name[0] != '.') || (all->a_flag && dp->d_name[0] == '.'))
+		if (dp->d_name[0] != '.')
 		{
-			list[ii] = ft_strnew(80);
+			list[ii] = ft_strnew(256);
 			if (list[ii] == NULL)
 				exit(1);
-			ft_strcpy(list[ii], dp->d_name);
-			ii++;
+			ft_strcpy(list[ii++], dp->d_name);
+		}
+		else if (dp->d_name[0] == '.')
+		{
+			if (all->a_flag == 1)
+			{
+				list[ii] = ft_strnew(256);
+				if (list[ii] == NULL)
+					exit(1);
+				ft_strcpy(list[ii++], dp->d_name);
+			}
 		}
 	}
 	closedir(dir);
@@ -306,8 +321,8 @@ int		open_and_write_directory(t_all *all, const char *directory, const char *pat
 		{
 			ft_putstr(dir_tmp);
 			free(dir_tmp);
+			dir_tmp = NULL;
 		}
-		free(list);
 		write(1, ":\n", 3);
 		return (0);
 	}
@@ -357,12 +372,12 @@ int		open_and_write_directory(t_all *all, const char *directory, const char *pat
 		{
 			if (path == NULL)
 			{
-				if (check_directory(list[x], directory) != 0)
+				if (check_directory(list[x], directory, all) != 0)
 					other_dirrs[0][o++] = x;
 			}
 			else
 			{
-				if (check_directory(list[x], dir_tmp) != 0)
+				if (check_directory(list[x], dir_tmp, all) != 0)
 					other_dirrs[0][o++] = x;
 			}
 		}
@@ -371,13 +386,11 @@ int		open_and_write_directory(t_all *all, const char *directory, const char *pat
 			if (x == 0)
 				total_number_of_blocks(all);
 			if (path == NULL)
-
 				write_long_output(list[x], all, directory);
 			else
 				write_long_output(list[x], all, dir_tmp);
 		}
-		printf("%s\n", list[x++]);
-//		ft_printf("%s\n", list[x++]);
+		ft_printf("%s\n", list[x++]);
 	}
 	in = 0;
 	check = 0;
@@ -403,19 +416,21 @@ int		open_and_write_directory(t_all *all, const char *directory, const char *pat
 	if (all->big_r_flag)
 	{
 		free(other_dirrs[0]);
+		other_dirrs[0] = NULL;
 		free(other_dirrs);
+		other_dirrs = NULL;
 		free(tmp);
+		tmp = NULL;
 	}
 	if (path != NULL)
-		free(dir_tmp);
-	x = 0;
-	while (list[x] != NULL)
-		free(list[x++]);
-/*	if (list != NULL && x != 0)
 	{
-		free(list);
-		list = NULL;
-	}*/
+		free(dir_tmp);
+		dir_tmp = NULL;
+	}
+	x = 0;
+	while (x < ii)
+		free(list[x++]);
+	free(list);
 	return (1);
 }
 /*

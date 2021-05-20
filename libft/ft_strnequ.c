@@ -6,11 +6,11 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/22 13:14:46 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 16:51:32 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:17:52 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 int	ft_strnequ(char const *s1, char const *s2, size_t n)
 {

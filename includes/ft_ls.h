@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:04:42 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/18 18:01:28 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 15:51:19 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		ft_exit_call(int i, char c);
 
 int		check_regular_file(const char *str);
 
-int		check_directory(char *str, const char *path);
+int		check_directory(char *str, const char *path, t_all *all);
 
 void	set_values_to_zero(t_all *all);
 

@@ -6,11 +6,11 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 16:02:24 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 16:02:04 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:14:51 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 int	ft_isalpha(int c)
 {

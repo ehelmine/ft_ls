@@ -6,17 +6,17 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/09 10:20:07 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 16:48:16 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:26:53 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
-int	ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
 	int	i;
 	int	x;
-	int	res;
+	long	res;
 
 	x = 1;
 	i = 0;

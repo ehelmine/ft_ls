@@ -6,11 +6,11 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 11:25:56 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 16:57:16 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:40:12 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 int	ft_check_int_len(long n)
 {

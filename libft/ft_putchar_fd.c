@@ -6,11 +6,11 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/17 17:27:15 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 16:27:31 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:16:42 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 void	ft_putchar_fd(char c, int fd)
 {

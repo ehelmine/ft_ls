@@ -6,11 +6,11 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/09 10:15:31 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 16:29:35 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:17:00 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 void	ft_putnbr(long long n)
 {

@@ -6,11 +6,11 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 14:35:47 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 16:03:18 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:14:48 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 int	ft_isprint(int c)
 {

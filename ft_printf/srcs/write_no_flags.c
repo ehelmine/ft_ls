@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 14:22:07 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/19 14:34:50 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 15:49:02 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,14 @@ int		write_no_flags(t_val *all)
 	i = 0;
 	if (all->conv == 's')
 	{
-		while (all->str[i] != '\0')
-			i++;
-		write(1, all->str, i);
+		if (all->str == NULL)
+			write(1, "(null)", 7);
+		else
+		{
+			while (all->str[i] != '\0')
+				i++;
+			write(1, all->str, i);
+		}
 	}
 	else if (all->conv == 'i' || all->conv == 'd')
 		ft_putnbr(all->num);

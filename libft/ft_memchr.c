@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/17 15:57:18 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 16:27:52 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:16:03 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 **   no such byte exists within n bytes.
 */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {

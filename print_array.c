@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 14:29:45 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/19 15:05:41 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 15:43:52 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ void	print_and_free_array(char **arr, int i, int no, t_all *all)
 	if (path == NULL)
 		exit(1);
 	path = NULL;
-	if (i > 1 && !all->t_flag)
+	if (i > 1 && all->t_flag)
+		sort_mod_time(arr, i, path, all);
+	else if (i > 1 && !all->t_flag)
 		sort_asc_arr(arr, i);
 	while (x < i)
 	{

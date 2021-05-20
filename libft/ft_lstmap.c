@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 15:24:09 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 16:51:41 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:15:42 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@
 ** Libc functions malloc(3), free(3).
 */
 
-#include "libft.h"
-#include <stdlib.h>
+#include "includes/libft.h"
 
 t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {

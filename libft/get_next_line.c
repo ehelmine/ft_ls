@@ -6,11 +6,11 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/22 10:56:07 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 17:49:47 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:36:12 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 static int	check_line_break(char *buf)
 {
@@ -104,6 +104,7 @@ int	get_next_line(const int fd, char **line)
 		}
 		else
 			end[fd] = ft_strdup(buf);
+		x = read(fd, buf, BUFF_SIZE);
 	}
 	if (x == -1 || line == NULL || fd < 0 || fd >= MAX_FD)
 		return (-1);

@@ -6,11 +6,11 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/10 15:50:41 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 16:52:24 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:16:51 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 void	ft_putendl(char const *s)
 {

@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/09 16:42:06 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 16:49:55 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:17:52 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 **   The strcpy() and strncpy() functions return dst.
 */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 char	*ft_strcpy(char *dest, const char *src)
 {

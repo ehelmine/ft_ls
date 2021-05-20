@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 09:14:37 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/18 14:52:04 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:17:52 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 ** f.
 */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 char	*ft_strmap(char const *s, char (*f)(char))
 {

@@ -6,11 +6,11 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 10:10:12 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 16:03:22 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:15:04 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 int	ft_isupper(int c)
 {

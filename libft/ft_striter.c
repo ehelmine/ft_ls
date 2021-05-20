@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 12:41:22 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 16:47:57 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:17:52 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** modified if necessary.
 */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 void	ft_striter(char *s, void (*f)(char *))
 {

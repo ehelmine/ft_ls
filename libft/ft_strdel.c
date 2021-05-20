@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 09:06:37 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 16:30:47 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:17:52 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 ** freed with free(3), then sets its pointer to NULL.
 */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 void	ft_strdel(char **as)
 {

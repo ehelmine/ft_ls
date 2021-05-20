@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/09 14:51:46 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 16:50:02 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:17:52 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 ** unsigned characters, so that `\200' is greater than `\0'.
 */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 int	ft_strncmp(const char *str1, const char *str2, size_t n)
 {

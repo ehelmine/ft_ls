@@ -6,11 +6,11 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 10:12:28 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 16:02:50 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:14:49 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 int	ft_islower(int c)
 {

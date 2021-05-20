@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/17 14:12:55 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 16:52:16 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:15:55 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 **   undefined.
 */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {

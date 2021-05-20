@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 11:01:03 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 17:37:45 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:17:52 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 ** returns the array ["hello", "fellow", "students"].
 */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 static char	**free_array(int x, char **array)
 {

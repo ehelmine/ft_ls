@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 12:52:57 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 17:01:56 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:15:47 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 ** Return value The new link.
 */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 t_list	*ft_lstnew(void const *content, size_t content_size)
 {

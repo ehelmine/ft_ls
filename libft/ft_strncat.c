@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/10 12:35:40 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 16:34:39 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:17:52 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 ** The strcat() and strncat() functions return the pointer s1.
 */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 char	*ft_strncat(char *dest, const char *src, size_t n)
 {

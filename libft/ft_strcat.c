@@ -6,11 +6,11 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/10 11:34:55 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/01 16:30:02 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:17:13 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 char	*ft_strcat(char *dest, const char *src)
 {

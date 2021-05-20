@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 15:14:58 by ehelmine          #+#    #+#             */
-/*   Updated: 2020/07/08 15:20:33 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:15:36 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 ** Libc functions None.
 */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 void	ft_lstiter(t_list *lst, void (*f)(t_list *elem))
 {

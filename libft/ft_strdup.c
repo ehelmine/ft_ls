@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/09 12:39:09 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/18 12:55:41 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:17:52 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 **   ENOMEM.
 */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 char	*ft_strdup(const char *s)
 {
