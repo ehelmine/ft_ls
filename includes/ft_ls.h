@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:04:42 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/27 12:19:06 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/27 14:59:24 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,9 @@ int		check_directory(const char *file, const char *path, t_all *all);
 void	set_values_to_zero(t_all *all);
 
 int		open_and_write_directory(t_all *all, const char *directory, const char *path);
+
+void	sort_list(char **list, char *dir_tmp, t_all *all, const char *directory,
+	const char *path);
 
 void	sort_asc(char **list, int ii);
 

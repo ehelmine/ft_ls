@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:37:22 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/27 14:05:34 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/27 15:04:41 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,6 +241,40 @@ void	write_long_output(char *file, t_all *all, const char *path)
 	write_long_output2(all, tmp);
 }
 
+int	**malloc_int_array()
+{
+	int **other_dirrs;
+	
+	other_dirrs = NULL;
+	other_dirrs = (int **)malloc(sizeof(int *) * 1);
+	if (other_dirrs == NULL)
+		exit (1);
+	other_dirrs[0] = (int *)malloc(sizeof(int) * 800);
+	if (other_dirrs[0] == NULL)
+		exit (1);
+	return (other_dirrs);
+}
+
+int	empty_dir(const char *directory, const char *path, char *dir_tmp)
+{
+	if (path == NULL)
+		ft_putstr(directory);
+	else
+	{
+		ft_putstr(dir_tmp);
+		free(dir_tmp);
+		dir_tmp = NULL;
+	}
+	write(1, ":\n", 3);
+	return (0);
+}
+
+/*
+**	Read the directory content and copy all the files/dirs to char **list. 
+**	If we have -a flag, copy also the . -files. Put NULL to end of list and
+**	return **list.
+*/
+
 char	**read_directory(DIR *dir, t_all *all)
 {
 	char **list;
@@ -277,6 +311,14 @@ char	**read_directory(DIR *dir, t_all *all)
 	return (list);
 }
 
+/*
+** If path == NULL it means that we're inside the directory where we want to 
+** open that file. So if we have a path (and then path != NULL), we need to
+** put path & directory together. Check that, and after that open directory.
+** If we can't open in, write error message and return (NULL). 
+** If we can open it, continue to read_directory -function.
+*/
+
 char	**open_directory(const char *directory, const char *path, char *dir_tmp, t_all *all)
 {
 	DIR		*dir;
@@ -284,7 +326,7 @@ char	**open_directory(const char *directory, const char *path, char *dir_tmp, t_
 	dir = NULL;
 	if (path == NULL)
 		dir = opendir(directory);
-	if (path != NULL)
+	else if (path != NULL)
 		dir = opendir(dir_tmp);
 	if (dir == NULL)
 	{
@@ -301,16 +343,13 @@ char	**open_directory(const char *directory, const char *path, char *dir_tmp, t_
 
 int		open_and_write_directory(t_all *all, const char *directory, const char *path)
 {
-	int i;
 	int x;
 	int ii;
-	int y;
 	int **other_dirrs;
-	int o;
 	int in;
-	int intti;
-	int check;
+	int o;
 	char *tmp;
+	
 	char	*dir_tmp;
 	char	**list;
 
@@ -326,50 +365,24 @@ int		open_and_write_directory(t_all *all, const char *directory, const char *pat
 //	ft_printf("dir %s path %s d_t %s\n", directory, path, dir_tmp);
 	if (list == NULL)
 		return (0);
-	i = 0;
-	y = 0;
-	o = 0;
-	tmp = NULL;
-	other_dirrs = NULL;
 	ii = 0;
 	while (list[ii] != NULL)
 		ii++;
 	if (ii == 0)
-	{
-		if (path == NULL)
-			ft_putstr(directory);
-		else
-		{
-			ft_putstr(dir_tmp);
-			free(dir_tmp);
-			dir_tmp = NULL;
-		}
-		write(1, ":\n", 3);
-		return (0);
-	}
+		return (empty_dir(directory, path, dir_tmp));
+	other_dirrs = NULL;
 	if (all->big_r_flag)
-	{
-		other_dirrs = (int **)malloc(sizeof(int *) * 1);
-		if (other_dirrs == NULL)
-			exit (1);
-		other_dirrs[o] = (int *)malloc(sizeof(int) * 800);
-		if (other_dirrs[o] == NULL)
-			exit (1);
-	}
+		other_dirrs = malloc_int_array();
 	if (ii > 1)
-	{
-		if (all->t_flag)
-		{
-			if (path != NULL)
-				sort_mod_time(list, ii, dir_tmp, all);
-			else
-				sort_mod_time(list, ii, directory, all);
-		}
-		else
-			sort_asc(list, ii);
-	}
-	x = 0;
-	check = 0;
+		sort_list(list, dir_tmp, all, directory, path);
+	if (path != NULL)
+		continue_with_dir(list, dir_tmp, all, ii, path);
+	else
+		continue_with_dir(list, directory, all, ii, path);
+// TASSA KATKAISE FUNKTIO JA PALOTTELE ALLA OLEVA LOPPPUIHIN FUNKTIOIHIN! HUOM
+// DIR_TMP JA DIR LAHTEE NYT "SAMANA" JOTEN TARKISTA AINA TARPEEN TULLEN ONKO
+// PATH TYHJA VAI EI
+
 	if (path != NULL)
 	{
 		ft_putstr(dir_tmp);
@@ -386,6 +399,7 @@ int		open_and_write_directory(t_all *all, const char *directory, const char *pat
 			check_number_of_links(list, all, directory, ii);
 	}
 	x = 0;
+	o = 0;
 	while (x < ii)
 	{
 		if (all->big_r_flag)
@@ -413,7 +427,7 @@ int		open_and_write_directory(t_all *all, const char *directory, const char *pat
 		ft_printf("%s\n", list[x++]);
 	}
 	in = 0;
-	check = 0;
+	tmp = NULL;
 	if (all->big_r_flag)
 	{
 		if (path == NULL)
@@ -429,10 +443,8 @@ int		open_and_write_directory(t_all *all, const char *directory, const char *pat
 //		ft_printf("here in %i amount of files %i amount of dirs %i", in, ii, o);
 		if (all->big_r_flag && other_dirrs[0][x] == in && x < o)
 		{
-			intti = other_dirrs[0][x];
 			write(1, "\n", 2);
-			open_and_write_directory(all, list[intti], tmp);
-			x++;
+			open_and_write_directory(all, list[other_dirrs[0][x++]], tmp);
 		}
 		in++;
 	}
