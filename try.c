@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:37:22 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/27 15:04:41 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/27 15:30:09 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,13 +277,15 @@ int	empty_dir(const char *directory, const char *path, char *dir_tmp)
 
 char	**read_directory(DIR *dir, t_all *all)
 {
-	char **list;
+	int i;
 	int ii;
 	struct dirent	*dp;
+	char **list;
 
+	i = 9000;
 	ii = 0;
 	dp = NULL;
-	list = (char **)malloc(sizeof(char *) * 9000);
+	list = (char **)malloc(sizeof(char *) * (i + 1));
 	if (list == NULL)
 		exit (1);
 	while ((dp = readdir(dir)))
@@ -375,10 +377,10 @@ int		open_and_write_directory(t_all *all, const char *directory, const char *pat
 		other_dirrs = malloc_int_array();
 	if (ii > 1)
 		sort_list(list, dir_tmp, all, directory, path);
-	if (path != NULL)
+/*	if (path != NULL)
 		continue_with_dir(list, dir_tmp, all, ii, path);
 	else
-		continue_with_dir(list, directory, all, ii, path);
+		continue_with_dir(list, directory, all, ii, path);*/
 // TASSA KATKAISE FUNKTIO JA PALOTTELE ALLA OLEVA LOPPPUIHIN FUNKTIOIHIN! HUOM
 // DIR_TMP JA DIR LAHTEE NYT "SAMANA" JOTEN TARKISTA AINA TARPEEN TULLEN ONKO
 // PATH TYHJA VAI EI

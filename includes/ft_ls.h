@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:04:42 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/27 14:59:24 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/27 15:21:44 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef	struct s_all
 		char *empty2;
 		int blocks;
 		int check;
+		int files_in_dir;
 }				t_all;
 
 int		ft_exit_call(int i, char c);
