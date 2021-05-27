@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:04:42 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/20 15:51:19 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/27 12:19:06 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "../libft/includes/libft.h"
 # include "../ft_printf/includes/ft_printf.h"
 #include <sys/stat.h>
+#include <sys/param.h>
 #include <sys/types.h>
 #include <pwd.h>
 #include <grp.h>
@@ -61,7 +62,7 @@ int		ft_exit_call(int i, char c);
 
 int		check_regular_file(const char *str);
 
-int		check_directory(char *str, const char *path, t_all *all);
+int		check_directory(const char *file, const char *path, t_all *all);
 
 void	set_values_to_zero(t_all *all);
 

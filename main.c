@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:11:24 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/20 15:22:52 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/27 14:06:28 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,21 +80,10 @@ void	print_output(t_all *all)
 ** char **directories. If it is neither, we put it in char **no_exist.
 */
 
-int	check_other_input(t_all *all, int i, int argc)
+int loop_other_input(t_all *all, int i, int argc)
 {
-	int				ii;
-	struct stat		buf;
+	struct stat	buf;
 
-	ii = 0;
-	all->files = (char **)malloc(sizeof(char *) * (argc + 1));
-	if (all->files == NULL)
-		return (-1);
-	all->not_exist = (char **)malloc(sizeof(char *) * (argc + 1));
-	if (all->not_exist == NULL)
-		return (-1);
-	all->directories = (char **)malloc(sizeof(char *) * (argc + 1));
-	if (all->directories == NULL)
-		return (-1);
 	while (i < argc)
 	{
 		if (stat(all->input_arr[i], &buf) == -1)
@@ -113,9 +102,23 @@ int	check_other_input(t_all *all, int i, int argc)
 	return (1);
 }
 
+int	malloc_for_other_input(t_all *all, int i, int argc)
+{
+	all->files = (char **)malloc(sizeof(char *) * (argc + 1));
+	if (all->files == NULL)
+		return (-1);
+	all->not_exist = (char **)malloc(sizeof(char *) * (argc + 1));
+	if (all->not_exist == NULL)
+		return (-1);
+	all->directories = (char **)malloc(sizeof(char *) * (argc + 1));
+	if (all->directories == NULL)
+		return (-1);
+	return (loop_other_input(all, i, argc));
+}
+
 /*
 ** Loop from the argv[1] and try to find flags (- with Ralrt) and set
-** true if found. If something else is found, call error function.
+** true if some flag is found. If something else is found, call error function.
 ** If there is still arguments left that are not starting with -, 
 ** call check_other_input -function.
 */
@@ -135,8 +138,10 @@ int	check_flags(t_all *all, int argc)
 	{
 		if (all->input_arr[i][0] != '-')
 			break ;
-		while (all->input_arr[i][0] == '-' && all->input_arr[i][ii] != '\0')
+		while (all->input_arr[i][ii] != '\0')
 		{
+			while (all->input_arr[i][ii] == '-')
+				ii++;
 			if (all->input_arr[i][ii] == 'a')
 				all->a_flag = 1;
 			else if (all->input_arr[i][ii] == 'l')
@@ -151,13 +156,14 @@ int	check_flags(t_all *all, int argc)
 				ft_exit_call(1, all->input_arr[i][ii]);
 			ii++;
 		}
+		ii = 1;
 		i++;
 	}
 	if (i < argc)
-		return (check_other_input(all, i, argc));
+		return (malloc_for_other_input(all, i, argc));
 	else
 	{
-		all->directories = (char **)malloc(sizeof(char *) * (1));
+		all->directories = (char **)malloc(sizeof(char *) * 1);
 		if (all->directories == NULL)
 			return (-1);
 		all->directories[all->num_dir++] = ft_strdup(".");

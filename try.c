@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:37:22 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/20 17:53:17 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/27 14:05:34 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	write_long_output3(struct stat buf, t_all *all, char *path)
 	links = buf.st_nlink;
 	len = ft_check_int_len(links);
 	real_len = all->links_len - len;
-	empty = (char *)malloc(sizeof(char) * real_len + 1);
+	empty = (char *)malloc(sizeof(char) * (real_len + 1));
 	if (empty == NULL)
 		exit(1);
 	i = 0;
@@ -113,7 +113,7 @@ void	write_long_output3(struct stat buf, t_all *all, char *path)
 	empty[real_len] = '\0';
 	len = ft_check_int_len(buf.st_size);
 	real_len = all->size_len - len;
-	empty2 = (char *)malloc(sizeof(char) * real_len + 1);
+	empty2 = (char *)malloc(sizeof(char) * (real_len + 1));
 	if (empty2 == NULL)
 		exit(1);
 	i = 0;
@@ -241,11 +241,66 @@ void	write_long_output(char *file, t_all *all, const char *path)
 	write_long_output2(all, tmp);
 }
 
+char	**read_directory(DIR *dir, t_all *all)
+{
+	char **list;
+	int ii;
+	struct dirent	*dp;
+
+	ii = 0;
+	dp = NULL;
+	list = (char **)malloc(sizeof(char *) * 9000);
+	if (list == NULL)
+		exit (1);
+	while ((dp = readdir(dir)))
+	{
+		if (dp->d_name[0] != '.')
+		{
+			list[ii] = (char *)malloc(sizeof(char) * (500));
+			if (list[ii] == NULL)
+				exit(1);
+			ft_strcpy(list[ii++], dp->d_name);
+		}
+		else if (dp->d_name[0] == '.')
+		{
+			if (all->a_flag == 1)
+			{
+				list[ii] = (char *)malloc(sizeof(char) * (500));
+				if (list[ii] == NULL)
+					exit(1);
+				ft_strcpy(list[ii++], dp->d_name);
+			}
+		}
+	}
+	closedir(dir);
+	list[ii] = NULL;
+	return (list);
+}
+
+char	**open_directory(const char *directory, const char *path, char *dir_tmp, t_all *all)
+{
+	DIR		*dir;
+	
+	dir = NULL;
+	if (path == NULL)
+		dir = opendir(directory);
+	if (path != NULL)
+		dir = opendir(dir_tmp);
+	if (dir == NULL)
+	{
+		ft_printf("%s\nls: %s: %s\n", dir_tmp, directory, strerror(errno));
+		if (path != NULL)
+		{
+			free(dir_tmp);
+			dir_tmp = NULL;
+		}
+		return (NULL);
+	}
+	return (read_directory(dir, all));
+}
+
 int		open_and_write_directory(t_all *all, const char *directory, const char *path)
 {
-	char			**list;
-	DIR				*dir;
-	struct dirent	*dp;
 	int i;
 	int x;
 	int ii;
@@ -256,63 +311,29 @@ int		open_and_write_directory(t_all *all, const char *directory, const char *pat
 	int intti;
 	int check;
 	char *tmp;
-	char *dir_tmp;
+	char	*dir_tmp;
+	char	**list;
 
-	i = 0;
-	y = 0;
-	ii = 0;
-	o = 0;
-	tmp = NULL;
-	list = NULL;
+//	ft_printf("dir %s path %s\n", directory, path);
 	dir_tmp = NULL;
-	other_dirrs = NULL;
-	dir = NULL;
-	dp = NULL;
-//	ft_printf("dir very begin %s and path %s\n", directory, path);
-	if (path == NULL)
-		dir = opendir(directory);
 	if (path != NULL)
 	{
 		dir_tmp = ft_strjoin(path, directory);
 		if (dir_tmp == NULL)
-			return (0);
-		dir = opendir(dir_tmp);
+			exit (1);
 	}
-//	ft_printf("begin path %s dir %s tmp %s\n\n", path, directory, tmp);
-	if (dir == NULL)
-	{
-		ft_printf("%s\nls: %s: %s\n", dir_tmp, directory, strerror(errno));
-		if (path != NULL)
-		{
-			free(dir_tmp);
-			dir_tmp = NULL;
-		}
-		return (0);
-	}
-	list = (char **)malloc(sizeof(char *) * 3000);
+	list = open_directory(directory, path, dir_tmp, all);
+//	ft_printf("dir %s path %s d_t %s\n", directory, path, dir_tmp);
 	if (list == NULL)
-		exit (1);
-	while ((dp = readdir(dir)))
-	{
-		if (dp->d_name[0] != '.')
-		{
-			list[ii] = ft_strnew(256);
-			if (list[ii] == NULL)
-				exit(1);
-			ft_strcpy(list[ii++], dp->d_name);
-		}
-		else if (dp->d_name[0] == '.')
-		{
-			if (all->a_flag == 1)
-			{
-				list[ii] = ft_strnew(256);
-				if (list[ii] == NULL)
-					exit(1);
-				ft_strcpy(list[ii++], dp->d_name);
-			}
-		}
-	}
-	closedir(dir);
+		return (0);
+	i = 0;
+	y = 0;
+	o = 0;
+	tmp = NULL;
+	other_dirrs = NULL;
+	ii = 0;
+	while (list[ii] != NULL)
+		ii++;
 	if (ii == 0)
 	{
 		if (path == NULL)
@@ -326,13 +347,12 @@ int		open_and_write_directory(t_all *all, const char *directory, const char *pat
 		write(1, ":\n", 3);
 		return (0);
 	}
-	list[ii] = NULL;
 	if (all->big_r_flag)
 	{
-		other_dirrs = (int**)malloc(sizeof(int*) * 1);
+		other_dirrs = (int **)malloc(sizeof(int *) * 1);
 		if (other_dirrs == NULL)
 			exit (1);
-		other_dirrs[o] = (int*)malloc(sizeof(int) * 800);
+		other_dirrs[o] = (int *)malloc(sizeof(int) * 800);
 		if (other_dirrs[o] == NULL)
 			exit (1);
 	}
@@ -400,6 +420,208 @@ int		open_and_write_directory(t_all *all, const char *directory, const char *pat
 			tmp = ft_strjoin(directory, "/");
 		else
 			tmp = ft_strjoin(dir_tmp, "/");
+		if (tmp == NULL)
+			exit (1);
+	}
+	x = 0;
+	while (in < ii)
+	{
+//		ft_printf("here in %i amount of files %i amount of dirs %i", in, ii, o);
+		if (all->big_r_flag && other_dirrs[0][x] == in && x < o)
+		{
+			intti = other_dirrs[0][x];
+			write(1, "\n", 2);
+			open_and_write_directory(all, list[intti], tmp);
+			x++;
+		}
+		in++;
+	}
+	if (all->big_r_flag)
+	{
+		free(other_dirrs[0]);
+		other_dirrs[0] = NULL;
+		free(other_dirrs);
+		other_dirrs = NULL;
+		free(tmp);
+		tmp = NULL;
+	}
+	if (path != NULL)
+	{
+		free(dir_tmp);
+		dir_tmp = NULL;
+	}
+	x = 0;
+	while (x < ii)
+	{
+		free(list[x]);
+		x++;
+	}
+	free(list);
+	list = NULL;
+	return (1);
+}
+/*
+int		open_and_write_directory(t_all *all, const char *directory, const char *path)
+{
+	char			**list;
+	struct dirent	*dp;
+	int i;
+	int x;
+	int ii;
+	int y;
+	int **other_dirrs;
+	int o;
+	int in;
+	int intti;
+	int check;
+	char *tmp;
+
+
+	char	*dir_tmp;
+	DIR		*dir;
+
+	i = 0;
+	y = 0;
+	ii = 0;
+	o = 0;
+	tmp = NULL;
+	list = NULL;
+	other_dirrs = NULL;
+	dp = NULL;
+	dir_tmp = NULL;
+	dir = NULL;
+	if (path == NULL)
+		dir = opendir(directory);
+	if (path != NULL)
+	{
+		dir_tmp = ft_strjoin(path, directory);
+		if (dir_tmp == NULL)
+			return (0);
+		dir = opendir(dir_tmp);
+	}
+	if (dir == NULL)
+	{
+		ft_printf("%s\nls: %s: %s\n", dir_tmp, directory, strerror(errno));
+		if (path != NULL)
+		{
+			free(dir_tmp);
+			dir_tmp = NULL;
+		}
+		return (0);
+	}
+	list = (char **)malloc(sizeof(char *) * 9000);
+	if (list == NULL)
+		exit (1);
+	while ((dp = readdir(dir)))
+	{
+		if (dp->d_name[0] != '.')
+		{
+			list[ii] = (char *)malloc(sizeof(char) * (500));
+			if (list[ii] == NULL)
+				exit(1);
+			ft_strcpy(list[ii++], dp->d_name);
+		}
+		else if (dp->d_name[0] == '.')
+		{
+			if (all->a_flag == 1)
+			{
+				list[ii] = (char *)malloc(sizeof(char) * (500));
+				if (list[ii] == NULL)
+					exit(1);
+				ft_strcpy(list[ii++], dp->d_name);
+			}
+		}
+	}
+	closedir(dir);
+	if (ii == 0)
+	{
+		if (path == NULL)
+			ft_putstr(directory);
+		else
+		{
+			ft_putstr(dir_tmp);
+			free(dir_tmp);
+			dir_tmp = NULL;
+		}
+		write(1, ":\n", 3);
+		return (0);
+	}
+	list[ii] = NULL;
+	if (all->big_r_flag)
+	{
+		other_dirrs = (int **)malloc(sizeof(int *) * 1);
+		if (other_dirrs == NULL)
+			exit (1);
+		other_dirrs[o] = (int *)malloc(sizeof(int) * 800);
+		if (other_dirrs[o] == NULL)
+			exit (1);
+	}
+	if (ii > 1)
+	{
+		if (all->t_flag)
+		{
+			if (path != NULL)
+				sort_mod_time(list, ii, dir_tmp, all);
+			else
+				sort_mod_time(list, ii, directory, all);
+		}
+		else
+			sort_asc(list, ii);
+	}
+	x = 0;
+	check = 0;
+	if (path != NULL)
+	{
+		ft_putstr(dir_tmp);
+		write(1, ":\n", 3);
+	}
+	if (all->l_flag)
+	{
+		all->links_len = 0;
+		all->size_len = 0;
+		all->blocks = 0;
+		if (path != NULL)
+			check_number_of_links(list, all, dir_tmp, ii);
+		else
+			check_number_of_links(list, all, directory, ii);
+	}
+	x = 0;
+	while (x < ii)
+	{
+		if (all->big_r_flag)
+		{
+			if (path == NULL)
+			{
+				if (check_directory(list[x], directory, all) != 0)
+					other_dirrs[0][o++] = x;
+			}
+			else
+			{
+				if (check_directory(list[x], dir_tmp, all) != 0)
+					other_dirrs[0][o++] = x;
+			}
+		}
+		if (all->l_flag)
+		{
+			if (x == 0)
+				total_number_of_blocks(all);
+			if (path == NULL)
+				write_long_output(list[x], all, directory);
+			else
+				write_long_output(list[x], all, dir_tmp);
+		}
+		ft_printf("%s\n", list[x++]);
+	}
+	in = 0;
+	check = 0;
+	if (all->big_r_flag)
+	{
+		if (path == NULL)
+			tmp = ft_strjoin(directory, "/");
+		else
+			tmp = ft_strjoin(dir_tmp, "/");
+		if (tmp == NULL)
+			exit (1);
 	}
 	x = 0;
 	while (in < ii)
@@ -429,11 +651,16 @@ int		open_and_write_directory(t_all *all, const char *directory, const char *pat
 	}
 	x = 0;
 	while (x < ii)
-		free(list[x++]);
+	{
+		free(list[x]);
+		x++;
+	}
 	free(list);
+	list = NULL;
 	return (1);
 }
-/*
+
+
 while (any_array[y] != NULL)
 	{
 		free(any_array[y]);
