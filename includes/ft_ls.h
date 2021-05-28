@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:04:42 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/27 15:21:44 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/05/28 14:10:30 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,14 @@ void	sort_mod_time(char **list, int ii, const char *path, t_all *all);
 
 void	sort_asc_arr(char **list, int ii);
 
+void	call_check_num_of_links(t_all *all, char **list, const char *directory);
+
+void	check_number_of_links(char **list, t_all *all, const char *path, int ii);
+
+void	total_number_of_blocks(t_all *all);
+
 void	print_and_free_array(char **arr, int i, int no, t_all *all);
+
+void	write_long_output(char *file, t_all *all, const char *path);
 
 #endif
