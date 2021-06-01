@@ -6,35 +6,33 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:27:41 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/27 13:57:12 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/01 19:25:55 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
+void	check_if_null(void *ptr)
+{
+	if (ptr == NULL)
+		exit(1);
+	else
+		return ;
+}
+
 int	check_directory(const char *file, const char *path, t_all *all)
 {
-	struct stat buf;
-	char *tmp;
-	int i;
-	char *path_slash;
-	int len;
-	
-	len = 0;
+	struct stat	buf;
+	char		*tmp;
+	char		*path_slash;
+
 	all->i = 0;
 	path_slash = NULL;
 	if (file[0] == '.' && (file[1] == '.' || file[1] == '\0'))
 		return (0);
-	if (path != NULL)
-		len = ft_strlen(path);
 	if (path == NULL)
-	{
-		tmp = ft_strnew(len);
-		if (tmp == NULL)
-			exit(1);
-		ft_strcpy(tmp, file);
-	}
-	else if (len > 0 && path[len - 1] != '/' && path != NULL)
+		tmp = ft_strdup(file);
+	else
 	{
 		path_slash = ft_strjoin(path, "/");
 		if (path_slash == NULL)
@@ -42,27 +40,19 @@ int	check_directory(const char *file, const char *path, t_all *all)
 		tmp = ft_strjoin(path_slash, file);
 		if (tmp == NULL)
 			exit (1);
-		free(path_slash);	
+		free(path_slash);
 	}
-	else
-	{
-		tmp = ft_strjoin(path, file);
-		if (tmp == NULL)
-			exit (1);
-	}
-	i = lstat(tmp, &buf);
+	all->i = lstat(tmp, &buf);
 	free(tmp);
-	if (i == -1 && !(S_ISDIR(buf.st_mode)))
-		return (0);
-	if (S_ISDIR(buf.st_mode))
+	if (all->i == 0 && S_ISDIR(buf.st_mode))
 		return (1);
 	return (0);
 }
 
-int	check_regular_file(const char *str)
+/*int	check_regular_file(const char *str)
 {
-	struct stat buf;
+	struct	stat buf;
 	
 	stat(str, &buf);
 	return (S_ISREG(buf.st_mode));
-}
+}*/

@@ -6,13 +6,13 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 14:15:24 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/14 15:54:17 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/01 19:50:32 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-int		ft_exit_call(int i, char c)
+int	ft_exit_call(int i, char c)
 {
 	if (i == 1)
 	{

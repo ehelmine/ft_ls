@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 17:53:31 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/27 15:00:41 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/01 19:52:06 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,33 @@
 // NIIN JOS NE ON TASMALLEEN SAMAAN AIKAAN
 // NIIN SITTEN ASCENDING ORDER PITAA TEHDA NIILLE TIEDOSTOILLE.
 
+void	sort_reverse(char **list)
+{
+	int		start;
+	int		end;
+	int		i;
+	char	*temp;
+
+	i = 0;
+	while (list[i] != NULL)
+		i++;
+	start = 0;
+	end = i - 1;
+	temp = NULL;
+	while (start < end)
+	{
+		temp = list[start];
+		list[start] = list[end];
+		list[end] = temp;
+		start++;
+		end--;
+	}
+}
+
 void	sort_mod_time(char **list, int ii, const char *path, t_all *all)
 {
-	struct	stat first;
-	struct	stat second;
+	struct stat	first;
+	struct stat	second;
 	char	*tmp;
 	char	*tmp2;
 	char	*cur_dir1;
@@ -44,9 +67,7 @@ void	sort_mod_time(char **list, int ii, const char *path, t_all *all)
 	}
 	else
 		tmp2 = (char *)path;
-	tmp = (char *)malloc(sizeof(char) * 1000);
-	if (tmp == NULL)
-		exit (1);
+	tmp = NULL;
 	while (all->i + 1 < ii)
 	{
 		if (path != NULL)
@@ -84,28 +105,26 @@ void	sort_mod_time(char **list, int ii, const char *path, t_all *all)
 		second_t = second.st_mtime;
 		if (first_t < second_t)
 		{
-			ft_strcpy(tmp, list[all->i]);
-			ft_strcpy(list[all->i], list[all->i + 1]);
-			ft_strcpy(list[all->i + 1], tmp);
-			all->i = -1;
+			tmp = list[all->i];
+			list[all->i] = list[all->i + 1];
+			list[all->i + 1] = tmp;
+			all->i = -1;			
 		}
 		else if (first_t == second_t)
 		{
 			if (ft_strcmp(list[all->i], list[all->i + 1]) > 0)
 			{
-				ft_strcpy(tmp, list[all->i]);
-				ft_strcpy(list[all->i], list[all->i + 1]);
-				ft_strcpy(list[all->i + 1], tmp);
-				all->i = -1;	
+				tmp = list[all->i];
+				list[all->i] = list[all->i + 1];
+				list[all->i + 1] = tmp;
+				all->i = -1;
 			}
 		}
 		all->i++;
 	}
-	free(tmp);
 	if (check == 1)
 		free(tmp2);
 	return ;
-//	ft_printf("here counter %i amount of lines ii %i path %s\n", i, ii, path);
 }
 
 /*
@@ -113,9 +132,8 @@ void	sort_mod_time(char **list, int ii, const char *path, t_all *all)
 ** and checks it is in order by the ascending order.
 */
 
-void	sort_asc(char **list, int ii)
+void	sort_asc(char **list, int ii, char *tmp)
 {
-	char	temp[800];
 	int		i;
 	int		x;
 
@@ -125,21 +143,24 @@ void	sort_asc(char **list, int ii)
 		x = ft_strcmp(list[i], list[i + 1]);
 		if (x > 0)
 		{
-			ft_strcpy(temp, list[i]);
-			ft_strcpy(list[i], list[i + 1]);
-			ft_strcpy(list[i + 1], temp);
-			i = -1;
+			tmp = list[i];
+			list[i] = list[i + 1];
+			list[i + 1] = tmp;
+			i -= 2;
+			if (i < 0)
+				i = -1;
 		}
 		i++;
 	}
-
 }
 
 void	sort_list(char **list, char *dir_tmp, t_all *all, const char *directory,
 	const char *path)
 {
 	int ii;
+	char *tmp;
 
+	tmp = NULL;
 	ii = 0;
 	while (list[ii] != NULL)
 		ii++;
@@ -151,6 +172,8 @@ void	sort_list(char **list, char *dir_tmp, t_all *all, const char *directory,
 			sort_mod_time(list, ii, directory, all);
 	}
 	else
-		sort_asc(list, ii);
+		sort_asc(list, ii, tmp);
+	if (all->reverse_flag)
+		sort_reverse(list);
 	return ;
 }

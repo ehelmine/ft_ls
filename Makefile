@@ -6,14 +6,14 @@
 #    By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/17 12:59:07 by ehelmine          #+#    #+#              #
-#    Updated: 2021/05/28 14:10:50 by ehelmine         ###   ########.fr        #
+#    Updated: 2021/06/01 19:04:28 by ehelmine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls
 
 SRCS = exit_function.c main.c print_array.c sort_functions.c stat_checks.c \
-try.c check_files.c write_long_output.c
+try.c check_files.c write_long_output.c input_check.c write_only_ls.c
 
 LIBFT_SRCS = $(addprefix libft/, ft_putchar.c ft_putstr.c ft_atoi.c \
 ft_strlen.c ft_strcmp.c ft_putnbr.c ft_strdup.c ft_strcpy.c ft_strncpy.c \
@@ -29,7 +29,7 @@ ft_lstdelone.c ft_lstdel.c ft_lstiter.c ft_lstmap.c ft_check_int_len.c \
 ft_islower.c ft_isupper.c ft_isspace.c ft_strndup.c get_next_line.c)
 
 OBJS = exit_function.o main.o print_array.o sort_functions.o stat_checks.o \
-try.o check_files.o write_long_output.o
+try.o check_files.o write_long_output.o input_check.o write_only_ls.o
 
 LIB = libft/
 
