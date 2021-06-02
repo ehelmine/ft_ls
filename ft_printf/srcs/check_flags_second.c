@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 15:20:12 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/19 14:21:14 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/02 13:40:35 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	set_values(t_val *all, char *flags, char c)
 	all->hash_flag = 0;
 	all->plus_flag = 0;
 	all->space_flag = 0;
+	all->asterisk_flag = 0;
 	all->l = 0;
 	all->ll = 0;
 	all->big_l = 0;
@@ -104,5 +105,4 @@ void	set_values(t_val *all, char *flags, char c)
 		all->width = -1;
 	if (c == 'f')
 		all->precision = 6;
-	return ;
 }

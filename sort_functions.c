@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 17:53:31 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/01 19:52:06 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/02 17:52:50 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,81 +49,28 @@ void	sort_mod_time(char **list, int ii, const char *path, t_all *all)
 {
 	struct stat	first;
 	struct stat	second;
-	char	*tmp;
-	char	*tmp2;
-	char	*cur_dir1;
-	char	*cur_dir2;
-	time_t	first_t;
-	time_t	second_t;
-	int		check;
+	char		*tmp2;
+	char		*cur_dir1;
+	char		*cur_dir2;
 
-	all->i = 0;
-	check = 0;
-//	ft_printf("here amount of lines ii %i path %s\n", ii, path);
-	if (path != NULL && path[ft_strlen(path) - 1] != '/')
-	{
-		tmp2 = ft_strjoin(path, "/");
-		check = 1;
-	}
-	else
-		tmp2 = (char *)path;
-	tmp = NULL;
+	tmp2 = initialize_sort_tmp(path);
 	while (all->i + 1 < ii)
 	{
+		cur_dir1 = list[all->i];
+		cur_dir2 = list[all->i + 1];
 		if (path != NULL)
 		{
-//			ft_printf("list1 %s list+1 %s ii %i all->i %i\n", list[all->i], list[all->i + 1], ii, all->i);
-			cur_dir1 = ft_strjoin(tmp2, list[all->i]);
-			if (cur_dir1 == NULL)
-				exit (1);
-			cur_dir2 = ft_strjoin(tmp2, list[all->i + 1]);
-			if (cur_dir2 == NULL)
-				exit (1);
+			cur_dir1 = call_strjoin(tmp2, list[all->i]);
+			cur_dir2 = call_strjoin(tmp2, list[all->i + 1]);
 		}
-		else if (path == NULL)
-		{
-			cur_dir1 = list[all->i];
-			cur_dir2 = list[all->i + 1];
-		}
-//		ft_printf("curdir1 %s curdir2 %s ii %i all->i %i\n", cur_dir1, cur_dir2, ii, all->i);
-		if (lstat(cur_dir1, &first) == -1)
-		{
-			ft_putstr("stat fail in modt\n");
+		if (lstat(cur_dir1, &first) == -1 || lstat(cur_dir2, &second) == -1)
 			exit (1);
-		}
-		if (lstat(cur_dir2, &second) == -1)
-		{
-			ft_putstr("stat fail in modt\n");
-			exit (1);
-		}
 		if (path != NULL)
-		{
-			free(cur_dir1);
-			free(cur_dir2);
-		}
-		first_t = first.st_mtime;
-		second_t = second.st_mtime;
-		if (first_t < second_t)
-		{
-			tmp = list[all->i];
-			list[all->i] = list[all->i + 1];
-			list[all->i + 1] = tmp;
-			all->i = -1;			
-		}
-		else if (first_t == second_t)
-		{
-			if (ft_strcmp(list[all->i], list[all->i + 1]) > 0)
-			{
-				tmp = list[all->i];
-				list[all->i] = list[all->i + 1];
-				list[all->i + 1] = tmp;
-				all->i = -1;
-			}
-		}
+			free_two((void *)cur_dir1, (void *)cur_dir2);
+		compare_times(first, second, list, all);
 		all->i++;
 	}
-	if (check == 1)
-		free(tmp2);
+	free(tmp2);
 	return ;
 }
 
@@ -132,12 +79,14 @@ void	sort_mod_time(char **list, int ii, const char *path, t_all *all)
 ** and checks it is in order by the ascending order.
 */
 
-void	sort_asc(char **list, int ii, char *tmp)
+void	sort_asc(char **list, int ii)
 {
 	int		i;
 	int		x;
+	char	*tmp;
 
 	i = 0;
+	tmp = NULL;
 	while (i < ii - 1)
 	{
 		x = ft_strcmp(list[i], list[i + 1]);
@@ -146,8 +95,8 @@ void	sort_asc(char **list, int ii, char *tmp)
 			tmp = list[i];
 			list[i] = list[i + 1];
 			list[i + 1] = tmp;
-			i -= 2;
-			if (i < 0)
+			i = i - 2;
+			if (i < -1)
 				i = -1;
 		}
 		i++;
@@ -157,11 +106,10 @@ void	sort_asc(char **list, int ii, char *tmp)
 void	sort_list(char **list, char *dir_tmp, t_all *all, const char *directory,
 	const char *path)
 {
-	int ii;
-	char *tmp;
+	int		ii;
 
-	tmp = NULL;
 	ii = 0;
+	all->i = 0;
 	while (list[ii] != NULL)
 		ii++;
 	if (all->t_flag)
@@ -172,7 +120,7 @@ void	sort_list(char **list, char *dir_tmp, t_all *all, const char *directory,
 			sort_mod_time(list, ii, directory, all);
 	}
 	else
-		sort_asc(list, ii, tmp);
+		sort_asc(list, ii);
 	if (all->reverse_flag)
 		sort_reverse(list);
 	return ;

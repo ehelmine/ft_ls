@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:04:42 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/01 19:35:55 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/02 17:55:30 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef	struct s_all
 		int i;
 		int links_len;
 		int size_len;
+		int group_len;
 		char *empty;
 		char *empty2;
 		int blocks;
@@ -77,6 +78,11 @@ int	malloc_for_other_input(t_all *all, int i, int argc);
 
 int loop_other_input(t_all *all, int i, int argc);
 
+void	reverse_loop_print_array(char **arr, int numbers[1][2], char *path,
+	t_all *all);
+
+void	loop_print_array(char **arr, int numbers[1][2], char *path, t_all *all);
+
 int	open_and_write_directory(t_all *all, const char *directory,
 	const char *path);
 
@@ -92,7 +98,7 @@ int	continue_with_dir(char **list, const char *directory, t_all *all,
 void	sort_list(char **list, char *dir_tmp, t_all *all, const char *directory,
 	const char *path);
 
-void	sort_asc(char **list, int ii, char *tmp);
+void	sort_asc(char **list, int ii);
 
 void	sort_mod_time(char **list, int ii, const char *path, t_all *all);
 
@@ -112,6 +118,25 @@ void	print_array(char **arr, int i, int no, t_all *all);
 
 void	write_only_ls(t_all *all);
 
-void	write_long_output(char *file, t_all *all, const char *path);
+void	start_long_output(char *file, t_all *all, const char *path, int x);
+
+void	modify_time(char *str, time_t now, time_t mod_time);
+
+char	*get_link_name(char *path, struct stat buf, t_all *all);
+
+void	print_time_and_name(char *str, char *file, char *arrow, char *link);
+
+void	total_number_of_blocks(t_all *all);
+
+void	free_two(void *ptr1, void *ptr2);
+
+void	compare_times(struct stat first, struct stat second, char **list,
+	t_all *all);
+
+void	swap_and_move_index_two_back(char **list, t_all *all);
+
+char	*initialize_sort_tmp(const char *path);
+
+char	*call_strjoin(char *path, char *file);
 
 #endif

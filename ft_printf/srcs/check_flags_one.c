@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 15:21:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/19 14:27:33 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/02 13:42:10 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,30 +73,32 @@ int	check_flags_float(t_val *all, char *flags, int i)
 	return (1);
 }
 
-int	check_flags_int(t_val *all, char *flags, int i, char c)
+int	check_flags_int(t_val *all, char *f, int i, char c)
 {
-	if (flags[i + 1] == '\0')
+	if (f[i + 1] == '\0')
 	{
 		all->no_flags = 1;
 		return (1);
 	}
-	while (flags[i] == '+' || flags[i] == '-'
-		|| flags[i] == ' ' || flags[i] == '#' || flags[i] == '0')
+	while (f[i] == '+' || f[i] == '-' || f[i] == ' ' || f[i] == '#'
+		|| f[i] == '0' || f[i] == '*')
 	{
-		if (flags[i] == '+' && (c == 'd' || c == 'i'))
+		if (f[i] == '+' && (c == 'd' || c == 'i'))
 			all->plus_flag = 1;
-		else if (flags[i] == '-')
+		else if (f[i] == '-')
 			all->minus_flag = 1;
-		else if (flags[i] == ' ' && (c == 'd' || c == 'i'))
+		else if (f[i] == ' ' && (c == 'd' || c == 'i'))
 			all->space_flag = 1;
-		else if (flags[i] == '0')
+		else if (f[i] == '0')
 			all->zero_flag = 1;
-		else if (flags[i] == '#')
+		else if (f[i] == '#')
 			all->hash_flag = 1;
+		else if (f[i] == '*')
+			all->asterisk_flag = 1;
 		i++;
 	}
-	i = check_width_and_precision(all, flags, i);
-	check_h_and_l(all, flags, i);
+	i = check_width_and_precision(all, f, i);
+	check_h_and_l(all, f, i);
 	return (1);
 }
 

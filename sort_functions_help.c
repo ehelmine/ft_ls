@@ -1,0 +1,65 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_functions_help.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/02 17:49:26 by ehelmine          #+#    #+#             */
+/*   Updated: 2021/06/02 17:52:19 by ehelmine         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "includes/ft_ls.h"
+
+char	*call_strjoin(char *path, char *file)
+{
+	char	*str;
+
+	str = ft_strjoin(path, file);
+	if (str == NULL)
+		exit(1);
+	return (str);
+}
+
+char	*initialize_sort_tmp(const char *path)
+{
+	char	*tmp;
+
+	if (path != NULL && path[ft_strlen(path) - 1] != '/')
+		tmp = ft_strjoin(path, "/");
+	else
+		tmp = ft_strdup(path);
+	return (tmp);
+}
+
+void	swap_and_move_index_two_back(char **list, t_all *all)
+{
+	char	*tmp;
+
+	tmp = NULL;
+	tmp = list[all->i];
+	list[all->i] = list[all->i + 1];
+	list[all->i + 1] = tmp;
+	all->i = all->i - 2;
+	if (all->i < -1)
+		all->i = -1;
+}
+
+void	compare_times(struct stat first, struct stat second, char **list,
+	t_all *all)
+{
+	if (first.st_mtime < second.st_mtime)
+		swap_and_move_index_two_back(list, all);
+	else if (first.st_mtime == second.st_mtime)
+	{
+		if (ft_strcmp(list[all->i], list[all->i + 1]) > 0)
+			swap_and_move_index_two_back(list, all);
+	}
+}
+
+void	free_two(void *ptr1, void *ptr2)
+{
+	free(ptr1);
+	free(ptr2);
+}

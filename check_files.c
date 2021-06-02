@@ -6,11 +6,31 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:00:11 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/01 20:13:36 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/02 17:56:19 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
+
+void	len_of_group(struct stat buf, t_all *all)
+{
+	struct group	*grp;
+	int				len;
+
+	grp = getgrgid(buf.st_gid);
+	if (grp == NULL)
+	{
+		len = ft_check_int_len(buf.st_gid);
+		if (len > all->group_len)
+			all->group_len = len;
+	}
+	else
+	{
+		len = ft_strlen(grp->gr_name);
+		if (len > all->group_len)
+			all->group_len = len;
+	}
+}
 
 void	num_of_links_loop(char *tmp2, t_all *all)
 {
@@ -33,6 +53,7 @@ void	num_of_links_loop(char *tmp2, t_all *all)
 		if (len > all->size_len)
 			all->size_len = len;
 		all->blocks += buf.st_blocks;
+		len_of_group(buf, all);
 	}	
 }
 
@@ -43,6 +64,7 @@ void	check_number_of_links(char **list, t_all *all, const char *path, int ii)
 
 	tmp2 = NULL;
 	x = -1;
+	all->group_len = 0;
 	while (++x < ii)
 	{
 		if (path != NULL)
@@ -81,21 +103,6 @@ void	call_check_num_of_links(t_all *all, char **list, const char *directory)
 	}
 	else
 		check_number_of_links(list, all, directory, ii);
-}
-
-int	**malloc_int_array(void)
-{
-	int	**other_dirrs;
-
-	other_dirrs = NULL;
-	other_dirrs = (int **)malloc(sizeof(int *) * 2);
-	if (other_dirrs == NULL)
-		exit (1);
-	other_dirrs[0] = (int *)malloc(sizeof(int) * 800);
-	if (other_dirrs[0] == NULL)
-		exit (1);
-	other_dirrs[1] = (int *)malloc(sizeof(int) * 2);
-	return (other_dirrs);
 }
 
 int	count_num_of_files(DIR *dir, t_all *all)

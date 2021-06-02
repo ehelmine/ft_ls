@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 19:00:55 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/01 19:55:06 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/02 15:04:30 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 void	output_and_free_ls(t_all *all, char **list, int i)
 {
-	char	*tmp;
-
-	tmp = NULL;
-	sort_asc(list, i, tmp);
+	sort_asc(list, i);
 	all->x = 0;
 	while (all->x < i)
 	{

@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:37:22 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/01 18:44:48 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/02 17:57:53 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,10 @@ void	loop_dir_content2(char **list, const char *directory, t_all *all,
 			other_dirrs[1][0] = o;
 		}
 		if (all->l_flag)
-		{
-			if (x == 0)
-				total_number_of_blocks(all);
-			write_long_output(list[x], all, directory);
-		}
-		ft_printf("%s\n", list[x++]);
+			start_long_output(list[x], all, directory, x);
+		if (!all->l_flag)
+			ft_printf("%s\n", list[x]);
+		x++;
 	}
 }
 
@@ -112,26 +110,4 @@ int	continue_with_dir(char **list, const char *directory, t_all *all,
 		call_check_num_of_links(all, list, directory);
 	loop_dir_content(list, directory, all, path);
 	return (1);
-}
-
-int	empty_dir(const char *directory, const char *path, char *dir_tmp,
-	char **list)
-{
-	int	x;
-
-	x = 0;
-	if (path == NULL)
-		ft_putstr(directory);
-	else
-	{
-		ft_putstr(dir_tmp);
-		free(dir_tmp);
-		dir_tmp = NULL;
-		while (list[x] != NULL)
-			free(list[x++]);
-		free(list);
-		list = NULL;
-	}
-	write(1, ":\n", 3);
-	return (0);
 }

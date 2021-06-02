@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 14:29:45 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/01 19:51:07 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/02 17:54:57 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,30 +161,4 @@ void	reverse_loop_print_array(char **arr, int numbers[1][2], char *path,
 		}
 		x--;
 	}	
-}
-
-void	print_array(char **arr, int i, int no, t_all *all)
-{
-	char	*path;
-	char	*str;
-	int		numbers[1][2];
-
-	str = NULL;
-	path = NULL;
-	path = (char *)malloc(sizeof(char) * 1000);
-	if (path == NULL)
-		exit(1);
-	path = NULL;
-	if (i > 1 && all->t_flag)
-		sort_mod_time(arr, i, path, all);
-	else if (i > 1 && !all->t_flag)
-		sort_asc(arr, i, str);
-	numbers[0][0] = i;
-	numbers[0][1] = no;
-	if (all->reverse_flag)
-		reverse_loop_print_array(arr, numbers, path, all);
-	else
-		loop_print_array(arr, numbers, path, all);
-	free(path);
-	return ;
 }

@@ -6,11 +6,36 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:11:24 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/01 19:05:38 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/02 17:55:00 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
+
+
+void	print_array(char **arr, int i, int no, t_all *all)
+{
+	char	*path;
+	int		numbers[1][2];
+
+	path = NULL;
+	path = (char *)malloc(sizeof(char) * 1000);
+	if (path == NULL)
+		exit(1);
+	path = NULL;
+	if (i > 1 && all->t_flag)
+		sort_mod_time(arr, i, path, all);
+	else if (i > 1 && !all->t_flag)
+		sort_asc(arr, i);
+	numbers[0][0] = i;
+	numbers[0][1] = no;
+	if (all->reverse_flag)
+		reverse_loop_print_array(arr, numbers, path, all);
+	else
+		loop_print_array(arr, numbers, path, all);
+	free(path);
+	return ;
+}
 
 void	print_output(t_all *all)
 {

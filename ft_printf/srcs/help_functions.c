@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 17:05:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/19 14:31:28 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/02 14:02:04 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ int	get_arg_unsigned_int(t_val *all, va_list args, char x)
 
 int	get_arg_signed_int(t_val *all, va_list args)
 {
+	if (all->asterisk_flag)
+		return (write_asterisk(all, args));
 	if (all->h == 1)
 		all->num = (short int)va_arg(args, int);
 	else if (all->ll == 1 || all->l == 1)
