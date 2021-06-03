@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 17:53:31 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/02 17:52:50 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/03 14:15:55 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,24 +103,13 @@ void	sort_asc(char **list, int ii)
 	}
 }
 
-void	sort_list(char **list, char *dir_tmp, t_all *all, const char *directory,
-	const char *path)
+void	sort_list(char **list, t_all *all, const char *directory)
 {
-	int		ii;
-
-	ii = 0;
 	all->i = 0;
-	while (list[ii] != NULL)
-		ii++;
 	if (all->t_flag)
-	{
-		if (path != NULL)
-			sort_mod_time(list, ii, dir_tmp, all);
-		else
-			sort_mod_time(list, ii, directory, all);
-	}
+		sort_mod_time(list, all->len_of_list, directory, all);
 	else
-		sort_asc(list, ii);
+		sort_asc(list, all->len_of_list);
 	if (all->reverse_flag)
 		sort_reverse(list);
 	return ;

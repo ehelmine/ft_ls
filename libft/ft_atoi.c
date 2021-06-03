@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/09 10:20:07 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/20 13:26:53 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/03 14:01:04 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 long	ft_atoi(const char *str)
 {
-	int	i;
-	int	x;
+	int		i;
+	int		x;
 	long	res;
 
 	x = 1;

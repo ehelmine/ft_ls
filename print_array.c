@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 14:29:45 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/02 17:54:57 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/03 18:08:05 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ char	**read_directory(DIR *dir, t_all *all, int i)
 	list = (char **)malloc(sizeof(char *) * (i + 1));
 	if (list == NULL)
 		exit (1);
-	while ((dp = readdir(dir)))
+	dp = readdir(dir);
+	while (dp)
 	{
 		if (dp->d_name[0] != '.' || (dp->d_name[0] == '.' && all->a_flag == 1))
 		{
@@ -38,9 +39,11 @@ char	**read_directory(DIR *dir, t_all *all, int i)
 				exit(1);
 			ft_strcpy(list[ii++], dp->d_name);
 		}
+		dp = readdir(dir);
 	}
 	closedir(dir);
 	list[ii] = NULL;
+	all->len_of_list = ii;
 	return (list);
 }
 
@@ -87,25 +90,25 @@ int	open_and_write_directory(t_all *all, const char *directory,
 {	
 	char	*dir_tmp;
 	char	**list;
-	int		ii;
 
 	dir_tmp = NULL;
 	if (path != NULL)
 	{
 		dir_tmp = ft_strjoin(path, directory);
-		if (dir_tmp == NULL)
-			exit (1);
+		check_if_null((void *)dir_tmp);
 	}
 	list = open_directory(directory, path, dir_tmp, all);
 	if (list == NULL)
 		return (0);
-	ii = 0;
-	while (list[ii] != NULL)
-		ii++;
-	if (ii == 0)
+	if (all->len_of_list == 0)
 		return (empty_dir(directory, path, dir_tmp, list));
-	if (ii > 1)
-		sort_list(list, dir_tmp, all, directory, path);
+	if (all->len_of_list > 1)
+	{
+		if (path != NULL)
+			sort_list(list, all, dir_tmp);
+		else
+			sort_list(list, all, directory);
+	}
 	if (path != NULL)
 		return (continue_with_dir(list, dir_tmp, all, path));
 	else
@@ -116,8 +119,8 @@ void	loop_print_array(char **arr, int numbers[1][2], char *path, t_all *all)
 {
 	int	x;
 
-	x = 0;
-	while (x < numbers[0][0])
+	x = -1;
+	while (++x < numbers[0][0])
 	{
 		if (numbers[0][1] == 2)
 		{
@@ -125,15 +128,19 @@ void	loop_print_array(char **arr, int numbers[1][2], char *path, t_all *all)
 			if (x + 1 != numbers[0][0])
 				write(1, "\n", 2);
 		}
-		if (numbers[0][1] == 1)
+		else if (numbers[0][1] == 1)
 			ft_printf("ls: %s: No such file or directory\n", arr[x]);
 		else if (numbers[0][1] == 0)
 		{
-			ft_printf("%s\n", arr[x]);
-			if (x + 1 == numbers[0][0])
-				write(1, "\n", 2);
+			if (all->l_flag)
+				start_long_output(arr[x], all, NULL, -1);
+			else
+			{
+				ft_printf("%s\n", arr[x]);
+				if (x + 1 == numbers[0][0])
+					write(1, "\n", 2);
+			}
 		}
-		x++;
 	}	
 }
 

@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 17:19:30 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/02 17:20:21 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/03 18:13:08 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,28 @@ void	modify_time(char *str, time_t now, time_t mod_time)
 		str[15] = str[23];
 		str[16] = '\0';
 	}
+}
+
+void	check_file_type(char output[11], struct stat buf, t_all *all)
+{
+	if (S_ISDIR(buf.st_mode) != 0)
+		output[0] = 'd';
+	else if (S_ISREG(buf.st_mode) != 0)
+		output[0] = '-';
+	else if (S_ISLNK(buf.st_mode) != 0)
+		output[0] = 'l';
+	else if (S_ISCHR(buf.st_mode) != 0)
+	{
+		output[0] = 'c';
+		all->if_device = 1;
+	}
+	else if (S_ISBLK(buf.st_mode) != 0)
+	{
+		output[0] = 'b';
+		all->if_device = 1;
+	}
+	else if (S_ISFIFO(buf.st_mode) != 0)
+		output[0] = 'p';
+	else if (S_ISSOCK(buf.st_mode) != 0)
+		output[0] = 's';
 }

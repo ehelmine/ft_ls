@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 19:00:55 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/02 15:04:30 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/03 13:54:49 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ void	write_only_ls(t_all *all)
 	struct dirent	*dp;
 
 	dir = opendir(".");
-	if (dir == NULL)
-		exit (1);
+	check_if_null((void *)dir);
 	i = 0;
 	list = (char **)malloc(sizeof(char) * 13000);
 	if (list == NULL)
 		exit (1);
-	while (((dp = readdir(dir)) != NULL))
+	dp = readdir(dir);
+	while (dp)
 	{
 		if (dp->d_name[0] != '.')
 		{
@@ -46,6 +46,7 @@ void	write_only_ls(t_all *all)
 			check_if_null((void *)list[i]);
 			i++;
 		}
+		dp = readdir(dir);
 	}
 	closedir(dir);
 	list[i] = NULL;

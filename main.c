@@ -6,12 +6,11 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:11:24 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/02 17:55:00 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/03 13:55:09 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
-
 
 void	print_array(char **arr, int i, int no, t_all *all)
 {

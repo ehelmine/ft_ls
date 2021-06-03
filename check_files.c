@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:00:11 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/02 17:56:19 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/03 13:53:17 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,10 +111,12 @@ int	count_num_of_files(DIR *dir, t_all *all)
 	int				i;
 
 	i = 0;
-	while ((dp = readdir(dir)))
+	dp = readdir(dir);
+	while (dp)
 	{
 		if (dp->d_name[0] != '.' || (dp->d_name[0] == '.' && all->a_flag == 1))
 			i++;
+		dp = readdir(dir);
 	}
 	closedir(dir);
 	return (i);

@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 14:22:07 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/02 14:02:22 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/03 17:12:52 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,33 @@
 
 int	write_asterisk(t_val *all, va_list args)
 {
-	int i;
-	int len;
+	int	i;
+	int	len;
 
 	i = 0;
-	if (all->conv == 'd' || all->conv == 'i')
-		i = va_arg(args, signed int);
-	all->num = va_arg(args, long long int);
-	len = ft_check_int_len(all->num);
-	while (i > len)
+	i = va_arg(args, signed int);
+	if (all->conv == 'i' || all->conv == 'd')
 	{
-		write(1, " ", 1);
-		i--;
+		all->num = va_arg(args, long long int);
+		len = ft_check_int_len(all->num);
+		while (i > len)
+		{
+			write(1, " ", 1);
+			i--;
+		}
+		ft_putnbr(all->num);
 	}
-	ft_putnbr(all->num);
+	else if (all->conv == 'u')
+	{
+		all->unum = va_arg(args, unsigned long long);
+		len = ft_check_int_len(all->num);
+		while (i > len)
+		{
+			write(1, " ", 1);
+			i--;
+		}
+		ft_putnbr(all->unum);
+	}
 	return (1);
 }
 
