@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 17:19:30 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/03 18:13:08 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/03 18:20:32 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	print_time_and_name(char *str, char *file, char *arrow, char *link)
 	ft_printf("%s %s %s %s\n", str + 4, file, arrow, link);
 }
 
-char	*get_link_name(char *path, struct stat buf, t_all *all)
+char	*get_link_name(char *path, struct stat buf)
 {
 	char	*ptr;
 
@@ -32,8 +32,6 @@ char	*get_link_name(char *path, struct stat buf, t_all *all)
 	if (ptr == NULL)
 		exit(1);
 	readlink(path, ptr, buf.st_size + 1);
-	if (all->check == 1)
-		free(path);
 	return (ptr);
 }
 

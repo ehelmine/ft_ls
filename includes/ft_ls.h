@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:04:42 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/03 18:13:25 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/03 18:20:44 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	check_file_type(char output[11], struct stat buf, t_all *all);
 
 void	modify_time(char *str, time_t now, time_t mod_time);
 
-char	*get_link_name(char *path, struct stat buf, t_all *all);
+char	*get_link_name(char *path, struct stat buf);
 
 void	print_time_and_name(char *str, char *file, char *arrow, char *link);
 

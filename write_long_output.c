@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 14:08:48 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/03 18:12:55 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/03 18:21:34 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,18 @@ void	finish_long_output(struct stat buf, t_all *all, char *path, char *file)
 	arrow = "";
 	if (S_ISLNK(buf.st_mode) != 0)
 	{
-		link = get_link_name(path, buf, all);
+		link = get_link_name(path, buf);
 		arrow = ft_strdup("->");
 	}
+	if (all->check == 1)
+		free(path);
 	print_long_output(buf, all, pwd, grp);
 	print_time_and_name(str, file, arrow, link);
 	if (S_ISLNK(buf.st_mode) != 0)
 	{
 		free(link);
 		free(arrow);
-	}		
+	}
 }
 
 /* 
@@ -119,6 +121,8 @@ void	lstat_long_output(t_all *all, char *path, char *file, int x)
 		i = stat(path, &buf);
 		if (buf.st_mode & !S_IXUSR)
 			exit (1);
+		if (all->check == 1)
+			free(path);
 		return ;
 	}
 	if (x == 0)
