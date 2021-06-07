@@ -6,7 +6,7 @@
 #    By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/19 13:31:46 by ehelmine          #+#    #+#              #
-#    Updated: 2021/05/19 14:24:42 by ehelmine         ###   ########.fr        #
+#    Updated: 2021/06/07 17:32:56 by ehelmine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ ft_strtrim.c ft_strjoin.c ft_striter.c ft_striteri.c ft_strsplit.c \
 ft_strsub.c ft_strmap.c ft_strmapi.c ft_itoa.c ft_putchar_fd.c \
 ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_lstnew.c ft_lstadd.c \
 ft_lstdelone.c ft_lstdel.c ft_lstiter.c ft_lstmap.c ft_check_int_len.c \
-ft_islower.c ft_isupper.c ft_isspace.c ft_strndup.c get_next_line.c)
+ft_islower.c ft_isupper.c ft_isspace.c ft_strndup.c get_next_line.c \
+major_bit.c minor_bit.c)
 
 OBJS = handle_input.o check_flags_one.o check_flags_second.o \
 write_c_and_ints.o help_functions.o write_signed_ints.o write_string.o \

@@ -1,34 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_int_len.c                                 :+:      :+:    :+:   */
+/*   major_bit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/07 11:25:56 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/07 17:48:53 by ehelmine         ###   ########.fr       */
+/*   Created: 2021/06/07 17:24:06 by ehelmine          #+#    #+#             */
+/*   Updated: 2021/06/07 17:25:51 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
-#include <stdio.h>
 
-intmax_t	ft_check_int_len(unsigned long long n)
+int		my_major(int x)
 {
-	int	i;
-
-	i = 0;
-	if (n == 0)
-		return (1);
-	if (n < 0)
-	{
-		n = n * -1;
-		i++;
-	}
-	while (n > 0)
-	{
-		n = n / 10;
-		i++;
-	}
-	return (i);
+	return (((int32_t)(((u_int32_t)(x) >> 24) & 0xff)));
 }

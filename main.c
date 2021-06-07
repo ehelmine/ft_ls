@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:11:24 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/03 18:17:37 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/07 15:06:30 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,22 @@ void	print_output(t_all *all)
 	y = 0;
 	while (y < all->num_no)
 		free(all->not_exist[y++]);
-	free(all->not_exist);
+	if (all->not_exist != NULL)
+		free(all->not_exist);
 	if (all->num_file > 0)
 		print_array(all->files, all->num_file, 0, all);
 	y = 0;
 	while (y < all->num_file)
 		free(all->files[y++]);
-	free(all->files);
+	if (all->files != NULL)
+		free(all->files);
 	if (all->num_dir > 0)
 		print_array(all->directories, all->num_dir, 2, all);
 	y = 0;
 	while (y < all->num_dir)
 		free(all->directories[y++]);
-	free(all->directories);
+	if (all->directories != NULL)
+		free(all->directories);
 }
 
 void	set_values_to_zero(t_all *all)
@@ -67,6 +70,7 @@ void	set_values_to_zero(t_all *all)
 	all->reverse_flag = 0;
 	all->big_r_flag = 0;
 	all->t_flag = 0;
+	all->i = 0;
 	all->no_flags = 0;
 	all->num_file = 0;
 	all->num_no = 0;
@@ -76,6 +80,9 @@ void	set_values_to_zero(t_all *all)
 	all->size_len = 0;
 	all->tmp = NULL;
 	all->blocks = 0;
+	all->not_exist = NULL;
+	all->files = NULL;
+	all->directories = NULL;
 }
 
 /*
@@ -99,9 +106,7 @@ int	main(int argc, char **argv)
 		write_only_ls(&all);
 	else
 	{
-		all.not_exist = NULL;
-		all.files = NULL;
-		all.directories = NULL;
+		all.arg_count = argc;
 		while (i < argc)
 			ft_strcpy(all.input_arr[i++], argv[ii++]);
 		all.input_arr[i][0] = '\0';
@@ -109,6 +114,6 @@ int	main(int argc, char **argv)
 			return (1);
 		print_output(&all);
 	}
-	system ("leaks ft_ls");
+//	system ("leaks ft_ls");
 	return (0);
 }

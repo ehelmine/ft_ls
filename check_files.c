@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:00:11 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/03 13:53:17 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/07 17:46:43 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	len_of_group(struct stat buf, t_all *all)
 	grp = getgrgid(buf.st_gid);
 	if (grp == NULL)
 	{
-		len = ft_check_int_len(buf.st_gid);
+		len = (int)ft_check_int_len(buf.st_gid);
 		if (len > all->group_len)
 			all->group_len = len;
 	}
@@ -46,10 +46,10 @@ void	num_of_links_loop(char *tmp2, t_all *all)
 	}
 	if (i == 0)
 	{
-		len = ft_check_int_len(buf.st_nlink);
+		len = (int)ft_check_int_len(buf.st_nlink);
 		if (len > all->links_len)
 			all->links_len = len;
-		len = ft_check_int_len(buf.st_size);
+		len = (int)ft_check_int_len(buf.st_size);
 		if (len > all->size_len)
 			all->size_len = len;
 		all->blocks += buf.st_blocks;

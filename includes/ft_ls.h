@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:04:42 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/03 18:20:44 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/07 17:33:15 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 # include <time.h>
 # include <errno.h>
 # define MAX_LINES 10000
-# define my_major(x)        ((int32_t)(((u_int32_t)(x) >> 24) & 0xff))
-# define my_minor(x)        ((int32_t)((x) & 0xffffff))
 
 typedef struct s_all
 {
@@ -57,6 +55,8 @@ typedef struct s_all
 	int		o;
 	int		len_of_list;
 	int		if_device;
+	int		arg_count;
+	int		y;
 }				t_all;
 
 int		ft_exit_call(int i, char c);

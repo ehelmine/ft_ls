@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 14:08:48 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/03 18:21:34 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/07 18:02:08 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ void	print_long_output(struct stat buf, t_all *all, struct passwd *pwd,
 	if (all->if_device)
 		ft_printf(" %d, %d ", my_major(buf.st_rdev), my_minor(buf.st_rdev));
 	else if (grp == NULL)
-		ft_printf(" %*llu ", all->size_len + (all->group_len
-				- ft_check_int_len(buf.st_gid)),
+		ft_printf("%*llu ", all->size_len + (all->group_len
+				- (int)ft_check_int_len(buf.st_gid)),
 			(unsigned long long)buf.st_size);
 	else
-		ft_printf(" %*llu ", all->size_len + (all->group_len
-				- ft_strlen(grp->gr_name)), (unsigned long long)buf.st_size);
+		ft_printf("%*llu ", all->size_len + (all->group_len
+				- (int)ft_strlen(grp->gr_name)), (unsigned long long)buf.st_size);
 }
 
 void	finish_long_output(struct stat buf, t_all *all, char *path, char *file)
@@ -64,10 +64,7 @@ void	finish_long_output(struct stat buf, t_all *all, char *path, char *file)
 	print_long_output(buf, all, pwd, grp);
 	print_time_and_name(str, file, arrow, link);
 	if (S_ISLNK(buf.st_mode) != 0)
-	{
-		free(link);
-		free(arrow);
-	}
+		free_two((void *)link, (void *)arrow);
 }
 
 /* 
@@ -105,7 +102,9 @@ void	set_permission_to_output(char output[11], struct stat buf, t_all *all)
 		output[7] = 'r';
 	if (buf.st_mode & S_IWOTH)
 		output[8] = 'w';
-	if (buf.st_mode & S_IXOTH)
+	if (buf.st_mode & S_ISVTX)
+		output[9] = 'T';
+	else if (buf.st_mode & S_IXOTH)
 		output[9] = 'x';
 }
 

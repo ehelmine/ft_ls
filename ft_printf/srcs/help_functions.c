@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 17:05:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/02 14:02:04 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/07 17:54:38 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ int	check_num_type(t_val *all)
 	return (1);
 }
 
-int	get_arg_unsigned_int(t_val *all, va_list args, char x)
+int	get_arg_unsigned_int(t_val *all, va_list args)
 {
-	all->conv = x;
+	if (all->asterisk_flag)
+		return (write_asterisk(all, args));
 	if (all->conv == 'u')
 		all->base = 10;
 	if (all->conv == 'o')
@@ -134,6 +135,6 @@ int	get_arg(t_val *all, va_list args, char x)
 	else if (x == 's' || x == 'p')
 		return (get_arg_s_and_p(all, args, x));
 	else if (x == 'o' || x == 'x' || x == 'X' || x == 'u')
-		return (get_arg_unsigned_int(all, args, x));
+		return (get_arg_unsigned_int(all, args));
 	return (1);
 }

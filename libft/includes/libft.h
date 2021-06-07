@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/09 10:13:02 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/20 13:27:16 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/07 17:42:44 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void				ft_putendl_fd(char const *s, int fd);
 
 void				ft_putnbr_fd(int n, int fd);
 
-int					ft_check_int_len(long n);
+intmax_t			ft_check_int_len(unsigned long long n);
 
 t_list				*ft_lstnew(void const *content, size_t content_size);
 
@@ -153,5 +153,9 @@ int					ft_islower(int c);
 char				*ft_strndup(const char *s1, size_t n);
 
 int					get_next_line(const int fd, char **line);
+
+int					my_major(int x);
+
+int					my_minor(int x);
 
 #endif

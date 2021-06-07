@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 14:29:45 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/03 18:08:05 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/07 15:06:26 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,27 +117,27 @@ int	open_and_write_directory(t_all *all, const char *directory,
 
 void	loop_print_array(char **arr, int numbers[1][2], char *path, t_all *all)
 {
-	int	x;
-
-	x = -1;
-	while (++x < numbers[0][0])
+	all->y = -1;
+	while (++all->y < numbers[0][0])
 	{
 		if (numbers[0][1] == 2)
 		{
-			open_and_write_directory(all, arr[x], path);
-			if (x + 1 != numbers[0][0])
+			if (numbers[0][0] > 1)
+				ft_printf("%s:\n", arr[all->y]);
+			open_and_write_directory(all, arr[all->y], path);
+			if (all->y + 1 != numbers[0][0])
 				write(1, "\n", 2);
 		}
 		else if (numbers[0][1] == 1)
-			ft_printf("ls: %s: No such file or directory\n", arr[x]);
+			ft_printf("ls: %s: No such file or directory\n", arr[all->y]);
 		else if (numbers[0][1] == 0)
 		{
 			if (all->l_flag)
-				start_long_output(arr[x], all, NULL, -1);
+				start_long_output(arr[all->y], all, NULL, -1);
 			else
 			{
-				ft_printf("%s\n", arr[x]);
-				if (x + 1 == numbers[0][0])
+				ft_printf("%s\n", arr[all->y]);
+				if (all->y + 1 == numbers[0][0])
 					write(1, "\n", 2);
 			}
 		}
