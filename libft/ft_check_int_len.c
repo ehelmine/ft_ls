@@ -6,12 +6,11 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 11:25:56 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/07 17:48:53 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/07 18:06:44 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
-#include <stdio.h>
 
 intmax_t	ft_check_int_len(unsigned long long n)
 {

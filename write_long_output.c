@@ -6,12 +6,11 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 14:08:48 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/07 18:02:08 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/07 18:06:36 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
-#include <stdio.h>
 
 void	print_long_output(struct stat buf, t_all *all, struct passwd *pwd,
 	struct group *grp)
