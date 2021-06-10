@@ -6,7 +6,7 @@
 #    By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/19 13:31:46 by ehelmine          #+#    #+#              #
-#    Updated: 2021/06/07 17:32:56 by ehelmine         ###   ########.fr        #
+#    Updated: 2021/06/08 15:16:31 by ehelmine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ srcs/write_string.c srcs/write_p.c srcs/write_unsigned_ints.c \
 srcs/write_zero.c srcs/convert_int.c srcs/write_float_1.c \
 srcs/write_float_2.c srcs/write_float_3.c srcs/write_no_flags.c
 
-LIBFT_SRCS = $(addprefix ../libft/, ft_putchar.c ft_putstr.c ft_atoi.c \
+LIBFT_SRCS = $(addprefix ../, ft_putchar.c ft_putstr.c ft_atoi.c \
 ft_strlen.c ft_strcmp.c ft_putnbr.c ft_strdup.c ft_strcpy.c ft_strncpy.c \
 ft_strclr.c ft_strcat.c ft_strncmp.c ft_putendl.c ft_strlcat.c ft_bzero.c \
 ft_strncat.c ft_strchr.c ft_strrchr.c ft_isalpha.c ft_isdigit.c ft_isascii.c \
@@ -37,9 +37,9 @@ write_c_and_ints.o help_functions.o write_signed_ints.o write_string.o \
 write_p.o write_unsigned_ints.o write_zero.o convert_int.o write_float_1.o \
 write_float_2.o write_float_3.o write_no_flags.o
 
-LIB = libft/
+LIB = ../../libft/
 
-LIB_A = libft/libft.a
+LIB_A = ../libft.a
 
 LIBFT_OBJS = $(LIBFT_SRCS:%.c=%.o)
 
@@ -50,20 +50,20 @@ CFLAGS = -g -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME):
-	make -C ../libft
-	@gcc $(CFLAGS) -c $(SRCS) -I ../libft
-	@echo "Sources to objects done"
+	make -C ../
+	@gcc $(CFLAGS) -c $(SRCS) -I ../
+	@echo "Libftprintf sources to objects done"
 	@ar rcs libftprintf.a $(OBJS) $(LIBFT_OBJS)
 	@echo "Compiling libftprintf.a done"
 
 clean:
-	make clean -C ../libft
-	@echo "Removing .o files"
+	make clean -C ../
+	@echo "Libftprintf removing .o files"
 	@rm -f $(OBJS)
 
 fclean: clean
-	make -C ../libft fclean
-	@echo "Removing .a files"
+	make -C ../ fclean
+	@echo "Libftprintf removing .a files"
 	@rm -f $(NAME)
 
 re: fclean all

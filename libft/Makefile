@@ -6,7 +6,7 @@
 #    By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 13:01:03 by ehelmine          #+#    #+#              #
-#    Updated: 2021/06/07 17:32:32 by ehelmine         ###   ########.fr        #
+#    Updated: 2021/06/09 14:23:12 by ehelmine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,19 +25,31 @@ SRCS = ft_putchar.c ft_putstr.c ft_atoi.c ft_strlen.c ft_strcmp.c ft_putnbr.c \
 	ft_check_int_len.c ft_islower.c ft_isupper.c ft_isspace.c ft_strndup.c \
 	get_next_line.c major_bit.c minor_bit.c
 
+PRINTF_SRCS = $(addprefix ft_printf/srcs/, handle_input.c check_flags_one.c check_flags_second.c \
+write_c_and_ints.c help_functions.c write_signed_ints.c write_string.c \
+write_p.c write_unsigned_ints.c write_zero.c convert_int.c write_float_1.c \
+write_float_2.c write_float_3.c write_no_flags.c)
+
+PRINTF_OBJS = handle_input.o check_flags_one.o check_flags_second.o \
+write_c_and_ints.o help_functions.o write_signed_ints.o write_string.o \
+write_p.o write_unsigned_ints.o write_zero.o convert_int.o write_float_1.o \
+write_float_2.o write_float_3.o write_no_flags.o
+
 OBJS = $(SRCS:%.c=%.o)
 
-HEADER = libft.h
+PRINT_H = ft_printf/includes/
+
+LIB_H = includes/libft.h
 
 all: $(NAME)
 
 $(NAME):
-		@gcc -g -Wall -Wextra -Werror -c -I includes $(SRCS)
-		@ar rc $(NAME) $(OBJS)
-		@ranlib $(NAME)
+		@gcc -g -Wall -Wextra -Werror -c  $(PRINTF_SRCS) -I $(PRINT_H)
+		@gcc -g -Wall -Wextra -Werror -c  $(SRCS) -I $(LIB_H)
+		@ar rcs libft.a $(OBJS) $(PRINTF_OBJS)
 
 clean:
-		@rm -f $(OBJS) 
+		@rm -f $(OBJS) $(PRINTF_OBJS)
 
 fclean: clean
 		@rm -f $(NAME)

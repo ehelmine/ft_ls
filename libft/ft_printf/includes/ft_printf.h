@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 18:31:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/02 13:48:22 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/08 17:55:42 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdarg.h>
 # include <string.h>
 # include <stdlib.h>
-# include "../../libft/includes/libft.h"
+# include "../../includes/libft.h"
 
 typedef struct s_val
 {

@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:04:42 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/07 17:33:15 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/08 15:15:35 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FT_LS_H
 
 # include "../libft/includes/libft.h"
-# include "../ft_printf/includes/ft_printf.h"
+# include "../libft/ft_printf/includes/ft_printf.h"
 # include <sys/stat.h>
 # include <pwd.h>
 # include <grp.h>
