@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 14:29:45 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/07 15:06:26 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/10 13:17:29 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int	open_and_write_directory(t_all *all, const char *directory,
 	char	**list;
 
 	dir_tmp = NULL;
+//	ft_printf("path %s dir %s\n", path, directory);
 	if (path != NULL)
 	{
 		dir_tmp = ft_strjoin(path, directory);

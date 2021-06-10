@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 17:53:31 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/07 14:37:39 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/10 12:10:49 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	sort_mod_time(char **list, int ii, const char *path, t_all *all)
 		}
 		if (lstat(cur_dir1, &first) == -1 || lstat(cur_dir2, &second) == -1)
 			exit (1);
+//		ft_printf("dir1 %s dir2 %s\n", cur_dir1, cur_dir2);
 		if (path != NULL)
 			free_two((void *)cur_dir1, (void *)cur_dir2);
 		compare_times(first, second, list, all);
