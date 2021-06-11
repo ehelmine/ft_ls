@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   try.c                                              :+:      :+:    :+:   */
+/*   write_output.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:37:22 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/02 17:57:53 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/11 18:51:41 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	continue_with_dir(char **list, const char *directory, t_all *all,
 	ii = 0;
 	while (list[ii] != NULL)
 		ii++;
-	if (path != NULL)
+	if (ft_strcmp(path, "") != 0)
 	{
 		ft_putstr(directory);
 		write(1, ":\n", 3);

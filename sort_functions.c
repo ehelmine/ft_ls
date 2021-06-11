@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 17:53:31 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/10 12:10:49 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/11 12:59:50 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,17 @@ void	sort_reverse(char **list)
 	}
 }
 
-void	sort_mod_time(char **list, int ii, const char *path, t_all *all)
+int	check_path_permission(const char *path)
+{
+	struct stat	buf;
+
+	lstat(path, &buf);
+	if (buf.st_mode & !S_IXUSR)
+		return (-1);
+	return (0);
+}
+
+int	sort_mod_time(char **list, int ii, const char *path, t_all *all)
 {
 	struct stat	first;
 	struct stat	second;
@@ -64,15 +74,14 @@ void	sort_mod_time(char **list, int ii, const char *path, t_all *all)
 			cur_dir2 = call_strjoin(tmp2, list[all->i + 1]);
 		}
 		if (lstat(cur_dir1, &first) == -1 || lstat(cur_dir2, &second) == -1)
-			exit (1);
-//		ft_printf("dir1 %s dir2 %s\n", cur_dir1, cur_dir2);
+			return (check_path_permission(path));
 		if (path != NULL)
 			free_two((void *)cur_dir1, (void *)cur_dir2);
 		compare_times(first, second, list, all);
 		all->i++;
 	}
 	free(tmp2);
-	return ;
+	return (1);
 }
 
 /*
@@ -104,14 +113,19 @@ void	sort_asc(char **list, int ii)
 	}
 }
 
-void	sort_list(char **list, t_all *all, const char *directory)
+int	sort_list(char **list, t_all *all, const char *directory)
 {
+	int	x;
+
 	all->i = 0;
+	x = 0;
 	if (all->t_flag)
-		sort_mod_time(list, all->len_of_list, directory, all);
+		x = sort_mod_time(list, all->len_of_list, directory, all);
 	else
 		sort_asc(list, all->len_of_list);
+	if (x == -1)
+		return (-1);
 	if (all->reverse_flag)
 		sort_reverse(list);
-	return ;
+	return (0);
 }

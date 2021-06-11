@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:04:42 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/08 15:15:35 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/11 16:38:38 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,11 @@ int		empty_dir(const char *directory, const char *path, char *dir_tmp,
 int		continue_with_dir(char **list, const char *directory, t_all *all,
 			const char *path);
 
-void	sort_list(char **list, t_all *all, const char *directory);
+int		sort_list(char **list, t_all *all, const char *directory);
 
 void	sort_asc(char **list, int ii);
 
-void	sort_mod_time(char **list, int ii, const char *path, t_all *all);
+int		sort_mod_time(char **list, int ii, const char *path, t_all *all);
 
 void	sort_asc_arr(char **list, int ii);
 
@@ -120,6 +120,8 @@ void	start_long_output(char *file, t_all *all, const char *path, int x);
 void	check_file_type(char output[11], struct stat buf, t_all *all);
 
 void	modify_time(char *str, time_t now, time_t mod_time);
+
+void	num_of_links_loop(char *tmp2, t_all *all);
 
 char	*get_link_name(char *path, struct stat buf);
 

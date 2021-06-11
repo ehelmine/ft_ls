@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:00:11 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/07 17:46:43 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/11 17:53:39 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,8 @@ void	num_of_links_loop(char *tmp2, t_all *all)
 	int			len;
 
 	i = lstat(tmp2, &buf);
-	if (i == -1 && !S_IFDIR)
-	{
-		ft_putstr("stat fail1\n");
-		exit (1);
-	}
+	if (i == -1 && !S_ISDIR(buf.st_mode))
+		return ;
 	if (i == 0)
 	{
 		len = (int)ft_check_int_len(buf.st_nlink);
@@ -59,12 +56,12 @@ void	num_of_links_loop(char *tmp2, t_all *all)
 
 void	check_number_of_links(char **list, t_all *all, const char *path, int ii)
 {
-	char	*tmp2;
-	int		x;
+	char		*tmp2;
+	int			x;
 
 	tmp2 = NULL;
-	x = -1;
 	all->group_len = 0;
+	x = -1;
 	while (++x < ii)
 	{
 		if (path != NULL)

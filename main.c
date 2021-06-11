@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:11:24 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/07 15:06:30 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/11 18:48:28 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	print_array(char **arr, int i, int no, t_all *all)
 	path = (char *)malloc(sizeof(char) * 1000);
 	if (path == NULL)
 		exit(1);
-	path = NULL;
+//	path = NULL;
 	if (i > 1 && all->t_flag)
 		sort_mod_time(arr, i, path, all);
 	else if (i > 1 && !all->t_flag)
@@ -33,6 +33,7 @@ void	print_array(char **arr, int i, int no, t_all *all)
 	else
 		loop_print_array(arr, numbers, path, all);
 	free(path);
+	path = NULL;
 	return ;
 }
 
@@ -45,21 +46,23 @@ void	print_output(t_all *all)
 	y = 0;
 	while (y < all->num_no)
 		free(all->not_exist[y++]);
-	if (all->not_exist != NULL)
+//	if (all->not_exist != NULL)
 		free(all->not_exist);
+	all->y = -1;
 	if (all->num_file > 0)
 		print_array(all->files, all->num_file, 0, all);
 	y = 0;
 	while (y < all->num_file)
 		free(all->files[y++]);
-	if (all->files != NULL)
+//	if (all->files != NULL)
 		free(all->files);
+	all->y = -1;
 	if (all->num_dir > 0)
 		print_array(all->directories, all->num_dir, 2, all);
 	y = 0;
 	while (y < all->num_dir)
 		free(all->directories[y++]);
-	if (all->directories != NULL)
+//	if (all->directories != NULL)
 		free(all->directories);
 }
 
@@ -83,6 +86,8 @@ void	set_values_to_zero(t_all *all)
 	all->not_exist = NULL;
 	all->files = NULL;
 	all->directories = NULL;
+	all->group_len = 0;
+	all->y = -1;
 }
 
 /*

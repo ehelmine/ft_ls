@@ -6,11 +6,12 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 14:08:48 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/07 18:06:36 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/11 18:21:25 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
+#include <stdio.h>
 
 void	print_long_output(struct stat buf, t_all *all, struct passwd *pwd,
 	struct group *grp)
@@ -30,12 +31,13 @@ void	print_long_output(struct stat buf, t_all *all, struct passwd *pwd,
 	if (all->if_device)
 		ft_printf(" %d, %d ", my_major(buf.st_rdev), my_minor(buf.st_rdev));
 	else if (grp == NULL)
-		ft_printf("%*llu ", all->size_len + (all->group_len
+		ft_printf("%*i ", all->size_len + (all->group_len
 				- (int)ft_check_int_len(buf.st_gid)),
 			(unsigned long long)buf.st_size);
 	else
-		ft_printf("%*llu ", all->size_len + (all->group_len
-				- (int)ft_strlen(grp->gr_name)), (unsigned long long)buf.st_size);
+		ft_printf("%*i ", all->size_len + (all->group_len
+				- (int)ft_strlen(grp->gr_name)),
+			(unsigned long long)buf.st_size);
 }
 
 void	finish_long_output(struct stat buf, t_all *all, char *path, char *file)

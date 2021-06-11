@@ -6,13 +6,13 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 17:24:06 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/07 17:25:51 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/11 12:11:24 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-int		my_major(int x)
+int	my_major(int x)
 {
 	return (((int32_t)(((u_int32_t)(x) >> 24) & 0xff)));
 }
