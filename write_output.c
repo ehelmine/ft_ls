@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:37:22 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/11 18:51:41 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/14 17:56:50 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	call_other_directories(char **list, const char *directory,
 	ii = other_dirrs[1][0];
 	while (x < ii)
 	{
-		write(1, "\n", 2);
+		write(1, "\n", 1);
 		open_and_write_directory(all, list[other_dirrs[0][x]], tmp);
 		x++;
 	}
@@ -80,7 +80,7 @@ int	loop_dir_content(char **list, const char *directory, t_all *all,
 	loop_dir_content2(list, directory, all, other_dirrs);
 	if (all->big_r_flag)
 		call_other_directories(list, directory, other_dirrs, all);
-	if (path != NULL)
+	if (ft_strcmp(path, "") != 0)
 	{
 		free((void *)directory);
 		directory = NULL;
@@ -104,7 +104,7 @@ int	continue_with_dir(char **list, const char *directory, t_all *all,
 	if (ft_strcmp(path, "") != 0)
 	{
 		ft_putstr(directory);
-		write(1, ":\n", 3);
+		write(1, ":\n", 2);
 	}
 	if (all->l_flag)
 		call_check_num_of_links(all, list, directory);

@@ -6,12 +6,11 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 14:08:48 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/11 18:21:25 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/14 18:05:13 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
-#include <stdio.h>
 
 void	print_long_output(struct stat buf, t_all *all, struct passwd *pwd,
 	struct group *grp)
@@ -132,7 +131,7 @@ void	lstat_long_output(t_all *all, char *path, char *file, int x)
 		output[i++] = '-';
 	output[10] = '\0';
 	set_permission_to_output(output, buf, all);
-	write(1, output, 11);
+	write(1, output, 10);
 	finish_long_output(buf, all, path, file);
 }
 
@@ -144,7 +143,7 @@ void	start_long_output(char *file, t_all *all, const char *path, int x)
 	tmp = NULL;
 	tmp2 = NULL;
 	all->check = 0;
-	if (path != NULL)
+	if (ft_strcmp(path, "") != 0)
 	{
 		if (path[ft_strlen(path) - 1] != '/')
 		{
@@ -160,7 +159,7 @@ void	start_long_output(char *file, t_all *all, const char *path, int x)
 			exit (1);
 		all->check = 1;
 	}
-	else if (path == NULL)
+	else if (ft_strcmp(path, "") == 0)
 		tmp = file;
 	lstat_long_output(all, tmp, file, x);
 }

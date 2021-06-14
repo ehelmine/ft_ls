@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 17:49:26 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/11 18:21:04 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/14 16:20:47 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ char	*initialize_sort_tmp(const char *path)
 {
 	char	*tmp;
 
-	if (path == NULL)
+	if (ft_strcmp(path, "") == 0)
 		tmp = ft_strdup("");
-	else if (path != NULL && path[ft_strlen(path) - 1] != '/')
+	else if (ft_strcmp(path, "") != 0 && path[ft_strlen(path) - 1] != '/')
 		tmp = ft_strjoin(path, "/");
 	else
 		tmp = ft_strdup(path);

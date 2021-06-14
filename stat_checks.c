@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:27:41 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/01 19:25:55 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/14 16:20:53 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	check_directory(const char *file, const char *path, t_all *all)
 	path_slash = NULL;
 	if (file[0] == '.' && (file[1] == '.' || file[1] == '\0'))
 		return (0);
-	if (path == NULL)
+	if (ft_strcmp(path, "") == 0)
 		tmp = ft_strdup(file);
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 14:29:45 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/11 18:48:44 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/14 17:22:52 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,20 +62,20 @@ char	**open_directory(const char *directory, const char *path, char *dir_tmp,
 	int		i;
 
 	dir = NULL;
-	if (path == NULL)
+	if (ft_strcmp(path, "") == 0)
 		dir = opendir(directory);
-	else if (path != NULL)
+	else if (ft_strcmp(path, "") != 0)
 		dir = opendir(dir_tmp);
 	if (dir != NULL)
 		i = count_num_of_files(dir, all);
-	if (path == NULL)
+	if (ft_strcmp(path, "") == 0)
 		dir = opendir(directory);
-	else if (path != NULL)
+	else if (ft_strcmp(path, "") != 0)
 		dir = opendir(dir_tmp);
 	if (dir == NULL)
 	{
 		ft_printf("%s\nls: %s: %s\n", dir_tmp, directory, strerror(errno));
-		if (path != NULL)
+		if (ft_strcmp(path, "") != 0)
 		{
 			free(dir_tmp);
 			dir_tmp = NULL;
@@ -92,7 +92,7 @@ int	open_and_write_directory(t_all *all, const char *directory,
 	char	**list;
 
 	dir_tmp = NULL;
-	if (path != NULL)
+	if (ft_strcmp(path, "") != 0)
 	{
 		dir_tmp = ft_strjoin(path, directory);
 		check_if_null((void *)dir_tmp);
@@ -102,14 +102,14 @@ int	open_and_write_directory(t_all *all, const char *directory,
 		return (empty_dir(directory, path, dir_tmp, list));
 	if (all->len_of_list > 1)
 	{
-		if (path != NULL)
+		if (ft_strcmp(path, "") != 0)
 			all->p = sort_list(list, all, dir_tmp);
 		else
 			all->p = sort_list(list, all, directory);
 		if (all->p == -1)
 			return (empty_dir(directory, path, dir_tmp, list));
 	}
-	if (path != NULL)
+	if (ft_strcmp(path, "") != 0)
 		return (continue_with_dir(list, dir_tmp, all, path));
 	else
 		return (continue_with_dir(list, directory, all, path));
@@ -123,7 +123,7 @@ void	loop_print_array(char **arr, int numbers[1][2], char *path, t_all *all)
 		{
 			open_and_write_directory(all, arr[all->y], path);
 			if (all->y + 1 != numbers[0][0])
-				write(1, "\n", 2);
+				write(1, "\n", 1);
 		}
 		else if (numbers[0][1] == 1)
 			ft_printf("ls: %s: No such file or directory\n", arr[all->y]);
@@ -137,7 +137,7 @@ void	loop_print_array(char **arr, int numbers[1][2], char *path, t_all *all)
 			else
 				ft_printf("%s\n", arr[all->y]);
 			if (all->num_dir && all->y + 1 == numbers[0][0])
-				write(1, "\n", 2);
+				write(1, "\n", 1);
 		}
 	}	
 }
@@ -154,7 +154,7 @@ void	reverse_loop_print_array(char **arr, int numbers[1][2], char *path,
 		{
 			open_and_write_directory(all, arr[x], path);
 			if (x - 1 != -1)
-				write(1, "\n", 2);
+				write(1, "\n", 1);
 		}
 		if (numbers[0][1] == 1)
 			ft_printf("ls: %s: No such file or directory\n", arr[x]);
@@ -162,7 +162,7 @@ void	reverse_loop_print_array(char **arr, int numbers[1][2], char *path,
 		{
 			ft_printf("%s\n", arr[x]);
 			if (x + 1 == 0)
-				write(1, "\n", 2);
+				write(1, "\n", 1);
 		}
 		x--;
 	}	

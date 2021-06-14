@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 17:19:30 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/03 18:20:32 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/14 18:04:52 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,17 @@
 
 void	total_number_of_blocks(t_all *all)
 {
-	write(1, "total ", 7);
+	write(1, "total ", 6);
 	ft_putnbr(all->blocks);
-	write(1, "\n", 2);
+	write(1, "\n", 1);
 }
 
 void	print_time_and_name(char *str, char *file, char *arrow, char *link)
 {
-	ft_printf("%s %s %s %s\n", str + 4, file, arrow, link);
+	if (ft_strcmp(link, "") != 0)
+		ft_printf("%s %s %s %s\n", str + 4, file, arrow, link);
+	else
+		ft_printf("%s %s\n", str + 4, file);
 }
 
 char	*get_link_name(char *path, struct stat buf)

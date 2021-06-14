@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 19:02:36 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/07 17:21:29 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/14 17:44:52 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ void	flags_loop(t_all *all, int i, int ii)
 {
 	while (all->input_arr[i][ii] != '\0')
 	{
-		while (all->input_arr[i][ii] == '-')
-			ii++;
 		if (all->input_arr[i][ii] == 'a')
 			all->a_flag = 1;
 		else if (all->input_arr[i][ii] == 'l')

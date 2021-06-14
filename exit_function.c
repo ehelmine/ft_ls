@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 14:15:24 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/01 19:50:32 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/14 17:50:44 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int	ft_exit_call(int i, char c)
 	{
 		write(1, "ls: illegal option -- ", 23);
 		write(1, &c, 1);
-		write(1, "\nusage: ls [-Ralrt] [file ...]\n", 32);
+		write(1, "\nusage: ls [-Ralrt] [file ...]\n", 31);
 	}
 	else if (i == 2)
-		write(1, "malloc fail\n", 13);
+		write(1, "malloc fail\n", 12);
 	exit (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:00:11 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/11 17:53:39 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/14 16:19:28 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,13 @@ void	check_number_of_links(char **list, t_all *all, const char *path, int ii)
 	x = -1;
 	while (++x < ii)
 	{
-		if (path != NULL)
+		if (ft_strcmp(path, "") != 0)
 			tmp2 = ft_strjoin(path, list[x]);
 		check_if_null((void *)(tmp2));
-		if (path == NULL)
+		if (ft_strcmp(path, "") == 0)
 			tmp2 = list[x];
 		num_of_links_loop(tmp2, all);
-		if (path != NULL)
+		if (ft_strcmp(path, "") != 0)
 			free(tmp2);
 	}
 }
