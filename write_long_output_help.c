@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 17:19:30 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/14 18:04:52 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/15 12:43:33 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,11 @@ char	*get_link_name(char *path, struct stat buf)
 {
 	char	*ptr;
 
-	ptr = (char *)malloc(sizeof(char) * 256);
+	ptr = (char *)malloc(sizeof(char) * (buf.st_size + 1));
 	if (ptr == NULL)
 		exit(1);
 	readlink(path, ptr, buf.st_size + 1);
+	ptr[buf.st_size] = '\0';
 	return (ptr);
 }
 

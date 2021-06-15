@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 17:53:31 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/14 17:40:44 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/15 12:22:10 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,6 @@
 ** Sorting function, which checks the list of files and directories
 ** and checks it is in order by the last modification time.
 */
-
-// MUISTA TEHDA
-// SE ETTA KUN ON MUOKATTU LAST MOD -TIMEN MUKAAN,
-// NIIN JOS NE ON TASMALLEEN SAMAAN AIKAAN
-// NIIN SITTEN ASCENDING ORDER PITAA TEHDA NIILLE TIEDOSTOILLE.
 
 void	sort_reverse(char **list)
 {

@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:37:22 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/14 17:56:50 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/15 13:17:47 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	call_other_directories(char **list, const char *directory,
 	while (x < ii)
 	{
 		write(1, "\n", 1);
-		open_and_write_directory(all, list[other_dirrs[0][x]], tmp);
+		if (open_and_write_directory(all, list[other_dirrs[0][x]], tmp) == 0)
+			write(1, "\n", 1);
 		x++;
 	}
 	free(other_dirrs[0]);
