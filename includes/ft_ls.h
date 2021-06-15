@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:04:42 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/11 16:38:38 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/15 14:57:21 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../libft/includes/libft.h"
 # include "../libft/ft_printf/includes/ft_printf.h"
 # include <sys/stat.h>
+# include <sys/xattr.h>
 # include <pwd.h>
 # include <grp.h>
 # include <dirent.h>

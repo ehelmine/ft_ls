@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 14:08:48 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/14 18:05:13 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/15 14:56:59 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ void	print_long_output(struct stat buf, t_all *all, struct passwd *pwd,
 	struct group *grp)
 {
 	if (grp == NULL && pwd != NULL)
-		ft_printf("  %*i %s  %llu  ", all->links_len, buf.st_nlink,
+		ft_printf(" %*i %s  %llu  ", all->links_len, buf.st_nlink,
 			pwd->pw_name, (unsigned long long)buf.st_gid);
 	else if (grp != NULL && pwd == NULL)
-		ft_printf("  %*i %llu  %s  ", all->links_len, buf.st_nlink,
+		ft_printf(" %*i %llu  %s  ", all->links_len, buf.st_nlink,
 			(unsigned long long)buf.st_uid, grp->gr_name);
 	else if (grp == NULL && pwd == NULL)
-		ft_printf("  %*i %llu  %llu  ", all->links_len, buf.st_nlink,
+		ft_printf(" %*i %llu  %llu  ", all->links_len, buf.st_nlink,
 			(unsigned long long)buf.st_uid, (unsigned long long)buf.st_gid);
 	else
-		ft_printf("  %*i %s  %s  ", all->links_len, buf.st_nlink,
+		ft_printf(" %*i %s  %s  ", all->links_len, buf.st_nlink,
 			pwd->pw_name, grp->gr_name);
 	if (all->if_device)
 		ft_printf(" %d, %d ", my_major(buf.st_rdev), my_minor(buf.st_rdev));
@@ -82,6 +82,14 @@ st_rdev
 
 */
 
+void	check_extended_attributes(char output[12], char *path)
+{
+	size_t xattr;
+	
+	xattr = listxattr(path, NULL, 0, );
+
+}
+
 void	set_permission_to_output(char output[11], struct stat buf, t_all *all)
 {
 	all->if_device = 0;
@@ -127,11 +135,12 @@ void	lstat_long_output(t_all *all, char *path, char *file, int x)
 	if (x == 0)
 		total_number_of_blocks(all);
 	i = 0;
-	while (i < 10)
+	while (i < 11)
 		output[i++] = '-';
-	output[10] = '\0';
+	output[11] = '\0';
 	set_permission_to_output(output, buf, all);
-	write(1, output, 10);
+	check_extended_attributes(output, path);
+	write(1, output, 11);
 	finish_long_output(buf, all, path, file);
 }
 
