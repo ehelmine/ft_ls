@@ -6,11 +6,12 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 14:08:48 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/15 14:56:59 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/16 15:30:50 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
+#include <stdio.h>
 
 void	print_long_output(struct stat buf, t_all *all, struct passwd *pwd,
 	struct group *grp)
@@ -67,60 +68,62 @@ void	finish_long_output(struct stat buf, t_all *all, char *path, char *file)
 		free_two((void *)link, (void *)arrow);
 }
 
-/* 
-S_ISREG(m) is it a regular file?					- - Regular file.
-S_ISDIR(m) directory?								d - Directory.
-S_ISCHR(m) character device?						c - Character special file.
-S_ISBLK(m) block device?							b - Block special file.
-S_ISFIFO(m) FIFO (named pipe)?						p - FIFO.
-S_ISLNK(m) symbolic link? (Not in POSIX.1-1996.)	l - Symbolic link.
-S_ISSOCK(m) socket? (Not in POSIX.1-1996.)			s - Socket.
-
-n - Network file.
-st_rdev
-
-
-*/
-
-void	check_extended_attributes(char output[12], char *path)
+void	set_permission_to_output2(char output[11], struct stat buf)
 {
-	size_t xattr;
-	
-	xattr = listxattr(path, NULL, 0, );
-
-}
-
-void	set_permission_to_output(char output[11], struct stat buf, t_all *all)
-{
-	all->if_device = 0;
-	check_file_type(output, buf, all);
-	if (buf.st_mode & S_IRUSR)
-		output[1] = 'r';
-	if (buf.st_mode & S_IWUSR)
-		output[2] = 'w';
-	if (buf.st_mode & S_IXUSR)
-		output[3] = 'x';
-	if (buf.st_mode & S_IRGRP)
-		output[4] = 'r';
-	if (buf.st_mode & S_IWGRP)
-		output[5] = 'w';
-	if (buf.st_mode & S_IXGRP)
+	if (buf.st_mode & S_ISGID)
+	{
+		output[6] = 'S';
+		if (buf.st_mode & S_IXGRP)
+			output[6] = 's';
+	}
+	else if (buf.st_mode & S_IXGRP)
 		output[6] = 'x';
 	if (buf.st_mode & S_IROTH)
 		output[7] = 'r';
 	if (buf.st_mode & S_IWOTH)
 		output[8] = 'w';
 	if (buf.st_mode & S_ISVTX)
+	{
 		output[9] = 'T';
+		if (buf.st_mode & S_IXOTH)
+			output[9] = 't';
+	}
 	else if (buf.st_mode & S_IXOTH)
 		output[9] = 'x';
+}
+
+void	set_permission_to_output(char output[11], struct stat buf, t_all *all,
+	char *path)
+{
+	check_file_type(output, buf, all);
+	if (buf.st_mode & S_IRUSR)
+		output[1] = 'r';
+	if (buf.st_mode & S_IWUSR)
+		output[2] = 'w';
+	if (buf.st_mode & S_ISUID)
+	{
+		if (buf.st_mode & S_IXUSR)
+			output[3] = 's';
+		else
+			output[3] = 'S';
+	}
+	else if (buf.st_mode & S_IXUSR)
+		output[3] = 'x';
+	if (buf.st_mode & S_IRGRP)
+		output[4] = 'r';
+	if (buf.st_mode & S_IWGRP)
+		output[5] = 'w';
+	all->xattr = (int)listxattr(path, NULL, 10000, XATTR_NOFOLLOW);
+	if (all->xattr > 0)
+		output[10] = '@';
+	set_permission_to_output2(output, buf);
 }
 
 void	lstat_long_output(t_all *all, char *path, char *file, int x)
 {
 	struct stat	buf;
 	int			i;
-	char		output[11];
+	char		output[12];
 
 	i = lstat(path, &buf);
 	if (i == -1 && S_ISDIR(buf.st_mode) == 0)
@@ -135,11 +138,12 @@ void	lstat_long_output(t_all *all, char *path, char *file, int x)
 	if (x == 0)
 		total_number_of_blocks(all);
 	i = 0;
-	while (i < 11)
+	while (i < 10)
 		output[i++] = '-';
+	output[10] = ' ';
 	output[11] = '\0';
-	set_permission_to_output(output, buf, all);
-	check_extended_attributes(output, path);
+	all->xattr = 0;
+	set_permission_to_output(output, buf, all, path);
 	write(1, output, 11);
 	finish_long_output(buf, all, path, file);
 }

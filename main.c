@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:11:24 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/14 17:41:17 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/16 14:35:32 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void	set_values_to_zero(t_all *all)
 	all->directories = NULL;
 	all->group_len = 0;
 	all->y = -1;
+	all->if_device = 0;
+	all->loop_call = 0;
 }
 
 /*

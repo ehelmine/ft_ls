@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 14:29:45 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/15 13:17:23 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/16 15:33:13 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,11 @@ char	**open_directory(const char *directory, const char *path, char *dir_tmp,
 		dir = opendir(dir_tmp);
 	if (dir == NULL)
 	{
-		ft_printf("%s\nls: %s: %s\n", dir_tmp, directory, strerror(errno));
+		ft_printf("%s\nls: %s: %s", dir_tmp, directory, strerror(errno));
+		if (!all->loop_call)
+			write(1, "\n", 1);
 		if (ft_strcmp(path, "") != 0)
-		{
 			free(dir_tmp);
-			dir_tmp = NULL;
-		}
 		return (NULL);
 	}
 	return (read_directory(dir, all, i));

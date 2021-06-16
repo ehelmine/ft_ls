@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:04:42 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/15 14:57:21 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/16 14:35:12 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ typedef struct s_all
 	int		if_device;
 	int		arg_count;
 	int		y;
+	int		xattr;
+	int		loop_call;
 }				t_all;
 
 int		ft_exit_call(int i, char c);

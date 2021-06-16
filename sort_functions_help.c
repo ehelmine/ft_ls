@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 17:49:26 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/14 16:20:47 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/16 15:33:00 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	compare_times(struct stat first, struct stat second, char **list,
 
 void	free_two(void *ptr1, void *ptr2)
 {
-	free(ptr1);
-	free(ptr2);
+	if (ptr1 != NULL)
+		free(ptr1);
+	if (ptr2 != NULL)
+		free(ptr2);
 }
