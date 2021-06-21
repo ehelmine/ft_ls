@@ -6,11 +6,12 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:37:22 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/16 14:36:16 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/21 17:08:12 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
+#include <stdio.h>
 //		./ft_ls -lRa ../../  3.04s user 1.88s system 41% cpu 11.953 total
 //	printf change
 //		./ft_ls -lRa ../../  2.93s user 1.74s system 41% cpu 11.166 total
@@ -99,15 +100,26 @@ int	continue_with_dir(char **list, const char *directory, t_all *all,
 	const char *path)
 {
 	int	ii;
+	struct stat buf;
 
-	ii = 0;
-	while (list[ii] != NULL)
-		ii++;
-	if (ft_strcmp(path, "") != 0)
+	if (ft_strcmp(path, "") != 0 || directory != NULL)
 	{
 		ft_putstr(directory);
 		write(1, ":\n", 2);
 	}
+	if (lstat(directory, &buf) == 0 && buf.st_mode & S_IXUSR)
+		ii = 0;
+	else
+	{
+		ii = 0;
+		while (list[ii] != NULL)
+			free(list[ii++]);
+		if (list != NULL)
+			free(list);
+		return (0);
+	}
+	while (list[ii] != NULL)
+		ii++;
 	if (all->l_flag)
 		call_check_num_of_links(all, list, directory);
 	loop_dir_content(list, directory, all, path);

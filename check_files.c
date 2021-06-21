@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:00:11 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/14 16:19:28 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/21 16:11:14 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	num_of_links_loop(char *tmp2, t_all *all)
 			all->size_len = len;
 		all->blocks += buf.st_blocks;
 		len_of_group(buf, all);
-	}	
+	}
 }
 
 void	check_number_of_links(char **list, t_all *all, const char *path, int ii)

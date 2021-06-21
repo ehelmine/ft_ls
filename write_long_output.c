@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 14:08:48 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/16 15:30:50 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/21 16:36:18 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ void	start_long_output(char *file, t_all *all, const char *path, int x)
 	tmp = NULL;
 	tmp2 = NULL;
 	all->check = 0;
-	if (ft_strcmp(path, "") != 0)
+	if (path != NULL)
 	{
 		if (path[ft_strlen(path) - 1] != '/')
 		{
@@ -172,7 +172,7 @@ void	start_long_output(char *file, t_all *all, const char *path, int x)
 			exit (1);
 		all->check = 1;
 	}
-	else if (ft_strcmp(path, "") == 0)
+	else if (path == NULL)
 		tmp = file;
 	lstat_long_output(all, tmp, file, x);
 }

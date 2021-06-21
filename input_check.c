@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 19:02:36 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/14 17:44:52 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/21 16:33:38 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	loop_other_input(t_all *all, int i, int argc)
 			all->not_exist[all->num_no++] = ft_strdup(all->input_arr[i]);
 			check_if_null((void *)all->not_exist[all->num_no - 1]);
 		}
-		else if (S_ISDIR(buf.st_mode))
+		else if (S_ISDIR(buf.st_mode) || (S_ISLNK(buf.st_mode) && !all->l_flag))
 		{
 			all->directories[all->num_dir++] = ft_strdup(all->input_arr[i]);
 			check_if_null((void *)all->directories[all->num_dir - 1]);
