@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:04:42 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/16 14:35:12 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/22 13:30:58 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,5 +142,8 @@ void	swap_and_move_index_two_back(char **list, t_all *all);
 char	*initialize_sort_tmp(const char *path);
 
 char	*call_strjoin(char *path, char *file);
+
+void	print_long_output(struct stat buf, t_all *all, struct passwd *pwd,
+			struct group *grp);
 
 #endif

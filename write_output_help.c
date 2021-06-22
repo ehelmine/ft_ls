@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 17:57:34 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/21 17:15:23 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/22 13:08:43 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	**malloc_int_array(void)
 	if (other_dirrs[0] == NULL)
 		exit (1);
 	other_dirrs[1] = (int *)malloc(sizeof(int) * 2);
+	if (other_dirrs[1] == NULL)
+		exit (1);
 	return (other_dirrs);
 }
 

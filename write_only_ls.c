@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 19:00:55 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/03 13:54:49 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/22 13:08:13 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	write_only_ls(t_all *all)
 	dir = opendir(".");
 	check_if_null((void *)dir);
 	i = 0;
-	list = (char **)malloc(sizeof(char) * 13000);
+	list = (char **)malloc(sizeof(char) * 14000);
 	if (list == NULL)
 		exit (1);
 	dp = readdir(dir);

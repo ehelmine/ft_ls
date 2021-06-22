@@ -6,12 +6,11 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 17:49:26 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/16 15:33:00 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/22 13:11:41 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
-#include <stdio.h>
 
 char	*call_strjoin(char *path, char *file)
 {
@@ -33,6 +32,8 @@ char	*initialize_sort_tmp(const char *path)
 		tmp = ft_strjoin(path, "/");
 	else
 		tmp = ft_strdup(path);
+	if (tmp == NULL)
+		exit(1);
 	return (tmp);
 }
 
