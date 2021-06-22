@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 19:02:36 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/21 16:33:38 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/22 20:15:28 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	check_flags(t_all *all, int argc)
 	x = 0;
 	ii = 1;
 	if (all->input_arr[i][0] != '-')
-		all->no_flags = 1;
+		all->n_fs = 1;
 	while (i < argc)
 	{
 		if (all->input_arr[i][0] != '-')

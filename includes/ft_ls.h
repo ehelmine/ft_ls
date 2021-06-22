@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:04:42 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/22 13:30:58 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/22 20:15:39 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_all
 	int		reverse_flag;
 	int		big_r_flag;
 	int		t_flag;
-	int		no_flags;
+	int		n_fs;
 	int		x;
 	int		xx;
 	int		num_no;
@@ -60,6 +60,9 @@ typedef struct s_all
 	int		y;
 	int		xattr;
 	int		loop_call;
+	int		ii;
+	int		val;
+	int		counter;
 }				t_all;
 
 int		ft_exit_call(int i, char c);
@@ -117,6 +120,9 @@ void	total_number_of_blocks(t_all *all);
 void	print_array(char **arr, int i, int no, t_all *all);
 
 void	write_only_ls(t_all *all);
+
+int		check_my_rights(const char *directory, const char *path, char *dir_tmp,
+			t_all *all);
 
 void	start_long_output(char *file, t_all *all, const char *path, int x);
 

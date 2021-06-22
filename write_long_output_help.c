@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 17:19:30 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/15 12:43:33 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/22 20:08:13 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	modify_time(char *str, time_t now, time_t mod_time)
 
 void	check_file_type(char output[11], struct stat buf, t_all *all)
 {
+	all->if_device = 0;
 	if (S_ISDIR(buf.st_mode) != 0)
 		output[0] = 'd';
 	else if (S_ISREG(buf.st_mode) != 0)

@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 17:49:26 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/22 13:11:41 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/22 15:06:38 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,9 @@ void	compare_times(struct stat first, struct stat second, char **list,
 		swap_and_move_index_two_back(list, all);
 	else if (first.st_mtime == second.st_mtime)
 	{
-		if (first.st_mtimespec.tv_nsec < second.st_mtimespec.tv_nsec
-			|| ft_strcmp(list[all->i], list[all->i + 1]) > 0)
+		if (first.st_mtimespec.tv_nsec < second.st_mtimespec.tv_nsec)
+			swap_and_move_index_two_back(list, all);
+		else if (ft_strcmp(list[all->i], list[all->i + 1]) > 0)
 			swap_and_move_index_two_back(list, all);
 	}
 }

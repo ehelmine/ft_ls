@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:11:24 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/21 16:56:20 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/22 20:15:48 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ void	print_array(char **arr, int i, int no, t_all *all)
 	numbers[0][0] = i;
 	numbers[0][1] = no;
 	if (all->reverse_flag)
+	{
+		all->counter = numbers[0][0] - 1;
 		reverse_loop_print_array(arr, numbers, path, all);
+	}
 	else
 		loop_print_array(arr, numbers, path, all);
 	free(path);
@@ -72,7 +75,7 @@ void	set_values_to_zero(t_all *all)
 	all->big_r_flag = 0;
 	all->t_flag = 0;
 	all->i = 0;
-	all->no_flags = 0;
+	all->n_fs = 0;
 	all->num_file = 0;
 	all->num_no = 0;
 	all->num_dir = 0;
@@ -119,6 +122,6 @@ int	main(int argc, char **argv)
 			return (1);
 		print_output(&all);
 	}
-	system ("leaks ft_ls");
+//	system ("leaks ft_ls");
 	return (0);
 }

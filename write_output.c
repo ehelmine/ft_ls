@@ -6,16 +6,11 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:37:22 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/22 13:28:46 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/22 20:14:57 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
-//		./ft_ls -lRa ../../  3.04s user 1.88s system 41% cpu 11.953 total
-//	printf change
-//		./ft_ls -lRa ../../  2.93s user 1.74s system 41% cpu 11.166 total
-// after i and d
-//		./ft_ls -lRa ../../  2.91s user 1.68s system 41% cpu 11.114 total
 
 void	call_other_directories(char **list, const char *directory,
 	int **other_dirrs, t_all *all)
@@ -26,8 +21,7 @@ void	call_other_directories(char **list, const char *directory,
 
 	tmp = NULL;
 	tmp = ft_strjoin(directory, "/");
-	if (tmp == NULL)
-		exit (1);
+	check_if_null((void *)tmp);
 	x = 0;
 	ii = other_dirrs[1][0];
 	all->loop_call = 1;
@@ -101,7 +95,8 @@ int	continue_with_dir(char **list, const char *directory, t_all *all,
 	struct stat	buf;
 	int			ii;
 
-	if (ft_strcmp(path, "") != 0 || directory != NULL)
+	if ((!all->n_fs && (ft_strcmp(path, "") != 0 || directory != NULL))
+		|| (all->n_fs && (all->num_dir > 1 || all->num_file || all->num_no)))
 	{
 		ft_putstr(directory);
 		write(1, ":\n", 2);
