@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:37:22 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/23 15:19:27 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/23 17:00:47 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,7 @@ int	continue_with_dir(char **list, const char *directory, t_all *all,
 	struct stat	buf;
 	int			ii;
 
-	if ((!all->n_fs && (ft_strcmp(path, "") != 0 || directory != NULL))
-		|| (all->n_fs && (all->num_dir > 1 || all->num_file || all->num_no)))
+	if (all->num_dir > 1 || all->num_file || all->num_no)
 	{
 		ft_putstr(directory);
 		write(1, ":\n", 2);
