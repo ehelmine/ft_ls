@@ -6,13 +6,13 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:37:22 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/22 20:14:57 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/23 15:19:27 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-void	call_other_directories(char **list, const char *directory,
+static void	call_other_directories(char **list, const char *directory,
 	int **other_dirrs, t_all *all)
 {
 	char	*tmp;
@@ -40,7 +40,7 @@ void	call_other_directories(char **list, const char *directory,
 	tmp = NULL;
 }
 
-void	loop_dir_content2(char **list, const char *directory, t_all *all,
+static void	loop_dir_content2(char **list, const char *directory, t_all *all,
 	int **other_dirrs)
 {
 	int	x;
@@ -64,7 +64,7 @@ void	loop_dir_content2(char **list, const char *directory, t_all *all,
 	}
 }
 
-int	loop_dir_content(char **list, const char *directory, t_all *all,
+static int	loop_dir_content(char **list, const char *directory, t_all *all,
 	const char *path)
 {
 	int	**other_dirrs;

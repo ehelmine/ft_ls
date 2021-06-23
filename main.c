@@ -6,13 +6,13 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:11:24 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/22 20:15:48 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/23 15:24:52 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-void	print_array(char **arr, int i, int no, t_all *all)
+static void	print_array(char **arr, int i, int no, t_all *all)
 {
 	char	*path;
 	int		numbers[1][2];
@@ -39,10 +39,8 @@ void	print_array(char **arr, int i, int no, t_all *all)
 	return ;
 }
 
-void	print_output(t_all *all)
+static void	print_output(t_all *all, int y)
 {
-	int	y;
-
 	if (all->num_no > 0)
 		print_array(all->not_exist, all->num_no, 1, all);
 	y = 0;
@@ -52,7 +50,10 @@ void	print_output(t_all *all)
 		free(all->not_exist);
 	all->y = -1;
 	if (all->num_file > 0)
+	{
+		check_num_of_links_with_files(all->files, all);
 		print_array(all->files, all->num_file, 0, all);
+	}
 	y = 0;
 	while (y < all->num_file)
 		free(all->files[y++]);
@@ -67,7 +68,7 @@ void	print_output(t_all *all)
 	free(all->directories);
 }
 
-void	set_values_to_zero(t_all *all)
+static void	set_values_to_zero(t_all *all)
 {
 	all->a_flag = 0;
 	all->l_flag = 0;
@@ -82,7 +83,6 @@ void	set_values_to_zero(t_all *all)
 	all->p = 0;
 	all->links_len = 0;
 	all->size_len = 0;
-	all->tmp = NULL;
 	all->blocks = 0;
 	all->not_exist = NULL;
 	all->files = NULL;
@@ -114,14 +114,13 @@ int	main(int argc, char **argv)
 		write_only_ls(&all);
 	else
 	{
-		all.arg_count = argc;
 		while (i < argc)
 			ft_strcpy(all.input_arr[i++], argv[ii++]);
 		all.input_arr[i][0] = '\0';
 		if (check_flags(&all, argc) == -1)
 			return (1);
-		print_output(&all);
+		print_output(&all, ii);
 	}
-//	system ("leaks ft_ls");
+	system ("leaks ft_ls");
 	return (0);
 }

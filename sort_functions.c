@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 17:53:31 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/15 12:22:10 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/23 16:34:44 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	sort_reverse(char **list)
 	}
 }
 
-int	free_mod_time(const char *path, char *d1, char *d2, char *str)
+static int	free_mod_time(const char *path, char *d1, char *d2, char *str)
 {
 	if (ft_strcmp(path, "") != 0)
 	{
@@ -62,6 +62,7 @@ int	sort_mod_time(char **list, int ii, const char *path, t_all *all)
 	tmp2 = initialize_sort_tmp(path);
 	while (all->i + 1 < ii)
 	{
+//		ft_printf("path %s eka %s toka %s all->i %i and ii %i\n", path, list[all->i], list[all->i + 1], all->i, ii);
 		cur_dir1 = list[all->i];
 		cur_dir2 = list[all->i + 1];
 		if (ft_strcmp(path, "") != 0)
@@ -71,9 +72,9 @@ int	sort_mod_time(char **list, int ii, const char *path, t_all *all)
 		}
 		if (lstat(cur_dir1, &first) == -1 || lstat(cur_dir2, &second) == -1)
 			return (free_mod_time(path, cur_dir1, cur_dir2, tmp2));
+		compare_times(first, second, list, all);
 		if (ft_strcmp(path, "") != 0)
 			free_two((void *)cur_dir1, (void *)cur_dir2);
-		compare_times(first, second, list, all);
 		all->i++;
 	}
 	free(tmp2);

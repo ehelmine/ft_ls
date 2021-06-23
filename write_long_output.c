@@ -6,13 +6,14 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 14:08:48 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/22 13:30:34 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/23 15:23:52 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-void	finish_long_output(struct stat buf, t_all *all, char *path, char *file)
+static void	finish_long_output(struct stat buf, t_all *all, char *path,
+	char *file)
 {
 	struct passwd	*pwd;
 	struct group	*grp;
@@ -41,7 +42,7 @@ void	finish_long_output(struct stat buf, t_all *all, char *path, char *file)
 		free_two((void *)link, (void *)arrow);
 }
 
-void	set_permission_to_output2(char output[11], struct stat buf)
+static void	set_permission_to_output2(char output[11], struct stat buf)
 {
 	if (buf.st_mode & S_ISGID)
 	{
@@ -65,8 +66,8 @@ void	set_permission_to_output2(char output[11], struct stat buf)
 		output[9] = 'x';
 }
 
-void	set_permission_to_output(char output[11], struct stat buf, t_all *all,
-	char *path)
+static void	set_permission_to_output(char output[11], struct stat buf,
+	t_all *all, char *path)
 {
 	check_file_type(output, buf, all);
 	if (buf.st_mode & S_IRUSR)
@@ -92,7 +93,7 @@ void	set_permission_to_output(char output[11], struct stat buf, t_all *all,
 	set_permission_to_output2(output, buf);
 }
 
-void	lstat_long_output(t_all *all, char *path, char *file, int x)
+static void	lstat_long_output(t_all *all, char *path, char *file, int x)
 {
 	struct stat	buf;
 	int			i;

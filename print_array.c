@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 14:29:45 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/22 20:12:16 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/23 15:23:08 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 **	return **list.
 */
 
-char	**read_directory(DIR *dir, t_all *all, int i)
+static char	**read_directory(DIR *dir, t_all *all, int i)
 {
 	struct dirent	*dp;
 	char			**list;
@@ -53,8 +53,8 @@ char	**read_directory(DIR *dir, t_all *all, int i)
 ** If we can open it, continue to read_directory -function.
 */
 
-char	**open_directory(const char *directory, const char *path, char *dir_tmp,
-	t_all *all)
+static char	**open_directory(const char *directory, const char *path,
+	char *dir_tmp, t_all *all)
 {
 	DIR		*dir;
 
@@ -128,16 +128,17 @@ void	loop_print_array(char **arr, int numbers[1][2], char *path, t_all *all)
 		else if (numbers[0][1] == 0)
 		{
 			if (all->l_flag)
-			{
-				num_of_links_loop(arr[all->y], all);
 				start_long_output(arr[all->y], all, NULL, -1);
-			}
 			else
 				ft_printf("%s\n", arr[all->y]);
 			if (all->num_dir && all->y + 1 == numbers[0][0])
 				write(1, "\n", 1);
 		}
-	}	
+	}
+	all->group_len = 0;
+	all->size_len = 0;
+	all->links_len = 0;
+	all->blocks = 0;
 }
 
 void	reverse_loop_print_array(char **arr, int numbers[1][2], char *path,
@@ -156,15 +157,16 @@ void	reverse_loop_print_array(char **arr, int numbers[1][2], char *path,
 		else if (numbers[0][1] == 0)
 		{
 			if (all->l_flag)
-			{
-				num_of_links_loop(arr[all->counter], all);
 				start_long_output(arr[all->counter], all, NULL, -1);
-			}
 			else
 				ft_printf("%s\n", arr[all->counter]);
 			if (all->num_dir && all->counter - 1 == -1)
 				write(1, "\n", 1);
 		}
 		all->counter--;
-	}	
+	}
+	all->group_len = 0;
+	all->size_len = 0;
+	all->links_len = 0;
+	all->blocks = 0;
 }

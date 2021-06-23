@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 17:49:26 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/22 15:06:38 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/23 16:34:27 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*initialize_sort_tmp(const char *path)
 	return (tmp);
 }
 
-void	swap_and_move_index_two_back(char **list, t_all *all)
+static void	swap_and_move_index_two_back(char **list, t_all *all)
 {
 	char	*tmp;
 
@@ -53,14 +53,21 @@ void	swap_and_move_index_two_back(char **list, t_all *all)
 void	compare_times(struct stat first, struct stat second, char **list,
 	t_all *all)
 {
+	int i;
+
+	i = 0;
 	if (first.st_mtime < second.st_mtime)
 		swap_and_move_index_two_back(list, all);
 	else if (first.st_mtime == second.st_mtime)
 	{
 		if (first.st_mtimespec.tv_nsec < second.st_mtimespec.tv_nsec)
 			swap_and_move_index_two_back(list, all);
-		else if (ft_strcmp(list[all->i], list[all->i + 1]) > 0)
-			swap_and_move_index_two_back(list, all);
+		else
+		{
+			i = ft_strcmp(list[all->i], list[all->i + 1]);
+			if (i > 0)
+				swap_and_move_index_two_back(list, all);
+		}
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 19:02:36 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/22 20:15:28 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/23 15:12:27 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 ** char **directories. If it is neither, we put it in char **no_exist.
 */
 
-int	loop_other_input(t_all *all, int i, int argc)
+static int	loop_other_input(t_all *all, int i, int argc)
 {
 	struct stat	buf;
 
@@ -45,7 +45,7 @@ int	loop_other_input(t_all *all, int i, int argc)
 	return (1);
 }
 
-int	malloc_for_other_input(t_all *all, int i, int argc)
+static int	malloc_for_other_input(t_all *all, int i, int argc)
 {
 	if (i == argc)
 	{
@@ -74,7 +74,7 @@ int	malloc_for_other_input(t_all *all, int i, int argc)
 ** call check_other_input -function.
 */
 
-void	flags_loop(t_all *all, int i, int ii)
+static void	flags_loop(t_all *all, int i, int ii)
 {
 	while (all->input_arr[i][ii] != '\0')
 	{

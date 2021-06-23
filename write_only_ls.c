@@ -6,13 +6,13 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 19:00:55 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/22 13:08:13 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/23 15:18:57 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-void	output_and_free_ls(t_all *all, char **list, int i)
+static void	output_and_free_ls(t_all *all, char **list, int i)
 {
 	sort_asc(list, i);
 	all->x = 0;

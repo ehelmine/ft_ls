@@ -6,13 +6,13 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:00:11 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/21 16:11:14 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/23 15:22:38 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-void	len_of_group(struct stat buf, t_all *all)
+static void	len_of_group(struct stat buf, t_all *all)
 {
 	struct group	*grp;
 	int				len;
@@ -54,7 +54,8 @@ void	num_of_links_loop(char *tmp2, t_all *all)
 	}
 }
 
-void	check_number_of_links(char **list, t_all *all, const char *path, int ii)
+static void	check_number_of_links(char **list, t_all *all,
+	const char *path, int ii)
 {
 	char		*tmp2;
 	int			x;

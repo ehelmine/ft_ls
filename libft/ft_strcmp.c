@@ -6,11 +6,12 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/09 12:36:56 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/01 16:27:14 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/23 16:35:08 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
+#include <stdio.h>
 
 int	ft_strcmp(const char *str1, const char *str2)
 {
@@ -26,6 +27,7 @@ int	ft_strcmp(const char *str1, const char *str2)
 	{
 		x++;
 	}
+//	printf("s1[x] %i %c and s2[x] %i %c\n", (int)s1[x], s1[x], (int)s2[x], s2[x]);
 	i = (s1[x] - s2[x]);
 	return (i);
 }

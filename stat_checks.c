@@ -6,11 +6,21 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:27:41 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/22 20:16:59 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/23 15:06:33 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
+
+void	check_num_of_links_with_files(char **files, t_all *all)
+{
+	int	i;
+
+	i = 0;
+	while (i < all->num_file)
+		num_of_links_loop(files[i++], all);
+	return ;
+}
 
 int	check_my_rights(const char *directory, const char *path, char *dir_tmp,
 		t_all *all)
