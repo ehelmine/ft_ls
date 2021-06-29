@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 14:08:48 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/23 15:23:52 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/28 14:09:35 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,31 +95,31 @@ static void	set_permission_to_output(char output[11], struct stat buf,
 
 static void	lstat_long_output(t_all *all, char *path, char *file, int x)
 {
-	struct stat	buf;
 	int			i;
-	char		output[12];
 
-	i = lstat(path, &buf);
-	if (i == -1 && S_ISDIR(buf.st_mode) == 0)
+	i = lstat(path, &all->buf_s);
+	if (i == -1 && S_ISDIR(all->buf_s.st_mode) == 0)
 	{
-		i = stat(path, &buf);
-		if (buf.st_mode & !S_IXUSR)
+		i = stat(path, &all->buf_s);
+		if (all->buf_s.st_mode & !S_IXUSR)
 			exit (1);
-		if (all->check == 1)
-			free(path);
-		return ;
+		if (all->big_r_flag || i == -1)
+		{
+			if (all->check == 1)
+				free(path);
+			return ;
+		}
 	}
 	if (x == 0)
 		total_number_of_blocks(all);
 	i = 0;
 	while (i < 10)
-		output[i++] = '-';
-	output[10] = ' ';
-	output[11] = '\0';
-	all->xattr = 0;
-	set_permission_to_output(output, buf, all, path);
-	write(1, output, 11);
-	finish_long_output(buf, all, path, file);
+		all->output[i++] = '-';
+	all->output[10] = ' ';
+	all->output[11] = '\0';
+	set_permission_to_output(all->output, all->buf_s, all, path);
+	write(1, all->output, 11);
+	finish_long_output(all->buf_s, all, path, file);
 }
 
 void	start_long_output(char *file, t_all *all, const char *path, int x)

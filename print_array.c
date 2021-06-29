@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 14:29:45 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/23 15:23:08 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/29 13:57:48 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,10 @@ void	loop_print_array(char **arr, int numbers[1][2], char *path, t_all *all)
 				write(1, "\n", 1);
 		}
 		else if (numbers[0][1] == 1)
-			ft_printf("ls: %s: No such file or directory\n", arr[all->y]);
+		{
+			lstat(arr[all->y], &all->buf_s);
+			ft_printf("ls: %s: %s\n", arr[all->y++], strerror(errno));
+		}
 		else if (numbers[0][1] == 0)
 		{
 			if (all->l_flag)
@@ -135,10 +138,7 @@ void	loop_print_array(char **arr, int numbers[1][2], char *path, t_all *all)
 				write(1, "\n", 1);
 		}
 	}
-	all->group_len = 0;
-	all->size_len = 0;
-	all->links_len = 0;
-	all->blocks = 0;
+	initialize_print_array_values(all);
 }
 
 void	reverse_loop_print_array(char **arr, int numbers[1][2], char *path,
@@ -153,7 +153,10 @@ void	reverse_loop_print_array(char **arr, int numbers[1][2], char *path,
 				write(1, "\n", 1);
 		}
 		if (numbers[0][1] == 1)
-			ft_printf("ls: %s: No such file or directory\n", arr[all->counter]);
+		{
+			lstat(arr[all->counter], &all->buf_s);
+			ft_printf("ls: %s: %s\n", arr[all->counter], strerror(errno));
+		}
 		else if (numbers[0][1] == 0)
 		{
 			if (all->l_flag)
@@ -165,8 +168,5 @@ void	reverse_loop_print_array(char **arr, int numbers[1][2], char *path,
 		}
 		all->counter--;
 	}
-	all->group_len = 0;
-	all->size_len = 0;
-	all->links_len = 0;
-	all->blocks = 0;
+	initialize_print_array_values(all);
 }

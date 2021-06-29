@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:04:42 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/23 15:21:19 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/29 13:58:12 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,36 +25,38 @@
 
 typedef struct s_all
 {
-	char	input_arr[MAX_LINES][500];
-	char	**not_exist;
-	char	**files;
-	char	**directories;
-	int		a_flag;
-	int		l_flag;
-	int		reverse_flag;
-	int		big_r_flag;
-	int		t_flag;
-	int		n_fs;
-	int		x;
-	int		xx;
-	int		num_no;
-	int		num_file;
-	int		num_dir;
-	int		p;
-	int		i;
-	int		links_len;
-	int		size_len;
-	int		group_len;
-	int		blocks;
-	int		check;
-	int		len_of_list;
-	int		if_device;
-	int		y;
-	int		xattr;
-	int		loop_call;
-	int		ii;
-	int		val;
-	int		counter;
+	char		input_arr[MAX_LINES][500];
+	char		**not_exist;
+	char		**files;
+	char		**directories;
+	int			a_flag;
+	int			l_flag;
+	int			reverse_flag;
+	int			big_r_flag;
+	int			t_flag;
+	int			n_fs;
+	int			x;
+	int			xx;
+	int			num_no;
+	int			num_file;
+	int			num_dir;
+	int			p;
+	int			i;
+	int			links_len;
+	int			size_len;
+	int			group_len;
+	int			blocks;
+	int			check;
+	int			len_of_list;
+	int			if_device;
+	int			y;
+	int			xattr;
+	int			loop_call;
+	int			ii;
+	int			val;
+	int			counter;
+	struct stat	buf_s;
+	char		output[12];
 }				t_all;
 
 int		ft_exit_call(int i, char c);
@@ -115,6 +117,8 @@ void	print_time_and_name(char *str, char *file, char *arrow, char *link);
 void	total_number_of_blocks(t_all *all);
 
 void	free_two(void *ptr1, void *ptr2);
+
+void	initialize_print_array_values(t_all *all);
 
 void	compare_times(struct stat first, struct stat second, char **list,
 			t_all *all);
