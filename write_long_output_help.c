@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 17:19:30 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/30 14:49:29 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/30 14:52:46 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,19 @@ char	*get_link_name(char *path, struct stat buf)
 	return (ptr);
 }
 
-void	modify_time(char *str, time_t now, time_t mod_time)
+void	modify_time(char *str, time_t now, time_t mod_time, t_all *all)
 {
-	char tmp[3];
-	
-//	ft_printf("this is time |%s|\n", str);
 	if (str[4] >= 'A' && str[4] <= 'S')
 	{
-		tmp[0] = ' ';
+		all->tmp[0] = ' ';
 		if (str[8] >= '1' && str[8] <= '3')
-			tmp[0] = str[8];
-		tmp[1] = str[9];
+			all->tmp[0] = str[8];
+		all->tmp[1] = str[9];
 		str[7] = str[4];
 		str[8] = str[5];
 		str[9] = str[6];
-		str[4] = tmp[0];
-		str[5] = tmp[1];
+		str[4] = all->tmp[0];
+		str[5] = all->tmp[1];
 		str[6] = ' ';
 	}
 	if (now - mod_time < 15778463)

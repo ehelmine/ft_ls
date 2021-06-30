@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 14:08:48 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/28 14:09:35 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/30 14:51:56 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	finish_long_output(struct stat buf, t_all *all, char *path,
 	grp = getgrgid(buf.st_gid);
 	str = ctime(&buf.st_mtime);
 	check_if_null((void *)str);
-	modify_time(str, time(0), buf.st_mtime);
+	modify_time(str, time(0), buf.st_mtime, all);
 	link = "";
 	arrow = "";
 	if (S_ISLNK(buf.st_mode) != 0)

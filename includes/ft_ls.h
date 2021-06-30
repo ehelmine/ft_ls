@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:04:42 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/29 13:58:12 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/30 14:52:30 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_all
 	int			counter;
 	struct stat	buf_s;
 	char		output[12];
+	char		tmp[3];
 }				t_all;
 
 int		ft_exit_call(int i, char c);
@@ -106,7 +107,7 @@ void	start_long_output(char *file, t_all *all, const char *path, int x);
 
 void	check_file_type(char output[11], struct stat buf, t_all *all);
 
-void	modify_time(char *str, time_t now, time_t mod_time);
+void	modify_time(char *str, time_t now, time_t mod_time, t_all *all);
 
 void	num_of_links_loop(char *tmp2, t_all *all);
 

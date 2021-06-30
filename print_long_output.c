@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 13:30:20 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/22 17:10:39 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/30 14:54:38 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,6 @@ void	print_long_output(struct stat buf, t_all *all, struct passwd *pwd,
 		ft_printf("%*i ", all->size_len + (all->group_len
 				- (int)ft_strlen(grp->gr_name)),
 			(unsigned long long)buf.st_size);
+	all->tmp[0] = ' ';
+	all->tmp[1] = ' ';
 }
