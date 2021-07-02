@@ -6,11 +6,31 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:00:11 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/28 13:31:23 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/30 15:11:52 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
+
+static void	len_of_user(struct stat buf, t_all *all)
+{
+	struct passwd	*pwd;
+	int				len;
+	
+	pwd = getpwuid(buf.st_uid);
+	if (pwd == NULL)
+	{
+		len = (int)ft_check_int_len(buf.st_uid);
+		if (len > all->user_len)
+			all->user_len = len;
+	}
+	else
+	{
+		len = ft_strlen(pwd->pw_name);
+		if (len > all->user_len)
+			all->user_len = len;
+	}
+}
 
 static void	len_of_group(struct stat buf, t_all *all)
 {
@@ -51,6 +71,7 @@ void	num_of_links_loop(char *tmp2, t_all *all)
 			all->size_len = len;
 		all->blocks += buf.st_blocks;
 		len_of_group(buf, all);
+		len_of_user(buf, all);
 	}
 }
 
@@ -62,6 +83,9 @@ static void	check_number_of_links(char **list, t_all *all,
 
 	tmp2 = NULL;
 	all->group_len = 0;
+	all->user_len = 0;
+	all->size_len = 0;
+	all->blocks = 0;
 	x = -1;
 	while (++x < ii)
 	{
@@ -74,6 +98,7 @@ static void	check_number_of_links(char **list, t_all *all,
 		if (ft_strcmp(path, "") != 0)
 			free(tmp2);
 	}
+		ft_printf("grouplen %i sizelen %i userlen %i\n", all->group_len, all->size_len, all->user_len);
 }
 
 void	call_check_num_of_links(t_all *all, char **list, const char *directory)

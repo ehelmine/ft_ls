@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 13:30:20 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/30 14:54:38 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/30 15:32:58 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,38 @@
 void	print_long_output(struct stat buf, t_all *all, struct passwd *pwd,
 	struct group *grp)
 {
-	if (grp == NULL && pwd != NULL)
-		ft_printf(" %*i %s  %llu  ", all->links_len, buf.st_nlink,
-			pwd->pw_name, (unsigned long long)buf.st_gid);
-	else if (grp != NULL && pwd == NULL)
-		ft_printf(" %*i %llu  %s  ", all->links_len, buf.st_nlink,
-			(unsigned long long)buf.st_uid, grp->gr_name);
-	else if (grp == NULL && pwd == NULL)
-		ft_printf(" %*i %llu  %llu  ", all->links_len, buf.st_nlink,
-			(unsigned long long)buf.st_uid, (unsigned long long)buf.st_gid);
+	int i;
+
+	if (pwd != NULL)
+	{
+		ft_printf(" %*i %s  ", all->links_len, buf.st_nlink,
+			pwd->pw_name);
+		i = ft_strlen(pwd->pw_name);
+		while (i++ < all->user_len)
+			write(1, " ", 1);
+	}
 	else
-		ft_printf(" %*i %s  %s  ", all->links_len, buf.st_nlink,
-			pwd->pw_name, grp->gr_name);
+	{
+		ft_printf(" %*i %llu  ", all->links_len, buf.st_nlink,
+			(unsigned long long)buf.st_uid);
+		i = ft_check_int_len(buf.st_uid);
+		while (i++ < all->user_len)
+			write(1, " ", 1);
+	}
+	if (grp == NULL)
+	{
+		ft_printf("%llu  ", (unsigned long long)buf.st_gid);
+		i = ft_check_int_len(buf.st_gid);
+		while (i++ < all->group_len)
+			write(1, " ", 1);
+	}
+	else
+	{
+		ft_printf("%s  ", grp->gr_name);
+		i = ft_strlen(grp->gr_name);
+		while (i++ < all->group_len)
+			write(1, " ", 1);
+	}		
 	if (all->if_device)
 		ft_printf(" %d, %d ", my_major(buf.st_rdev), my_minor(buf.st_rdev));
 	else if (grp == NULL)

@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:04:42 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/30 14:52:30 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/06/30 15:08:15 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_all
 	int			links_len;
 	int			size_len;
 	int			group_len;
+	int			user_len;
 	int			blocks;
 	int			check;
 	int			len_of_list;
