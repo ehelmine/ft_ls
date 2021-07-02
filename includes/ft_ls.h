@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:04:42 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/02 15:43:17 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/02 16:26:56 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ typedef struct s_all
 	char		output[12];
 	char		tmp[3];
 	int			e;
+	char		**list;
+	DIR			*dir;
 }				t_all;
 
 int		ft_exit_call(int i, char c);
@@ -75,11 +77,13 @@ void	reverse_loop_print_array(char **arr, int numbers[1][2], char *path,
 
 void	loop_print_array(char **arr, int numbers[1][2], char *path, t_all *all);
 
+void	open_dir_values(t_all *all);
+
 int		open_and_write_directory(t_all *all, const char *directory,
 			const char *path);
 
 int		empty_dir(const char *directory, const char *path, char *dir_tmp,
-			char **list, t_all *all);
+			t_all *all);
 
 int		continue_with_dir(char **list, const char *directory, t_all *all,
 			const char *path);

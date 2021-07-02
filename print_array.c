@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 14:29:45 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/02 15:26:27 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/02 16:31:35 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static char	**read_directory(DIR *dir, t_all *all, int i)
 	}
 	closedir(dir);
 	list[all->len_of_list] = NULL;
+	all->list = list;
 	return (list);
 }
 
@@ -55,22 +56,12 @@ static char	**read_directory(DIR *dir, t_all *all, int i)
 static char	**open_directory(const char *directory, const char *path,
 	char *dir_tmp, t_all *all)
 {
-	DIR		*dir;
-
-	dir = NULL;
+	open_dir_values(all);
 	if (ft_strcmp(path, "") == 0)
-		dir = opendir(directory);
+		all->dir = opendir(directory);
 	else if (ft_strcmp(path, "") != 0)
-		dir = opendir(dir_tmp);
-	if (dir != NULL)
-		all->ii = count_num_of_files(dir, all);
-	if (ft_strcmp(path, "") == 0)
-		dir = opendir(directory);
-	else if (ft_strcmp(path, "") != 0)
-		dir = opendir(dir_tmp);
-	all->len_of_list = 0;
-	all->val = 0;
-	if (dir == NULL)
+		all->dir = opendir(dir_tmp);
+	if (all->dir == NULL)
 	{
 		ft_printf("%s:\nls: %s: %s", dir_tmp, directory, strerror(errno));
 		if (!all->loop_call)
@@ -79,12 +70,17 @@ static char	**open_directory(const char *directory, const char *path,
 			free(dir_tmp);
 		return (NULL);
 	}
+	all->ii = count_num_of_files(all->dir, all);
+	if (ft_strcmp(path, "") == 0)
+		all->dir = opendir(directory);
+	else if (ft_strcmp(path, "") != 0)
+		all->dir = opendir(dir_tmp);
 	if (check_my_rights(directory, path, dir_tmp, all) == 0)
 	{
-		closedir(dir);
+		closedir(all->dir);
 		return (NULL);
 	}
-	return (read_directory(dir, all, all->ii));
+	return (read_directory(all->dir, all, all->ii));
 }
 
 int	open_and_write_directory(t_all *all, const char *directory,
@@ -101,7 +97,7 @@ int	open_and_write_directory(t_all *all, const char *directory,
 	}
 	list = open_directory(directory, path, dir_tmp, all);
 	if (list == NULL)
-		return (empty_dir(directory, path, dir_tmp, list, all));
+		return (empty_dir(directory, path, dir_tmp, all));
 	if (all->len_of_list > 1)
 	{
 		if (ft_strcmp(path, "") != 0)
@@ -109,7 +105,7 @@ int	open_and_write_directory(t_all *all, const char *directory,
 		else
 			all->p = sort_list(list, all, directory);
 		if (all->p == -1)
-			return (empty_dir(directory, path, dir_tmp, list, all));
+			return (empty_dir(directory, path, dir_tmp, all));
 	}
 	if (ft_strcmp(path, "") != 0)
 		return (continue_with_dir(list, dir_tmp, all, path));
@@ -130,7 +126,7 @@ void	loop_print_array(char **arr, int numbers[1][2], char *path, t_all *all)
 		else if (numbers[0][1] == 1)
 		{
 			lstat(arr[all->y], &all->buf_s);
-			ft_printf("ls: %s: %s\n", arr[all->y++], strerror(errno));
+			ft_printf("ls: %s: %s\n", arr[all->y], strerror(errno));
 		}
 		else if (numbers[0][1] == 0)
 		{

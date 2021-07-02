@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 17:57:34 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/02 15:27:12 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/02 16:26:46 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	**malloc_int_array(void)
 }
 
 int	empty_dir(const char *directory, const char *path, char *dir_tmp,
-	char **list, t_all *all)
+	t_all *all)
 {
 	int	x;
 
@@ -39,7 +39,7 @@ int	empty_dir(const char *directory, const char *path, char *dir_tmp,
 	{
 		if (all->val == 1)
 			free(dir_tmp);
-		free(list);
+		free(all->list);
 		all->val = 0;
 		return (0);
 	}
@@ -50,10 +50,11 @@ int	empty_dir(const char *directory, const char *path, char *dir_tmp,
 		ft_putstr(dir_tmp);
 		free(dir_tmp);
 		dir_tmp = NULL;
-		while (list[x] != NULL)
-			free(list[x++]);
+		while (all->list[x] != NULL)
+			free(all->list[x++]);
 	}
-	free(list);
+	free(all->list);
+	all->list = NULL;
 	write(1, ":\n", 1);
 	return (0);
 }
@@ -64,4 +65,12 @@ void	initialize_print_array_values(t_all *all)
 	all->size_len = 0;
 	all->links_len = 0;
 	all->blocks = 0;
+}
+
+void	open_dir_values(t_all *all)
+{
+	all->dir = NULL;
+	all->len_of_list = 0;
+	all->val = 0;
+	all->list = NULL;
 }

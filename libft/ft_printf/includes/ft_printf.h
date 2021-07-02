@@ -6,17 +6,14 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 18:31:32 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/08 17:55:42 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/02 15:59:44 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <unistd.h>
 # include <stdarg.h>
-# include <string.h>
-# include <stdlib.h>
 # include "../../includes/libft.h"
 
 typedef struct s_val

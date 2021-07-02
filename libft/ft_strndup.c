@@ -6,13 +6,11 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 10:21:34 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/20 13:17:52 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/02 15:55:18 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
-#include <string.h>
-#include <stdlib.h>
 
 char	*ft_strndup(const char *s1, size_t n)
 {

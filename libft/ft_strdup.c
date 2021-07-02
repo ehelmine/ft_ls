@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/09 12:39:09 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/20 13:17:52 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/02 15:57:34 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*ft_strdup(const char *s)
 	char	*dupstr;
 
 	src_sze = ft_strlen(s);
-	dupstr = (char *)malloc(sizeof(dupstr) * (src_sze + 1));
+	dupstr = (char *)malloc(sizeof(char) * (src_sze + 1));
 	if (dupstr == NULL)
 		return (NULL);
 	i = 0;

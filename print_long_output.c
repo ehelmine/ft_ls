@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 13:30:20 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/02 13:12:49 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/02 16:59:26 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 void	print_long_output2(struct stat buf, t_all *all, struct group *grp)
 {
-	while (all->e++ < all->group_len)
+	while (all->e < all->group_len)
+	{
 		write(1, " ", 1);
+		all->e++;
+	}
 	if (all->if_device)
 		ft_printf(" %d, %d ", my_major(buf.st_rdev), my_minor(buf.st_rdev));
 	else if (grp == NULL)
@@ -29,6 +32,7 @@ void	print_long_output2(struct stat buf, t_all *all, struct group *grp)
 	all->tmp[0] = ' ';
 	all->tmp[1] = ' ';
 	all->e = 0;
+	all->if_device = 0;
 }
 
 void	print_long_output(struct stat buf, t_all *all, struct passwd *pwd,
