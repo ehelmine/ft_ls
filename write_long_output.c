@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 14:08:48 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/30 14:51:56 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/02 15:43:31 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	finish_long_output(struct stat buf, t_all *all, char *path,
 	grp = getgrgid(buf.st_gid);
 	str = ctime(&buf.st_mtime);
 	check_if_null((void *)str);
-	modify_time(str, time(0), buf.st_mtime, all);
+	modify_time(str, time(0), buf.st_mtime);
 	link = "";
 	arrow = "";
 	if (S_ISLNK(buf.st_mode) != 0)
@@ -95,15 +95,13 @@ static void	set_permission_to_output(char output[11], struct stat buf,
 
 static void	lstat_long_output(t_all *all, char *path, char *file, int x)
 {
-	int			i;
-
-	i = lstat(path, &all->buf_s);
-	if (i == -1 && S_ISDIR(all->buf_s.st_mode) == 0)
+	all->e = lstat(path, &all->buf_s);
+	if (all->e == -1 && S_ISDIR(all->buf_s.st_mode) == 0)
 	{
-		i = stat(path, &all->buf_s);
+		all->e = stat(path, &all->buf_s);
 		if (all->buf_s.st_mode & !S_IXUSR)
 			exit (1);
-		if (all->big_r_flag || i == -1)
+		if (all->big_r_flag || all->e == -1)
 		{
 			if (all->check == 1)
 				free(path);
@@ -112,13 +110,14 @@ static void	lstat_long_output(t_all *all, char *path, char *file, int x)
 	}
 	if (x == 0)
 		total_number_of_blocks(all);
-	i = 0;
-	while (i < 10)
-		all->output[i++] = '-';
+	all->e = 0;
+	while (all->e < 10)
+		all->output[all->e++] = '-';
 	all->output[10] = ' ';
 	all->output[11] = '\0';
 	set_permission_to_output(all->output, all->buf_s, all, path);
 	write(1, all->output, 11);
+	all->e = 0;
 	finish_long_output(all->buf_s, all, path, file);
 }
 

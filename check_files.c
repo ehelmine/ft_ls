@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:00:11 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/30 15:11:52 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/02 13:13:29 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	len_of_user(struct stat buf, t_all *all)
 {
 	struct passwd	*pwd;
 	int				len;
-	
+
 	pwd = getpwuid(buf.st_uid);
 	if (pwd == NULL)
 	{
@@ -98,7 +98,6 @@ static void	check_number_of_links(char **list, t_all *all,
 		if (ft_strcmp(path, "") != 0)
 			free(tmp2);
 	}
-		ft_printf("grouplen %i sizelen %i userlen %i\n", all->group_len, all->size_len, all->user_len);
 }
 
 void	call_check_num_of_links(t_all *all, char **list, const char *directory)
@@ -126,21 +125,4 @@ void	call_check_num_of_links(t_all *all, char **list, const char *directory)
 	}
 	else
 		check_number_of_links(list, all, directory, ii);
-}
-
-int	count_num_of_files(DIR *dir, t_all *all)
-{
-	struct dirent	*dp;	
-	int				i;
-
-	i = 0;
-	dp = readdir(dir);
-	while (dp)
-	{
-		if (dp->d_name[0] != '.' || (dp->d_name[0] == '.' && all->a_flag == 1))
-			i++;
-		dp = readdir(dir);
-	}
-	closedir(dir);
-	return (i);
 }

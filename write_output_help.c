@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 17:57:34 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/29 13:58:32 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/02 15:27:12 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,26 @@ int	**malloc_int_array(void)
 	other_dirrs[0] = (int *)malloc(sizeof(int) * 800);
 	if (other_dirrs[0] == NULL)
 		exit (1);
-	other_dirrs[1] = (int *)malloc(sizeof(int) * 2);
+	other_dirrs[1] = (int *)malloc(sizeof(int) * 50);
 	if (other_dirrs[1] == NULL)
 		exit (1);
 	return (other_dirrs);
 }
 
 int	empty_dir(const char *directory, const char *path, char *dir_tmp,
-	char **list)
+	char **list, t_all *all)
 {
 	int	x;
 
-	if (list == NULL)
-		return (0);
 	x = 0;
+	if (all->len_of_list == 0)
+	{
+		if (all->val == 1)
+			free(dir_tmp);
+		free(list);
+		all->val = 0;
+		return (0);
+	}
 	if (ft_strcmp(path, "") == 0)
 		ft_putstr(directory);
 	else
@@ -48,7 +54,6 @@ int	empty_dir(const char *directory, const char *path, char *dir_tmp,
 			free(list[x++]);
 	}
 	free(list);
-	list = NULL;
 	write(1, ":\n", 1);
 	return (0);
 }

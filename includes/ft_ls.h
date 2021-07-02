@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:04:42 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/30 15:08:15 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/02 15:43:17 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_all
 	struct stat	buf_s;
 	char		output[12];
 	char		tmp[3];
+	int			e;
 }				t_all;
 
 int		ft_exit_call(int i, char c);
@@ -78,7 +79,7 @@ int		open_and_write_directory(t_all *all, const char *directory,
 			const char *path);
 
 int		empty_dir(const char *directory, const char *path, char *dir_tmp,
-			char **list);
+			char **list, t_all *all);
 
 int		continue_with_dir(char **list, const char *directory, t_all *all,
 			const char *path);
@@ -108,7 +109,7 @@ void	start_long_output(char *file, t_all *all, const char *path, int x);
 
 void	check_file_type(char output[11], struct stat buf, t_all *all);
 
-void	modify_time(char *str, time_t now, time_t mod_time, t_all *all);
+void	modify_time(char *str, time_t now, time_t mod_time);
 
 void	num_of_links_loop(char *tmp2, t_all *all);
 

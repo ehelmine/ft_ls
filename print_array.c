@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 14:29:45 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/29 14:03:36 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/02 15:26:27 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static char	**read_directory(DIR *dir, t_all *all, int i)
 	struct dirent	*dp;
 	char			**list;
 
-	all->len_of_list = 0;
 	dp = NULL;
 	list = (char **)malloc(sizeof(char *) * (i + 1));
 	if (list == NULL)
@@ -69,6 +68,8 @@ static char	**open_directory(const char *directory, const char *path,
 		dir = opendir(directory);
 	else if (ft_strcmp(path, "") != 0)
 		dir = opendir(dir_tmp);
+	all->len_of_list = 0;
+	all->val = 0;
 	if (dir == NULL)
 	{
 		ft_printf("%s:\nls: %s: %s", dir_tmp, directory, strerror(errno));
@@ -79,7 +80,10 @@ static char	**open_directory(const char *directory, const char *path,
 		return (NULL);
 	}
 	if (check_my_rights(directory, path, dir_tmp, all) == 0)
+	{
+		closedir(dir);
 		return (NULL);
+	}
 	return (read_directory(dir, all, all->ii));
 }
 
@@ -96,8 +100,8 @@ int	open_and_write_directory(t_all *all, const char *directory,
 		check_if_null((void *)dir_tmp);
 	}
 	list = open_directory(directory, path, dir_tmp, all);
-	if (all->len_of_list == 0 || list == NULL)
-		return (empty_dir(directory, path, dir_tmp, list));
+	if (list == NULL)
+		return (empty_dir(directory, path, dir_tmp, list, all));
 	if (all->len_of_list > 1)
 	{
 		if (ft_strcmp(path, "") != 0)
@@ -105,7 +109,7 @@ int	open_and_write_directory(t_all *all, const char *directory,
 		else
 			all->p = sort_list(list, all, directory);
 		if (all->p == -1)
-			return (empty_dir(directory, path, dir_tmp, list));
+			return (empty_dir(directory, path, dir_tmp, list, all));
 	}
 	if (ft_strcmp(path, "") != 0)
 		return (continue_with_dir(list, dir_tmp, all, path));
