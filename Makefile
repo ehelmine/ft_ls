@@ -6,7 +6,7 @@
 #    By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/17 12:59:07 by ehelmine          #+#    #+#              #
-#    Updated: 2021/07/02 15:08:33 by ehelmine         ###   ########.fr        #
+#    Updated: 2021/07/06 15:00:20 by ehelmine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,6 @@ $(NAME):
 	make -C libft/
 	@gcc $(CFLAGS) -c $(SRCS) -I includes
 	@echo "Sources to objects done"
-#	gcc -fsanitize=address $(CFLAGS) -o ft_ls $(OBJS) libft/libft.a
 	gcc $(CFLAGS) -o ft_ls $(OBJS) libft/libft.a
 	@echo "Compiling ft_ls done"
 
