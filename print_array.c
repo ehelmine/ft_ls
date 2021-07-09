@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 14:29:45 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/02 16:31:35 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/09 16:14:43 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,21 +59,14 @@ static char	**open_directory(const char *directory, const char *path,
 	open_dir_values(all);
 	if (ft_strcmp(path, "") == 0)
 		all->dir = opendir(directory);
-	else if (ft_strcmp(path, "") != 0)
+	else
 		all->dir = opendir(dir_tmp);
 	if (all->dir == NULL)
-	{
-		ft_printf("%s:\nls: %s: %s", dir_tmp, directory, strerror(errno));
-		if (!all->loop_call)
-			write(1, "\n", 1);
-		if (ft_strcmp(path, "") != 0)
-			free(dir_tmp);
-		return (NULL);
-	}
+		return (open_directory_is_null(all, directory, path, dir_tmp));
 	all->ii = count_num_of_files(all->dir, all);
 	if (ft_strcmp(path, "") == 0)
 		all->dir = opendir(directory);
-	else if (ft_strcmp(path, "") != 0)
+	else
 		all->dir = opendir(dir_tmp);
 	if (check_my_rights(directory, path, dir_tmp, all) == 0)
 	{
@@ -84,7 +77,7 @@ static char	**open_directory(const char *directory, const char *path,
 }
 
 int	open_and_write_directory(t_all *all, const char *directory,
-	const char *path)
+	const char *path, int i)
 {	
 	char	*dir_tmp;
 	char	**list;
@@ -94,20 +87,20 @@ int	open_and_write_directory(t_all *all, const char *directory,
 	{
 		dir_tmp = ft_strjoin(path, directory);
 		check_if_null((void *)dir_tmp);
+		i = 1;
 	}
+	if (check_if_link_and_rights(all, directory, dir_tmp, path) == -1)
+		return (empty_dir(directory, path, dir_tmp, all));
 	list = open_directory(directory, path, dir_tmp, all);
 	if (list == NULL)
 		return (empty_dir(directory, path, dir_tmp, all));
-	if (all->len_of_list > 1)
-	{
-		if (ft_strcmp(path, "") != 0)
-			all->p = sort_list(list, all, dir_tmp);
-		else
-			all->p = sort_list(list, all, directory);
-		if (all->p == -1)
-			return (empty_dir(directory, path, dir_tmp, all));
-	}
-	if (ft_strcmp(path, "") != 0)
+	if (i == 1)
+		all->p = sort_list(list, all, dir_tmp);
+	else
+		all->p = sort_list(list, all, directory);
+	if (all->p == -1)
+		return (empty_dir(directory, path, dir_tmp, all));
+	if (i == 1)
 		return (continue_with_dir(list, dir_tmp, all, path));
 	else
 		return (continue_with_dir(list, directory, all, path));
@@ -119,13 +112,13 @@ void	loop_print_array(char **arr, int numbers[1][2], char *path, t_all *all)
 	{
 		if (numbers[0][1] == 2)
 		{
-			open_and_write_directory(all, arr[all->y], path);
+			open_and_write_directory(all, arr[all->y], path, 0);
 			if (all->y + 1 != numbers[0][0])
 				write(1, "\n", 1);
 		}
 		else if (numbers[0][1] == 1)
 		{
-			lstat(arr[all->y], &all->buf_s);
+			lstat(arr[all->y], &all->b_s);
 			ft_printf("ls: %s: %s\n", arr[all->y], strerror(errno));
 		}
 		else if (numbers[0][1] == 0)
@@ -148,13 +141,13 @@ void	reverse_loop_print_array(char **arr, int numbers[1][2], char *path,
 	{
 		if (numbers[0][1] == 2)
 		{
-			open_and_write_directory(all, arr[all->counter], path);
-			if (all->counter - 1 != -1)
+			open_and_write_directory(all, arr[all->counter], path, 0);
+			if (all->counter != 0)
 				write(1, "\n", 1);
 		}
 		if (numbers[0][1] == 1)
 		{
-			lstat(arr[all->counter], &all->buf_s);
+			lstat(arr[all->counter], &all->b_s);
 			ft_printf("ls: %s: %s\n", arr[all->counter], strerror(errno));
 		}
 		else if (numbers[0][1] == 0)

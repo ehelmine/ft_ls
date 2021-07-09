@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:27:41 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/02 15:21:39 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/09 16:09:04 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	check_my_rights(const char *directory, const char *path, char *dir_tmp,
 				ft_putstr(directory);
 			else if (all->val == 1)
 				ft_putstr(dir_tmp);
-			write(1, ":", 1);
+			write(1, ":\n", 2);
 		}
 		return (0);
 	}

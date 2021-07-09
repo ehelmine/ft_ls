@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 14:08:48 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/02 15:43:31 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/09 15:32:48 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,11 @@ static void	set_permission_to_output(char output[11], struct stat buf,
 
 static void	lstat_long_output(t_all *all, char *path, char *file, int x)
 {
-	all->e = lstat(path, &all->buf_s);
-	if (all->e == -1 && S_ISDIR(all->buf_s.st_mode) == 0)
+	all->e = lstat(path, &all->b_s);
+	if (all->e == -1 && S_ISDIR(all->b_s.st_mode) == 0)
 	{
-		all->e = stat(path, &all->buf_s);
-		if (all->buf_s.st_mode & !S_IXUSR)
+		all->e = stat(path, &all->b_s);
+		if (all->b_s.st_mode & !S_IXUSR)
 			exit (1);
 		if (all->big_r_flag || all->e == -1)
 		{
@@ -115,10 +115,10 @@ static void	lstat_long_output(t_all *all, char *path, char *file, int x)
 		all->output[all->e++] = '-';
 	all->output[10] = ' ';
 	all->output[11] = '\0';
-	set_permission_to_output(all->output, all->buf_s, all, path);
+	set_permission_to_output(all->output, all->b_s, all, path);
 	write(1, all->output, 11);
 	all->e = 0;
-	finish_long_output(all->buf_s, all, path, file);
+	finish_long_output(all->b_s, all, path, file);
 }
 
 void	start_long_output(char *file, t_all *all, const char *path, int x)

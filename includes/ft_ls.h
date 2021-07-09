@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:04:42 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/02 16:26:56 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/09 15:57:31 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,13 @@ typedef struct s_all
 	int			ii;
 	int			val;
 	int			counter;
-	struct stat	buf_s;
+	struct stat	b_s;
 	char		output[12];
 	char		tmp[3];
 	int			e;
 	char		**list;
 	DIR			*dir;
+	char		*s;
 }				t_all;
 
 int		ft_exit_call(int i, char c);
@@ -80,7 +81,13 @@ void	loop_print_array(char **arr, int numbers[1][2], char *path, t_all *all);
 void	open_dir_values(t_all *all);
 
 int		open_and_write_directory(t_all *all, const char *directory,
-			const char *path);
+			const char *path, int i);
+
+int		check_if_link_and_rights(t_all *all, const char *directory,
+			char *dir_tmp, const char *path);
+
+char	**open_directory_is_null(t_all *all, const char *directory, const char
+			*path, char *dir_tmp);
 
 int		empty_dir(const char *directory, const char *path, char *dir_tmp,
 			t_all *all);

@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:11:24 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/06 14:59:26 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/09 16:19:39 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ static void	set_values_to_zero(t_all *all)
 	all->group_len = 0;
 	all->y = -1;
 	all->if_device = 0;
-	all->loop_call = 0;
 	all->xattr = 0;
 	all->len_of_list = 0;
 	all->val = 0;
@@ -124,5 +123,6 @@ int	main(int argc, char **argv)
 			return (1);
 		print_output(&all, ii);
 	}
+//	system ("leaks ft_ls");
 	return (0);
 }

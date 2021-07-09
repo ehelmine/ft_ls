@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 17:53:31 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/23 16:56:24 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/09 15:39:52 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ int	sort_list(char **list, t_all *all, const char *directory)
 {
 	int	x;
 
+	if (all->len_of_list < 2)
+		return (1);
 	all->i = 0;
 	x = 0;
 	if (all->t_flag)

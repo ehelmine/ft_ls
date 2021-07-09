@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 19:02:36 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/06/28 12:50:21 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/09 15:32:48 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,32 @@
 ** char **directories. If it is neither, we put it in char **no_exist.
 */
 
-static int	loop_other_input(t_all *all, int i, int argc)
+static void	loop_other_input(t_all *all, int i, int argc)
 {
-	struct stat	buf;
-
-	while (i < argc)
+	while (++i < argc)
 	{
-		if (lstat(all->input_arr[i], &buf) == -1)
-		{
+		if (lstat(all->input_arr[i], &all->b_s) == -1)
 			all->not_exist[all->num_no++] = ft_strdup(all->input_arr[i]);
-			check_if_null((void *)all->not_exist[all->num_no - 1]);
-		}
-		else if (S_ISDIR(buf.st_mode) || (S_ISLNK(buf.st_mode) && !all->l_flag))
+		else if (S_ISLNK(all->b_s.st_mode))
 		{
+			if (!all->l_flag)
+			{
+				all->s = get_link_name(all->input_arr[i], all->b_s);
+				if (lstat(all->s, &all->b_s) == 0 && S_ISDIR(all->b_s.st_mode))
+					all->directories[all->num_dir++]
+						= ft_strdup(all->input_arr[i]);
+				else
+					all->files[all->num_file++] = ft_strdup(all->input_arr[i]);
+				free(all->s);
+			}
+			else
+				all->files[all->num_file++] = ft_strdup(all->input_arr[i]);
+		}
+		else if (S_ISDIR(all->b_s.st_mode))
 			all->directories[all->num_dir++] = ft_strdup(all->input_arr[i]);
-			check_if_null((void *)all->directories[all->num_dir - 1]);
-		}
 		else
-		{
 			all->files[all->num_file++] = ft_strdup(all->input_arr[i]);
-			check_if_null((void *)all->files[all->num_file - 1]);
-		}
-		i++;
 	}
-	return (1);
 }
 
 static int	malloc_for_other_input(t_all *all, int i, int argc)
@@ -64,7 +66,8 @@ static int	malloc_for_other_input(t_all *all, int i, int argc)
 	all->directories = (char **)malloc(sizeof(char *) * (argc + 1));
 	if (all->directories == NULL)
 		return (-1);
-	return (loop_other_input(all, i, argc));
+	loop_other_input(all, i - 1, argc);
+	return (1);
 }
 
 /*
