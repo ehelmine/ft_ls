@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:00:11 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/02 13:13:29 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/13 13:18:51 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ static void	check_number_of_links(char **list, t_all *all,
 	all->group_len = 0;
 	all->user_len = 0;
 	all->size_len = 0;
+	all->links_len = 0;
 	all->blocks = 0;
 	x = -1;
 	while (++x < ii)
@@ -108,9 +109,6 @@ void	call_check_num_of_links(t_all *all, char **list, const char *directory)
 	ii = 0;
 	while (list[ii] != NULL)
 		ii++;
-	all->links_len = 0;
-	all->size_len = 0;
-	all->blocks = 0;
 	if (directory != NULL)
 	{
 		if (directory[ft_strlen(directory) - 1] != '/')

@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:11:24 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/09 16:19:39 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/13 13:18:13 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ static void	set_values_to_zero(t_all *all)
 	all->p = 0;
 	all->links_len = 0;
 	all->size_len = 0;
+	all->user_len = 0;
 	all->blocks = 0;
 	all->not_exist = NULL;
 	all->files = NULL;
