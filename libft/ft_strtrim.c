@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 09:46:34 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/20 13:17:52 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/14 16:05:54 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*ft_strtrim(char const *s)
 		i++;
 	while ((s[z - 1] == ' ' || s[z - 1] == '\n' || s[z - 1] == '\t') && i != z)
 		z--;
-	cpy = (char *)malloc(sizeof(cpy) * (z - i + 1));
+	cpy = (char *)malloc(sizeof(char) * (z - i + 1));
 	if (cpy == NULL)
 		return (NULL);
 	y = 0;

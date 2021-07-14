@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 14:29:45 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/14 14:34:25 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/14 16:04:04 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char	**read_directory(DIR *dir, t_all *all, int i)
 	char			**list;
 
 	dp = NULL;
-	list = (char **)malloc(sizeof(char *) * (i + 1));
+	list = (char **)malloc(sizeof(char *) * (i + 1 + 100));
 	if (list == NULL)
 		exit (1);
 	dp = readdir(dir);

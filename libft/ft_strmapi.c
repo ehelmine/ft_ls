@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 10:10:33 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/02 15:55:39 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/14 16:06:30 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 		temp[i] = f(i, temp[i]);
 		i++;
 	}
-	nwstr = (char *)malloc(sizeof(nwstr) * (i + 1));
+	nwstr = (char *)malloc(sizeof(char) * (i + 1));
 	if (nwstr == NULL)
 		return (NULL);
 	ft_strcpy(nwstr, temp);
