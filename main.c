@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:11:24 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/13 16:07:07 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/14 11:21:45 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	print_array(char **arr, int i, int no, t_all *all)
 	int		numbers[1][2];
 
 	path = NULL;
-	path = (char *)malloc(sizeof(char) * 1000);
+	path = (char *)malloc(sizeof(char) * 2000);
 	if (path == NULL)
 		exit(1);
 	if (i > 1 && all->t_flag && no != 1)

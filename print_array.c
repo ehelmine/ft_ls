@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 14:29:45 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/13 13:17:25 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/14 11:27:05 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@ static char	**read_directory(DIR *dir, t_all *all, int i)
 	if (list == NULL)
 		exit (1);
 	dp = readdir(dir);
+	all->len_of_list = 0;
 	while (dp)
 	{
 		if (dp->d_name[0] != '.' || (dp->d_name[0] == '.' && all->a_flag == 1))
 		{
-			list[all->len_of_list] = (char *)malloc(sizeof(char) * (500));
+			list[all->len_of_list] = (char *)malloc(sizeof(char) * (1000));
 			if (list[all->len_of_list] == NULL)
 				exit(1);
 			ft_strcpy(list[all->len_of_list++], dp->d_name);
