@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 17:57:34 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/14 11:37:03 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/14 11:47:00 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	initialize_print_array_values(t_all *all)
 	all->size_len = 0;
 	all->links_len = 0;
 	all->blocks = 0;
+	all->user_len = 0;
 }
 
 void	open_dir_values(t_all *all)

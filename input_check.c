@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 19:02:36 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/09 15:32:48 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/14 11:52:02 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ static void	loop_other_input(t_all *all, int i, int argc)
 						= ft_strdup(all->input_arr[i]);
 				else
 					all->files[all->num_file++] = ft_strdup(all->input_arr[i]);
-				free(all->s);
+				if (all->s != NULL)
+					free(all->s);
 			}
 			else
 				all->files[all->num_file++] = ft_strdup(all->input_arr[i]);
