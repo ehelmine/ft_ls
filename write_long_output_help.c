@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 17:19:30 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/14 11:52:18 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/14 17:59:45 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	total_number_of_blocks(t_all *all)
 
 void	print_time_and_name(char *str, char *file, char *arrow, char *link)
 {
-	if (ft_strcmp(link, "") != 0)
+	if (link != NULL)
 		ft_printf("%s %s %s %s\n", str + 4, file, arrow, link);
 	else
 		ft_printf("%s %s\n", str + 4, file);
