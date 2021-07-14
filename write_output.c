@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:37:22 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/14 14:33:26 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/14 16:28:14 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ static void	call_other_directories(char **list, const char *directory,
 	int		ii;
 
 	tmp = NULL;
-	tmp = ft_strjoin(directory, "/");
+	if (directory[0] == '/' && directory[1] == '\0')
+		tmp = ft_strdup("/");
+	else
+		tmp = ft_strjoin(directory, "/");
 	check_if_null((void *)tmp);
 	x = 0;
 	ii = other_dirrs[1][0];

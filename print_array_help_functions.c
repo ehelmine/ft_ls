@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 15:46:53 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/14 14:33:21 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/14 17:18:47 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,24 @@ int	check_if_link_and_rights(t_all *all, const char *directory, char *dir_tmp,
 	const char *path)
 {
 	char		*new_dir;
-	struct stat	buf;
 
 	if (all->l_flag)
 		return (1);
 	if (ft_strcmp(path, "") == 0)
 	{
-		if (lstat(directory, &buf) == -1)
+		if (lstat(directory, &all->b_s) == -1)
 			return (1);
-		new_dir = get_link_name((char *)directory, buf);
+		new_dir = get_link_name((char *)directory, all->b_s);
 	}
 	else
 	{
-		if (lstat(dir_tmp, &buf) == -1)
+		if (lstat(dir_tmp, &all->b_s) == -1)
 			return (1);
-		new_dir = get_link_name(dir_tmp, buf);
+		new_dir = get_link_name(dir_tmp, all->b_s);
 	}
 	if (new_dir == NULL)
 		return (1);
-	if (lstat(new_dir, &buf) == -1 || (buf.st_mode & S_IXUSR))
+	if (lstat(new_dir, &all->b_s) == -1 || (all->b_s.st_mode & S_IXUSR))
 	{
 		free(new_dir);
 		return (1);
