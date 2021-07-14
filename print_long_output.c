@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 13:30:20 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/14 12:11:09 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/14 15:02:36 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	print_long_output2(struct stat buf, t_all *all, struct group *grp)
 		all->e++;
 	}
 	if (all->if_device)
-		ft_printf(" %d, %d ", my_major(buf.st_rdev), my_minor(buf.st_rdev));
+		ft_printf(" %3d, %3d ", my_major(buf.st_rdev), my_minor(buf.st_rdev));
 	else if (grp == NULL)
 		ft_printf("%*i ", all->size_len, (unsigned long long)buf.st_size);
 	else
