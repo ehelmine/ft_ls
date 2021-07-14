@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:04:42 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/09 15:57:31 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/14 17:35:40 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ typedef struct s_all
 	int			counter;
 	struct stat	b_s;
 	char		output[12];
-	char		tmp[3];
 	int			e;
 	char		**list;
 	DIR			*dir;

@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 13:30:20 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/14 15:02:36 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/14 17:35:32 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void	print_long_output2(struct stat buf, t_all *all, struct group *grp)
 		ft_printf("%*i ", all->size_len, (unsigned long long)buf.st_size);
 	else
 		ft_printf("%*i ", all->size_len, (unsigned long long)buf.st_size);
-	all->tmp[0] = ' ';
-	all->tmp[1] = ' ';
 	all->e = 0;
 	all->if_device = 0;
 }
