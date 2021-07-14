@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 17:57:34 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/14 11:47:00 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/14 14:34:06 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	empty_dir(const char *directory, const char *path, char *dir_tmp,
 			free(dir_tmp);
 		free(all->list);
 		all->val = 0;
-		return (0);
+		return (-1);
 	}
 	if (ft_strcmp(path, "") == 0)
 		ft_putstr(directory);
@@ -56,7 +56,7 @@ int	empty_dir(const char *directory, const char *path, char *dir_tmp,
 	free(all->list);
 	all->list = NULL;
 	write(1, ":\n", 2);
-	return (0);
+	return (-1);
 }
 
 void	initialize_print_array_values(t_all *all)

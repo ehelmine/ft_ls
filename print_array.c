@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 14:29:45 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/14 11:27:05 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/14 14:34:25 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void	loop_print_array(char **arr, int numbers[1][2], char *path, t_all *all)
 		else if (numbers[0][1] == 1)
 		{
 			lstat(arr[all->y], &all->b_s);
-			ft_printf("ls: %s: %s\n", arr[all->y], strerror(errno));
+			ft_printf("ft_ls: %s: %s\n", arr[all->y], strerror(errno));
 		}
 		else if (numbers[0][1] == 0)
 		{
@@ -149,7 +149,7 @@ void	reverse_loop_print_array(char **arr, int numbers[1][2], char *path,
 		if (numbers[0][1] == 1)
 		{
 			lstat(arr[all->counter], &all->b_s);
-			ft_printf("ls: %s: %s\n", arr[all->counter], strerror(errno));
+			ft_printf("ft_ls: %s: %s\n", arr[all->counter], strerror(errno));
 		}
 		else if (numbers[0][1] == 0)
 		{

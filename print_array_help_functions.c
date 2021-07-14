@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 15:46:53 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/14 11:39:16 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/14 14:33:21 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ char	**open_directory_is_null(t_all *all, const char *directory, const char
 	else if (directory && (all->num_dir > 1 || all->big_r_flag
 			|| all->num_file || all->num_no))
 		ft_printf("%s:\n", directory);
-	ft_printf("ls: %s: %s", directory, strerror(errno));
-	if (all->num_dir > 1)
-		write(1, "\n", 1);
+	ft_printf("ft_ls: %s: %s\n", directory, strerror(errno));
 	if (ft_strcmp(path, "") != 0)
 		free(dir_tmp);
 	return (NULL);
@@ -49,6 +47,8 @@ int	check_if_link_and_rights(t_all *all, const char *directory, char *dir_tmp,
 			return (1);
 		new_dir = get_link_name(dir_tmp, buf);
 	}
+	if (new_dir == NULL)
+		return (1);
 	if (lstat(new_dir, &buf) == -1 || (buf.st_mode & S_IXUSR))
 	{
 		free(new_dir);
