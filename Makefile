@@ -6,7 +6,7 @@
 #    By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/17 12:59:07 by ehelmine          #+#    #+#              #
-#    Updated: 2021/07/09 15:54:38 by ehelmine         ###   ########.fr        #
+#    Updated: 2021/07/15 13:27:21 by ehelmine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ print_long_output.o print_array_help_functions.o
 
 INCLUDES = includes/ft_printf.h
 
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -fsanitize=address -g -Wall -Wextra -Werror
 
 all: $(NAME)
 

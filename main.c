@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:11:24 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/14 16:03:32 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/15 13:41:43 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	print_array(char **arr, int i, int no, t_all *all)
 	path = (char *)malloc(sizeof(char) * 5000);
 	if (path == NULL)
 		exit(1);
+	ft_memset((void *)path, 0, 5000);
 	if (i > 1 && all->t_flag && no != 1)
 		sort_mod_time(arr, i, path, all);
 	else if (i > 1 && (!all->t_flag || (all->t_flag && no == 1)))
@@ -124,6 +125,6 @@ int	main(int argc, char **argv)
 			return (1);
 		print_output(&all, ii);
 	}
-	system ("leaks ft_ls");
+//	system ("leaks ft_ls");
 	return (0);
 }
