@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:11:24 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/15 13:41:43 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/15 14:32:38 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,6 @@ int	main(int argc, char **argv)
 			return (1);
 		print_output(&all, ii);
 	}
-//	system ("leaks ft_ls");
+	system ("leaks ft_ls");
 	return (0);
 }
