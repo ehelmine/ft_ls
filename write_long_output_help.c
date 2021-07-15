@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 17:19:30 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/14 17:59:45 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/15 16:26:21 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*get_link_name(char *path, struct stat buf)
 
 void	modify_time(char *str, time_t now, time_t mod_time)
 {
-	if (now - mod_time < 15778463)
+	if (now - mod_time < 15724800 && now - mod_time > -1)
 		str[16] = '\0';
 	else
 	{
