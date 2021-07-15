@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:37:22 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/14 16:28:14 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/15 14:01:34 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int	loop_dir_content(char **list, const char *directory, t_all *all,
 
 	other_dirrs = NULL;
 	if (all->big_r_flag)
-		other_dirrs = malloc_int_array();
+		other_dirrs = malloc_int_array(all);
 	loop_dir_content2(list, directory, all, other_dirrs);
 	if (all->big_r_flag)
 		call_other_directories(list, directory, other_dirrs, all);

@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:04:42 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/14 17:35:40 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/15 14:01:29 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int		sort_mod_time(char **list, int ii, const char *path, t_all *all);
 
 int		count_num_of_files(DIR *dir, t_all *all);
 
-int		**malloc_int_array(void);
+int		**malloc_int_array(t_all *all);
 
 void	call_check_num_of_links(t_all *all, char **list, const char *directory);
 

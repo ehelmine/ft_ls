@@ -6,13 +6,13 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 17:57:34 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/07/15 13:53:03 by ehelmine         ###   ########.fr       */
+/*   Updated: 2021/07/15 14:03:53 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-int	**malloc_int_array(void)
+int	**malloc_int_array(t_all *all)
 {
 	int	**other_dirrs;
 
@@ -20,10 +20,10 @@ int	**malloc_int_array(void)
 	other_dirrs = (int **)malloc(sizeof(int *) * 2);
 	if (other_dirrs == NULL)
 		exit (1);
-	other_dirrs[0] = (int *)malloc(sizeof(int) * 5000);
+	other_dirrs[0] = (int *)malloc(sizeof(int) * (all->len_of_list + 1000));
 	if (other_dirrs[0] == NULL)
 		exit (1);
-	other_dirrs[1] = (int *)malloc(sizeof(int) * 5000);
+	other_dirrs[1] = (int *)malloc(sizeof(int) * (all->len_of_list + 1000));
 	if (other_dirrs[1] == NULL)
 		exit (1);
 	return (other_dirrs);
