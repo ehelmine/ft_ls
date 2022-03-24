@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 11:01:03 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/20 13:17:52 by ehelmine         ###   ########.fr       */
+/*   Updated: 2022/03/24 11:23:45 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static char	**ft_thersplit(int wrds, char c, char **same, const char *s)
 {
 	int	x;
 	int	w;
-	int	y;
 	int	i;
 
 	i = 0;
@@ -63,7 +62,6 @@ static char	**ft_thersplit(int wrds, char c, char **same, const char *s)
 	while (x < wrds)
 	{
 		w = 0;
-		y = 0;
 		while (s[i] == c)
 			i++;
 		while (s[i] != c && s[i] != '\0')

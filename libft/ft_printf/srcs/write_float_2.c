@@ -6,7 +6,7 @@
 /*   By: ehelmine <ehelmine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 21:03:30 by ehelmine          #+#    #+#             */
-/*   Updated: 2021/05/03 03:31:50 by ehelmine         ###   ########.fr       */
+/*   Updated: 2022/03/24 11:20:33 by ehelmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,8 @@ static int	write_float_5_second(t_val *all)
 	return (1);
 }
 
-int	write_float_5(t_val *all, int out)
+int	write_float_5(t_val *all)
 {
-	out = 0;
 	if ((int)all->d_num > 5)
 	{
 		free(all->begin_str);
